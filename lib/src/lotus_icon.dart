@@ -5,11 +5,11 @@ class LotusIcon extends StatelessWidget {
   /// Creates a [LotusIcon].
   const LotusIcon({
     super.key,
-    this.size = 24.0,
+    this.size,
   });
 
   /// The size of the icon.
-  final double size;
+  final double? size;
 
   @override
   Widget build(BuildContext context) {

@@ -106,7 +106,7 @@ class Sidebar extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Flexible(
+                Expanded(
                   child: AnimatedRotation(
                     duration: const Duration(milliseconds: 300),
                     turns: extended ? 1 : 0,
@@ -115,21 +115,23 @@ class Sidebar extends StatelessWidget {
                     ),
                   ),
                 ),
-                AnimatedContainer(
-                  duration: const Duration(milliseconds: 300),
-                  height: extended ? 50 : 0,
-                  margin: extended
-                      ? const EdgeInsets.only(top: 10)
-                      : EdgeInsets.zero,
-                  child: const Text(
-                    'Project Lotus',
-                    style: TextStyle(
-                      color: white,
-                      fontSize: 24,
+                Flexible(
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 300),
+                    height: extended ? 50 : 0,
+                    margin: extended
+                        ? const EdgeInsets.only(top: 10)
+                        : EdgeInsets.zero,
+                    child: const Text(
+                      'Project Lotus',
+                      style: TextStyle(
+                        color: white,
+                        fontSize: 24,
+                      ),
+                      softWrap: false,
+                      overflow: TextOverflow.fade,
+                      maxLines: 1,
                     ),
-                    softWrap: false,
-                    overflow: TextOverflow.fade,
-                    maxLines: 1,
                   ),
                 ),
               ],
