@@ -1,4 +1,4 @@
-name: flutter_desktop_template
+name: lotus
 description: "A new Flutter project."
 
 publish_to: "none"
@@ -20,14 +20,14 @@ dependencies:
     git:
       url: https://github.com/mrhaubrich/sidebarx.git
   auto_size_text: ^3.0.0
-  super_context_menu: ^0.8.19
 
   menubar:
     git:
       url: https://github.com/google/flutter-desktop-embedding.git
       path: plugins/menubar
       ref: 12decbe0f592e14e03223f6f2c0c7e0e2dbd70a1
-  file_picker: ^8.0.7
+  file_picker: ^8.1.2
+  super_context_menu: ^0.8.20
 
 dev_dependencies:
   flutter_test:
