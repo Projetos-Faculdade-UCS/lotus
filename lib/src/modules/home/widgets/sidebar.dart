@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:lotus/src/colors.dart';
+import 'package:lotus/src/lotus_icon.dart';
 import 'package:sidebarx/sidebarx.dart';
 
 /// Sidebar controller.
@@ -105,10 +106,14 @@ class Sidebar extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                AnimatedRotation(
-                  duration: const Duration(milliseconds: 300),
-                  turns: extended ? 1 : 0,
-                  child: const FlutterLogo(),
+                Flexible(
+                  child: AnimatedRotation(
+                    duration: const Duration(milliseconds: 300),
+                    turns: extended ? 1 : 0,
+                    child: const LotusIcon(
+                      size: 100,
+                    ),
+                  ),
                 ),
                 AnimatedContainer(
                   duration: const Duration(milliseconds: 300),
