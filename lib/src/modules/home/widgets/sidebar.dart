@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:lotus/src/colors.dart';
 import 'package:lotus/src/lotus_icon.dart';
 import 'package:sidebarx/sidebarx.dart';
 
@@ -52,6 +51,10 @@ class Sidebar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final canvasColor = Theme.of(context).canvasColor;
+    final actionColor = Theme.of(context).colorScheme.onSurface;
+    final accentCanvasColor = Theme.of(context).colorScheme.secondary;
+    final white = Theme.of(context).colorScheme.onPrimary;
     return SidebarX(
       controller: controller,
       theme: SidebarXTheme(
@@ -72,7 +75,7 @@ class Sidebar extends StatelessWidget {
           border: Border.all(
             color: actionColor.withOpacity(0.37),
           ),
-          gradient: const LinearGradient(
+          gradient: LinearGradient(
             colors: [accentCanvasColor, canvasColor],
           ),
           boxShadow: [
@@ -122,7 +125,7 @@ class Sidebar extends StatelessWidget {
                     margin: extended
                         ? const EdgeInsets.only(top: 10)
                         : EdgeInsets.zero,
-                    child: const Text(
+                    child: Text(
                       'Project Lotus',
                       style: TextStyle(
                         color: white,
