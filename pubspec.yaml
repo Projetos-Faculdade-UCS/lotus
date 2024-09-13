@@ -27,7 +27,7 @@ dependencies:
       path: plugins/menubar
       ref: 12decbe0f592e14e03223f6f2c0c7e0e2dbd70a1
   file_picker: ^8.1.2
-  super_context_menu: ^0.8.20
+  super_context_menu: ^0.8.22
   adaptive_theme: ^3.6.0
 
 dev_dependencies:
