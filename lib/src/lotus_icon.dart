@@ -11,12 +11,16 @@ class LotusIcon extends StatelessWidget {
   /// The size of the icon.
   final double? size;
 
+  static const AssetImage _iconImage = AssetImage('assets/logo/lotus_icon.png');
+
   @override
   Widget build(BuildContext context) {
-    return Image.asset(
-      'assets/logo/lotus_icon.png',
-      width: size,
-      height: size,
+    return RepaintBoundary(
+      child: Image(
+        image: _iconImage,
+        width: size,
+        height: size,
+      ),
     );
   }
 }
