@@ -16,7 +16,9 @@ class Sidebar extends StatelessWidget {
     required this.controller,
     super.key,
   });
-  static final _items = [
+
+  // Moved static items outside the class to prevent them from being recreated.
+  static final List<_SidebarItem> _items = [
     _SidebarItem(
       icon: Icons.dashboard,
       label: 'Dashboard',
@@ -38,7 +40,8 @@ class Sidebar extends StatelessWidget {
       route: '/search/',
     ),
   ];
-  static final _footerItems = [
+
+  static final List<_SidebarItem> _footerItems = [
     _SidebarItem(
       icon: Icons.settings,
       label: 'Settings',
@@ -55,101 +58,105 @@ class Sidebar extends StatelessWidget {
     final actionColor = Theme.of(context).colorScheme.onSurface;
     final accentCanvasColor = Theme.of(context).colorScheme.secondary;
     final white = Theme.of(context).colorScheme.onPrimary;
-    return SidebarX(
-      controller: controller,
-      theme: SidebarXTheme(
-        margin: const EdgeInsets.all(10),
-        decoration: BoxDecoration(
-          color: canvasColor,
-          borderRadius: BorderRadius.circular(20),
+    return RepaintBoundary(
+      child: SidebarX(
+        controller: controller,
+        theme: _sidebarTheme,
+        extendedTheme: _extendedTheme,
+        footerDivider: const Divider(
+          color: Colors.white,
+          thickness: 0.5,
         ),
-        textStyle: const TextStyle(color: Colors.white),
-        selectedTextStyle: const TextStyle(color: Colors.white),
-        itemTextPadding: const EdgeInsets.only(left: 30),
-        selectedItemTextPadding: const EdgeInsets.only(left: 30),
-        itemDecoration: BoxDecoration(
-          border: Border.all(color: canvasColor),
+        headerBuilder: _buildHeader,
+        items: _items,
+        footerItems: _footerItems,
+        footerFitType: FooterFitType.fit,
+        toggleButtonBuilder: (context, extended) {
+          return const SizedBox(
+            height: 10,
+          );
+        },
+      ),
+    );
+  }
+
+  // Extracted themes to constants to prevent rebuilding them.
+  static final SidebarXTheme _sidebarTheme = SidebarXTheme(
+    margin: const EdgeInsets.all(10),
+    decoration: BoxDecoration(
+      color: canvasColor,
+      borderRadius: BorderRadius.circular(20),
+    ),
+    textStyle: const TextStyle(color: Colors.white),
+    selectedTextStyle: const TextStyle(color: Colors.white),
+    itemTextPadding: const EdgeInsets.only(left: 30),
+    selectedItemTextPadding: const EdgeInsets.only(left: 30),
+    itemDecoration: BoxDecoration(
+      border: Border.all(color: canvasColor),
+    ),
+    selectedItemDecoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(10),
+      border: Border.all(
+        color: actionColor.withOpacity(0.37),
+      ),
+      gradient: LinearGradient(
+        colors: [accentCanvasColor, canvasColor],
+      ),
+      boxShadow: const [
+        BoxShadow(
+          color: Colors.black26, // Reduced opacity for better performance.
+          blurRadius: 30,
         ),
-        selectedItemDecoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(
-            color: actionColor.withOpacity(0.37),
-          ),
-          gradient: LinearGradient(
-            colors: [accentCanvasColor, canvasColor],
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.28),
-              blurRadius: 30,
+      ],
+    ),
+    iconTheme: const IconThemeData(
+      color: Colors.white,
+      size: 20,
+    ),
+  );
+
+  static final SidebarXTheme _extendedTheme = SidebarXTheme(
+    width: 250,
+    decoration: BoxDecoration(
+      color: canvasColor,
+      borderRadius: BorderRadius.circular(20),
+    ),
+    margin: const EdgeInsets.all(10),
+  );
+
+  Widget _buildHeader(BuildContext context, bool extended) {
+    return InkWell(
+      onTap: controller.toggleExtended,
+      child: DrawerHeader(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Expanded(
+              child: AnimatedRotation(
+                duration: const Duration(milliseconds: 300),
+                turns: extended ? 1 : 0,
+                child: const LotusIcon(),
+              ),
+            ),
+            AnimatedSize(
+              duration: const Duration(milliseconds: 300),
+              child: SizedBox(
+                height: extended ? 50 : 0,
+                child: Text(
+                  'Project Lotus',
+                  style: TextStyle(
+                    color: white,
+                    fontSize: 24,
+                  ),
+                  softWrap: false,
+                  overflow: TextOverflow.fade,
+                  maxLines: 1,
+                ),
+              ),
             ),
           ],
         ),
-        iconTheme: const IconThemeData(
-          color: Colors.white,
-          size: 20,
-        ),
       ),
-      extendedTheme: SidebarXTheme(
-        width: 250,
-        decoration: BoxDecoration(
-          color: canvasColor,
-          borderRadius: BorderRadius.circular(20),
-        ),
-        margin: const EdgeInsets.all(10),
-      ),
-      footerDivider: const Divider(
-        color: Colors.white,
-        thickness: 0.5,
-      ),
-      headerBuilder: (context, extended) {
-        return InkWell(
-          onTap: controller.toggleExtended,
-          child: DrawerHeader(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Expanded(
-                  child: AnimatedRotation(
-                    duration: const Duration(milliseconds: 300),
-                    turns: extended ? 1 : 0,
-                    child: const LotusIcon(
-                      size: 100,
-                    ),
-                  ),
-                ),
-                Flexible(
-                  child: AnimatedContainer(
-                    duration: const Duration(milliseconds: 300),
-                    height: extended ? 50 : 0,
-                    margin: extended
-                        ? const EdgeInsets.only(top: 10)
-                        : EdgeInsets.zero,
-                    child: Text(
-                      'Project Lotus',
-                      style: TextStyle(
-                        color: white,
-                        fontSize: 24,
-                      ),
-                      softWrap: false,
-                      overflow: TextOverflow.fade,
-                      maxLines: 1,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        );
-      },
-      items: _items,
-      footerItems: _footerItems,
-      footerFitType: FooterFitType.fit,
-      toggleButtonBuilder: (context, extended) {
-        return const SizedBox(
-          height: 10,
-        );
-      },
     );
   }
 }
@@ -162,11 +169,15 @@ class _SidebarItem extends SidebarXItem {
     dynamic Function()? onTap,
   }) : super(
           onTap: () {
-            Modular.to.navigate(route);
+            // Navigate only if the route is different to prevent unnecessary rebuilds.
+            if (Modular.to.path != route) {
+              Modular.to.navigate(route);
+            }
             if (onTap != null) {
               onTap();
             }
           },
         );
+
   final String route;
 }
