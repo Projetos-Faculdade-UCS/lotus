@@ -166,18 +166,18 @@ class _SidebarItem extends SidebarXItem {
     required this.route,
     super.icon,
     super.label,
-    dynamic Function()? onTap,
-  }) : super(
-          onTap: () {
-            // Navigate only if the route is different to prevent unnecessary rebuilds.
-            if (Modular.to.path != route) {
-              Modular.to.navigate(route);
-            }
-            if (onTap != null) {
-              onTap();
-            }
-          },
-        );
+  });
+
+  void _onTap() {
+    // Navigate only if the route is different
+    // to prevent unnecessary rebuilds.
+    if (Modular.to.path != route) {
+      Modular.to.navigate(route);
+    }
+  }
+
+  @override
+  void Function() get onTap => _onTap;
 
   final String route;
 }
