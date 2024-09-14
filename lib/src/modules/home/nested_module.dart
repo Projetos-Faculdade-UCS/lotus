@@ -6,12 +6,12 @@ import 'package:lotus/src/modules/home/modules/ice_cream/ice_cream_module.dart';
 import 'package:lotus/src/modules/home/modules/search/search_module.dart';
 import 'package:lotus/src/modules/home/modules/settings/settings_module.dart';
 import 'package:lotus/src/modules/home/modules/shop/shop_module.dart';
-import 'package:lotus/src/modules/home/pages/home_page.dart';
+import 'package:lotus/src/modules/home/pages/nested_page.dart';
 import 'package:lotus/src/modules/home/widgets/sidebar.dart';
 import 'package:sidebarx/sidebarx.dart';
 
 /// The Home module of the application.
-class HomeModule extends Module {
+class NestedModule extends Module {
   @override
   void binds(Injector i) {
     i
@@ -22,10 +22,10 @@ class HomeModule extends Module {
 
   @override
   void routes(RouteManager r) {
-    Modular.setInitialRoute('/dashboard');
+    Modular.setInitialRoute('/dashboard/');
     r.child(
       '/',
-      child: (_) => const HomePage(),
+      child: (_) => const NestedPage(),
       children: [
         ParallelRoute.module('/settings', module: SettingsModule()),
         ParallelRoute.module('/dashboard', module: DashboardModule()),
