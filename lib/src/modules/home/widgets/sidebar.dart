@@ -99,20 +99,19 @@ class Sidebar extends StatelessWidget {
                 child: const LotusIcon(),
               ),
             ),
-            AnimatedSize(
+            AnimatedContainer(
               duration: const Duration(milliseconds: 300),
-              child: SizedBox(
-                height: extended ? 50 : 0,
-                child: Text(
-                  'Project Lotus',
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.onPrimary,
-                    fontSize: 24,
-                  ),
-                  softWrap: false,
-                  overflow: TextOverflow.fade,
-                  maxLines: 1,
+              height: extended ? 40 : 0,
+              alignment: Alignment.center,
+              transform: Matrix4.translationValues(0, extended ? 0 : -10, 0),
+              child: const Text(
+                'Project Lotus',
+                style: TextStyle(
+                  fontSize: 24,
                 ),
+                softWrap: false,
+                overflow: TextOverflow.fade,
+                maxLines: 1,
               ),
             ),
           ],
