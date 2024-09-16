@@ -1,7 +1,8 @@
+// lib/widgets/sidebar.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:lotus/src/colors.dart';
 import 'package:lotus/src/lotus_icon.dart';
+import 'package:lotus/src/theme/sidebar_theme_extension.dart';
 import 'package:sidebarx/sidebarx.dart';
 
 /// Sidebar controller.
@@ -55,11 +56,14 @@ class Sidebar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final sidebarXThemeExtension =
+        Theme.of(context).extension<SidebarXThemeExtension>();
+
     return RepaintBoundary(
       child: SidebarX(
         controller: controller,
-        theme: _sidebarTheme,
-        extendedTheme: _extendedTheme,
+        theme: sidebarXThemeExtension!.sidebarXTheme,
+        extendedTheme: sidebarXThemeExtension.extendedSidebarXTheme,
         footerDivider: const Divider(
           color: Colors.white,
           thickness: 0.5,
@@ -77,72 +81,32 @@ class Sidebar extends StatelessWidget {
     );
   }
 
-  // Extracted themes to constants to prevent rebuilding them.
-  static final SidebarXTheme _sidebarTheme = SidebarXTheme(
-    margin: const EdgeInsets.all(10),
-    decoration: BoxDecoration(
-      color: canvasColor,
-      borderRadius: BorderRadius.circular(20),
-    ),
-    textStyle: const TextStyle(color: Colors.white),
-    selectedTextStyle: const TextStyle(color: Colors.white),
-    itemTextPadding: const EdgeInsets.only(left: 30),
-    selectedItemTextPadding: const EdgeInsets.only(left: 30),
-    itemDecoration: BoxDecoration(
-      border: Border.all(color: canvasColor),
-    ),
-    selectedItemDecoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(10),
-      border: Border.all(
-        color: actionColor.withOpacity(0.37),
-      ),
-      gradient: const LinearGradient(
-        colors: [accentCanvasColor, canvasColor],
-      ),
-      boxShadow: const [
-        BoxShadow(
-          color: Colors.black26, // Reduced opacity for better performance.
-          blurRadius: 30,
-        ),
-      ],
-    ),
-    iconTheme: const IconThemeData(
-      color: Colors.white,
-      size: 20,
-    ),
-  );
-
-  static final SidebarXTheme _extendedTheme = SidebarXTheme(
-    width: 250,
-    decoration: BoxDecoration(
-      color: canvasColor,
-      borderRadius: BorderRadius.circular(20),
-    ),
-    margin: const EdgeInsets.all(10),
-  );
-
   Widget _buildHeader(BuildContext context, bool extended) {
     return InkWell(
       onTap: controller.toggleExtended,
+      borderRadius: const BorderRadius.only(
+        topLeft: Radius.circular(20),
+        topRight: Radius.circular(20),
+      ),
       child: DrawerHeader(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Expanded(
-              child: AnimatedRotation(
-                duration: const Duration(milliseconds: 300),
-                turns: extended ? 1 : 0,
-                child: const LotusIcon(),
-              ),
+            const Expanded(
+              child: LotusIcon(),
             ),
-            AnimatedSize(
+            AnimatedContainer(
               duration: const Duration(milliseconds: 300),
-              child: SizedBox(
-                height: extended ? 50 : 0,
+              curve: Curves.easeInOutCubic,
+              height: extended ? 40 : 0,
+              alignment: Alignment.center,
+              child: AnimatedOpacity(
+                duration: const Duration(milliseconds: 300),
+                curve: Curves.easeInOutCubic,
+                opacity: extended ? 1 : 0,
                 child: const Text(
                   'Project Lotus',
                   style: TextStyle(
-                    color: white,
                     fontSize: 24,
                   ),
                   softWrap: false,

@@ -1,3 +1,4 @@
+import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:lotus/src/modules/home/controllers/bottom_bar_controller.dart';
@@ -41,6 +42,36 @@ class SettingsPage extends StatelessWidget {
                 },
                 title: const Text('Show Menu Bar'),
                 subtitle: const Text('Show or hide the menu bar.'),
+              );
+            },
+          ),
+          ListenableBuilder(
+            listenable: AdaptiveTheme.of(context).modeChangeNotifier,
+            builder: (context, snapshot) {
+              return ListTile(
+                title: const Text('Theme'),
+                trailing: DropdownButton<AdaptiveThemeMode>(
+                  value: AdaptiveTheme.of(context).mode,
+                  onChanged: (value) {
+                    AdaptiveTheme.of(context).setThemeMode(
+                      value ?? AdaptiveThemeMode.system,
+                    );
+                  },
+                  items: const [
+                    DropdownMenuItem(
+                      value: AdaptiveThemeMode.system,
+                      child: Text('System'),
+                    ),
+                    DropdownMenuItem(
+                      value: AdaptiveThemeMode.light,
+                      child: Text('Light'),
+                    ),
+                    DropdownMenuItem(
+                      value: AdaptiveThemeMode.dark,
+                      child: Text('Dark'),
+                    ),
+                  ],
+                ),
               );
             },
           ),

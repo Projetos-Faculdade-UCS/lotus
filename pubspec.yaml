@@ -28,6 +28,9 @@ dependencies:
       ref: 12decbe0f592e14e03223f6f2c0c7e0e2dbd70a1
   file_picker: ^8.1.2
   super_context_menu: ^0.8.22
+  adaptive_theme: ^3.6.0
+  flutter_svg: ^2.0.10+1
+  vector_graphics: ^1.1.11+1
 
 dev_dependencies:
   flutter_test:
@@ -42,3 +45,4 @@ flutter:
   uses-material-design: true
   assets:
     - assets/logo/lotus_icon.png
+    - assets/logo/ucs-logo.svg.vec
