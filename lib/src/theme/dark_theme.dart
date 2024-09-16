@@ -7,11 +7,11 @@ import 'package:sidebarx/sidebarx.dart';
 /// The dark theme of the application.
 final ThemeData darkTheme = ThemeData(
   brightness: Brightness.dark,
-  primaryColor: azulCeu,
+  primaryColor: azulInstitucional,
   scaffoldBackgroundColor: darkBackground,
   colorScheme: const ColorScheme.dark(
-    primary: azulCeu,
-    secondary: azulInstitucional,
+    primary: azulInstitucional,
+    secondary: azulCeu,
     error: vermelhoInstitucional,
     surface: Color(0xFF1E1E1E),
     onPrimary: branco,
@@ -37,9 +37,9 @@ final ThemeData darkTheme = ThemeData(
         selectedItemDecoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           border: Border.all(
-            color: azulCeu.withOpacity(0.5),
+            color: azulInstitucional.withOpacity(0.5),
           ),
-          color: azulCeu,
+          color: azulInstitucional,
           boxShadow: const [
             BoxShadow(
               color: Colors.black26,
@@ -61,6 +61,7 @@ final ThemeData darkTheme = ThemeData(
           horizontal: 10,
           vertical: 5,
         ),
+        hoverTextStyle: const TextStyle(color: azulCeu),
         itemMargin: const EdgeInsets.symmetric(
           horizontal: 10,
           vertical: 5,

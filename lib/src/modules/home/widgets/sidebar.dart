@@ -92,18 +92,14 @@ class Sidebar extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Expanded(
-              child: AnimatedRotation(
-                duration: const Duration(milliseconds: 300),
-                turns: extended ? 1 : 0,
-                child: const LotusIcon(),
-              ),
+            const Expanded(
+              child: LotusIcon(),
             ),
             AnimatedContainer(
               duration: const Duration(milliseconds: 300),
+              curve: Curves.easeInOutCubic,
               height: extended ? 40 : 0,
               alignment: Alignment.center,
-              transform: Matrix4.translationValues(0, extended ? 0 : -10, 0),
               child: const Text(
                 'Project Lotus',
                 style: TextStyle(
