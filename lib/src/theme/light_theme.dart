@@ -26,7 +26,7 @@ final ThemeData lightTheme = ThemeData(
           borderRadius: BorderRadius.circular(20),
         ),
         textStyle: const TextStyle(color: Colors.black),
-        selectedTextStyle: const TextStyle(color: Colors.black),
+        selectedTextStyle: const TextStyle(color: Colors.white),
         itemTextPadding: const EdgeInsets.only(left: 30),
         selectedItemTextPadding: const EdgeInsets.only(left: 30),
         itemDecoration: BoxDecoration(
@@ -35,9 +35,9 @@ final ThemeData lightTheme = ThemeData(
         selectedItemDecoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           border: Border.all(
-            color: azulCeu.withOpacity(0.5),
+            color: azulInstitucional.withOpacity(0.5),
           ),
-          color: azulCeu,
+          color: azulInstitucional,
           boxShadow: const [
             BoxShadow(
               color: Colors.black26,
