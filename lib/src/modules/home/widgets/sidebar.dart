@@ -100,14 +100,19 @@ class Sidebar extends StatelessWidget {
               curve: Curves.easeInOutCubic,
               height: extended ? 40 : 0,
               alignment: Alignment.center,
-              child: const Text(
-                'Project Lotus',
-                style: TextStyle(
-                  fontSize: 24,
+              child: AnimatedOpacity(
+                duration: const Duration(milliseconds: 300),
+                curve: Curves.easeInOutCubic,
+                opacity: extended ? 1 : 0,
+                child: const Text(
+                  'Project Lotus',
+                  style: TextStyle(
+                    fontSize: 24,
+                  ),
+                  softWrap: false,
+                  overflow: TextOverflow.fade,
+                  maxLines: 1,
                 ),
-                softWrap: false,
-                overflow: TextOverflow.fade,
-                maxLines: 1,
               ),
             ),
           ],
