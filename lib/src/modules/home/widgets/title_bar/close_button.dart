@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:window_manager/window_manager.dart';
 
 /// Close button.
@@ -17,7 +18,7 @@ class CloseButton extends StatelessWidget {
         ),
       ),
       icon: const Icon(
-        Icons.close,
+        HugeIcons.strokeRoundedCancel01,
       ),
       alignment: Alignment.center,
       padding: EdgeInsets.zero,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:window_manager/window_manager.dart';
 
 /// Minimize button.
@@ -16,9 +17,11 @@ class MinimizeButton extends StatelessWidget {
           ),
         ),
       ),
-      icon: const Icon(Icons.minimize),
+      icon: const Icon(
+        HugeIcons.strokeRoundedMinusSign,
+      ),
       hoverColor: Colors.grey.withOpacity(0.5),
-      alignment: Alignment.center,
+      alignment: Alignment.bottomCenter,
       padding: EdgeInsets.zero,
       onPressed: windowManager.minimize,
     );

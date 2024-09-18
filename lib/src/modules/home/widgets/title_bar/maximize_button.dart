@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:window_manager/window_manager.dart';
 
 /// Maximize button.
@@ -17,7 +18,7 @@ class MaximizeButton extends StatelessWidget {
         ),
       ),
       icon: const Icon(
-        Icons.crop_square,
+        HugeIcons.strokeRoundedSquare,
       ),
       alignment: Alignment.center,
       padding: EdgeInsets.zero,
