@@ -9,14 +9,32 @@ class AtivosPage extends StatelessWidget {
   const AtivosPage({super.key});
 
   static final List<Ativo> _ativos = [
-    Ativo(nome: 'Computador 007', tipo: TipoAtivo.computador),
-    Ativo(nome: 'Monitor', tipo: TipoAtivo.monitor),
-    Ativo(nome: 'Impressora', tipo: TipoAtivo.impressora),
+    Ativo(
+      nome: 'Computador Intel 2023',
+      tipo: TipoAtivo.computador,
+      patrimonio: 123456,
+      ultimaAtualizacao: DateTime(2023),
+    ),
+    Ativo(
+      nome: 'Monitor',
+      tipo: TipoAtivo.monitor,
+      patrimonio: 654321,
+      ultimaAtualizacao: DateTime(2022),
+    ),
+    Ativo(
+      nome: 'Impressora',
+      tipo: TipoAtivo.impressora,
+      patrimonio: 987654,
+      ultimaAtualizacao: DateTime(2021),
+    ),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Miolo(
+      appBar: AppBar(
+        title: const Text('Ativos de TI'),
+      ),
       child: ListView.builder(
         itemCount: _ativos.length,
         itemBuilder: (context, index) {

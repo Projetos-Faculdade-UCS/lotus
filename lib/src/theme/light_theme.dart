@@ -80,4 +80,9 @@ final ThemeData lightTheme = ThemeData(
     ),
     iconTheme: IconThemeData(color: Colors.black),
   ),
+  listTileTheme: const ListTileThemeData(
+    subtitleTextStyle: TextStyle(
+      color: Color(0xFF625B71),
+    ),
+  ),
 );

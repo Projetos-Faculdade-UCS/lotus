@@ -83,4 +83,9 @@ final ThemeData darkTheme = ThemeData(
     ),
     iconTheme: IconThemeData(color: branco),
   ),
+  textTheme: const TextTheme(
+    bodyMedium: TextStyle(
+      color: Color(0xFFC0BDC6),
+    ),
+  ),
 );
