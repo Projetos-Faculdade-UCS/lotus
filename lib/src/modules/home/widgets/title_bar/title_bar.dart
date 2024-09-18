@@ -9,20 +9,39 @@ class TitleBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SizedBox(
+    return SizedBox(
       height: 36,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          // Padding(
-          //   padding: EdgeInsets.all(8),
-          //   child: Icon(
-          //     Icons.menu,
-          //     color: Colors.white,
-          //   ),
-          // ),
-          Expanded(child: DraggableArea()),
-          WindowIcons(),
+          IconButton(
+            style: ButtonStyle(
+              shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(0),
+                ),
+              ),
+            ),
+            icon: const Icon(Icons.menu),
+            hoverColor: Colors.grey.withOpacity(0.5),
+            alignment: Alignment.center,
+            padding: EdgeInsets.zero,
+            onPressed: () {},
+          ),
+          Expanded(
+            child: Stack(
+              children: [
+                Center(
+                  child: Text(
+                    'Project Lotus',
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
+                ),
+                const DraggableArea(),
+              ],
+            ),
+          ),
+          const WindowIcons(),
         ],
       ),
     );

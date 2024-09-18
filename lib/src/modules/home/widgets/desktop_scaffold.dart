@@ -4,6 +4,7 @@ import 'package:lotus/src/modules/home/widgets/bottom_bar.dart';
 import 'package:lotus/src/modules/home/widgets/sidebar.dart';
 import 'package:lotus/src/modules/home/widgets/title_bar/title_bar.dart';
 import 'package:sidebarx/sidebarx.dart';
+import 'package:window_manager/window_manager.dart';
 
 /// A scaffold with a sidebar.
 class DesktopScaffold extends StatefulWidget {
@@ -25,30 +26,28 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          Column(
-            children: [
-              Expanded(
-                child: Row(
-                  children: [
-                    RepaintBoundary(
-                      child: Sidebar(
-                        controller: _controller,
-                      ),
+    return DragToResizeArea(
+      child: Scaffold(
+        body: Column(
+          children: [
+            const RepaintBoundary(child: TitleBar()),
+            Expanded(
+              child: Row(
+                children: [
+                  RepaintBoundary(
+                    child: Sidebar(
+                      controller: _controller,
                     ),
-                    const Expanded(
-                      child: RouterOutlet(),
-                    ),
-                  ],
-                ),
+                  ),
+                  const Expanded(
+                    child: RouterOutlet(),
+                  ),
+                ],
               ),
-              const BottomBar(),
-            ],
-          ),
-          const RepaintBoundary(child: TitleBar()),
-        ],
+            ),
+            const BottomBar(),
+          ],
+        ),
       ),
     );
   }

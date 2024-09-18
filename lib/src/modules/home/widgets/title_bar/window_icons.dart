@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide CloseButton;
+import 'package:lotus/src/modules/home/widgets/title_bar/close_button.dart';
 import 'package:lotus/src/modules/home/widgets/title_bar/maximize_button.dart';
 import 'package:lotus/src/modules/home/widgets/title_bar/minimize_button.dart';
 
@@ -9,16 +10,11 @@ class WindowIcons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return const Row(
       children: [
-        const MinimizeButton(),
-        const MaximizeButton(),
-        IconButton(
-          icon: const Icon(Icons.close),
-          onPressed: () {
-            // Close window.
-          },
-        ),
+        MinimizeButton(),
+        MaximizeButton(),
+        CloseButton(),
       ],
     );
   }

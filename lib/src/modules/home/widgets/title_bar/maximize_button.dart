@@ -25,7 +25,7 @@ class MaximizeButton extends StatelessWidget {
       onPressed: () async {
         final isMaximized = await windowManager.isMaximized();
         if (isMaximized) {
-          await windowManager.restore();
+          await windowManager.unmaximize();
         } else {
           await windowManager.maximize();
         }

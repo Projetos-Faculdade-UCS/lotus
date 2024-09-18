@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:window_manager/window_manager.dart';
 
@@ -8,25 +9,24 @@ class DraggableArea extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 36,
+    return Listener(
+      behavior: HitTestBehavior.translucent,
+      onPointerDown: (event) async {
+        if (event.buttons == kPrimaryButton) {
+          await windowManager.startDragging();
+        }
+      },
       child: GestureDetector(
-        behavior: HitTestBehavior.opaque, // Ensures the entire area is tappable
+        behavior: HitTestBehavior.translucent,
         onDoubleTap: () async {
           final isMaximized = await windowManager.isMaximized();
           if (isMaximized) {
-            await windowManager.restore();
+            await windowManager.unmaximize();
           } else {
             await windowManager.maximize();
           }
         },
-        onPanStart: (details) {
-          windowManager.startDragging();
-        },
-        child: Container(
-          color: Colors
-              .transparent, // Ensures the GestureDetector has a visible area
-        ),
+        // No child needed since we're just capturing gestures
       ),
     );
   }

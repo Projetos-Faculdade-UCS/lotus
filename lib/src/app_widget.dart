@@ -18,11 +18,13 @@ class AppWidget extends StatelessWidget {
       builder: (light, dark) {
         return MaterialApp.router(
           title: 'Lotus',
+          color: Colors.transparent,
           theme: light,
           darkTheme: dark,
           routerConfig: Modular.routerConfig,
+          debugShowCheckedModeBanner: false,
         );
       },
-    ); //added by extension
+    );
   }
 }

@@ -29,8 +29,8 @@ dependencies:
   file_picker: ^8.1.2
   super_context_menu: ^0.8.22
   adaptive_theme: ^3.6.0
-  flutter_svg: ^2.0.10+1
-  vector_graphics: ^1.1.11+1
+  flutter_svg: ^2.0.10
+  vector_graphics: ^1.1.11
   window_manager: ^0.4.2
 
 dev_dependencies:
