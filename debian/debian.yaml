@@ -1,0 +1,17 @@
+flutter_app: 
+  command: lotus
+  arch: x64
+  parent: /usr/local/lib
+  nonInteractive: false
+
+control:
+  Package: lotus
+  Version: 1.0.0
+  Architecture: amd64
+  Priority: optional
+  Depends:
+  Maintainer:
+  Description: Project Lotus.
+  
+#options:
+#  exec_out_dir: debian/packages
