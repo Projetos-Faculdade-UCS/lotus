@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:hugeicons/hugeicons.dart';
+import 'package:lotus/src/constants/colors.dart';
 import 'package:lotus/src/extensions/datetime_extension.dart';
 import 'package:lotus/src/modules/home/modules/ativos/business_logic/models/ativo.dart';
 import 'package:lotus/src/modules/home/modules/ativos/widgets/custom_badge.dart';
+import 'package:lotus/src/modules/home/modules/ativos/widgets/tipo_ativo_icone.dart';
 
 /// Card de ativo de TI.
 class AtivoCard extends StatelessWidget {
@@ -24,11 +26,14 @@ class AtivoCard extends StatelessWidget {
       child: Column(
         children: [
           ListTile(
-            title: Text(
-              ativo.nome,
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
+            title: Padding(
+              padding: const EdgeInsets.only(bottom: 6),
+              child: Text(
+                ativo.nome,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                ),
               ),
             ),
             subtitle: Text(
@@ -38,17 +43,74 @@ class AtivoCard extends StatelessWidget {
                 // fontWeight: FontWeight.w500,
               ),
             ),
-            trailing: CustomBadge(
-              backgroundColor: Theme.of(context).colorScheme.primary,
-              label: const Text(
-                'Automático',
-                textAlign: TextAlign.center,
-              ),
-            ),
+            trailing: ativo.automatico
+                ? CustomBadge(
+                    backgroundColor: Theme.of(context).colorScheme.primary,
+                    label: const Text(
+                      'Automático',
+                      textAlign: TextAlign.center,
+                    ),
+                  )
+                : null,
           ),
           ListTile(
-            leading: SvgPicture.asset(
-              ativo.imagem,
+            leading: TipoAtivoIcone(tipo: ativo.tipo),
+            title: Column(
+              children: [
+                Row(
+                  children: [
+                    const HugeIcon(
+                      icon: HugeIcons.strokeRoundedBuilding03,
+                      color: lightBodyText,
+                      size: 20,
+                    ),
+                    const SizedBox(width: 8),
+                    Text(
+                      '${ativo.sala?.bloco.nome ?? 'Sem bloco'} - ${ativo.sala?.nome ?? 'Sem sala'}',
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    const SizedBox(width: 20),
+                    HugeIcon(
+                      icon: ativo.emUso
+                          ? HugeIcons.strokeRoundedUser
+                          : HugeIcons.strokeRoundedPackage,
+                      color: lightBodyText,
+                      size: 20,
+                    ),
+                    const SizedBox(width: 8),
+                    Text(
+                      ativo.emUso ? 'Em uso' : 'Em estoque',
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 8),
+                Row(
+                  children: [
+                    const HugeIcon(
+                      icon: HugeIcons.strokeRoundedWorkflowSquare06,
+                      color: lightBodyText,
+                      size: 20,
+                    ),
+                    const SizedBox(width: 8),
+                    Text(
+                      ativo.relacionamentos > 0
+                          ? '${ativo.relacionamentos} relacionamento(s)'
+                          : 'Nenhum relacionamento',
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
         ],

@@ -84,5 +84,8 @@ final ThemeData lightTheme = ThemeData(
     subtitleTextStyle: TextStyle(
       color: Color(0xFF625B71),
     ),
+    titleTextStyle: TextStyle(
+      color: lightBodyText,
+    ),
   ),
 );
