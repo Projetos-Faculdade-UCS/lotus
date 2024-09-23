@@ -3,6 +3,7 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
+  hotkey_manager_windows
   irondash_engine_context
   menubar
   screen_retriever

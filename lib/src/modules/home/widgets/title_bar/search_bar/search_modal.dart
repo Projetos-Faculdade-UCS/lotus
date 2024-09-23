@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:super_sliver_list/super_sliver_list.dart';
 
@@ -12,6 +13,32 @@ class SearchModal extends StatelessWidget {
     200000,
     (index) => index + 1,
   );
+
+  static const _modalKey = ValueKey('search-modal');
+
+  /// Shows the search modal.
+  static Future<void> show() {
+    return Modular.to.push(
+      PageRouteBuilder<void>(
+        fullscreenDialog: true,
+        opaque: false,
+        barrierColor: Colors.black.withOpacity(0.5),
+        barrierDismissible: true,
+        barrierLabel: 'search-modal',
+        settings: const RouteSettings(
+          name: 'search-modal',
+        ),
+        pageBuilder: (context, animation, secondaryAnimation) {
+          return FadeTransition(
+            opacity: animation,
+            child: const SearchModal(
+              key: _modalKey,
+            ),
+          );
+        },
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {

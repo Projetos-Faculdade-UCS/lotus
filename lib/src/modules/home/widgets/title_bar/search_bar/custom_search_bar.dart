@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:lotus/src/modules/home/widgets/title_bar/hoverable_container.dart';
 import 'package:lotus/src/modules/home/widgets/title_bar/search_bar/search_modal.dart';
@@ -14,24 +13,7 @@ class CustomSearchBar extends StatelessWidget {
     return Hero(
       tag: 'search-bar',
       child: HoverableContainer(
-        onTap: () {
-          Modular.to.push(
-            PageRouteBuilder<void>(
-              fullscreenDialog: true,
-              opaque: false,
-              barrierColor: Colors.black.withOpacity(0.5),
-              barrierDismissible: true,
-              pageBuilder: (context, animation, secondaryAnimation) {
-                return FadeTransition(
-                  opacity: animation,
-                  child: const SearchModal(
-                    key: ValueKey('search-modal'),
-                  ),
-                );
-              },
-            ),
-          );
-        },
+        onTap: SearchModal.show,
         decoration: WidgetStateProperty.resolveWith((states) {
           final borderOpacity = states.contains(WidgetState.hovered) ? .9 : .5;
           final scaffoldBackgroundColor =
