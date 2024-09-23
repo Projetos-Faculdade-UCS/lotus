@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:lotus/src/modules/home/widgets/title_bar/hoverable_container.dart';
 import 'package:lotus/src/modules/home/widgets/title_bar/search_bar/search_modal.dart';
 
@@ -44,9 +45,21 @@ class CustomSearchBar extends StatelessWidget {
             color: color,
           );
         }),
-        child: const Center(
-          child: Text(
-            'Buscar',
+        child: const SizedBox.expand(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8),
+                child: Icon(
+                  HugeIcons.strokeRoundedSearch02,
+                  size: 16,
+                ),
+              ),
+              Text(
+                'Buscar',
+              ),
+            ],
           ),
         ),
       ),

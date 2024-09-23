@@ -30,6 +30,13 @@ class SearchModal extends StatelessWidget {
               child: SearchBar(
                 autoFocus: true,
                 elevation: const WidgetStatePropertyAll(0),
+                hintText: 'Buscar em todos os tipos de ativos',
+                hintStyle: const WidgetStatePropertyAll(
+                  TextStyle(
+                    color: Colors.grey,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
                 shape: WidgetStatePropertyAll(
                   RoundedRectangleBorder(
                     borderRadius: const BorderRadius.only(
@@ -51,7 +58,8 @@ class SearchModal extends StatelessWidget {
                   restorationId: 'search-list',
                   itemCount: _mockedResult.length,
                   itemBuilder: (context, index) => ListTile(
-                    title: Text('Item ${_mockedResult[index]}'),
+                    key: ValueKey('search-list-item-$index'),
+                    title: Text('Ativo ${_mockedResult[index]}'),
                     leading: const Icon(HugeIcons.strokeRoundedComputer),
                   ),
                 ),
