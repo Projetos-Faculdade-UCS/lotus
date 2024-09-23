@@ -40,9 +40,12 @@ class TitleBar extends StatelessWidget {
             const Expanded(
               child: DraggableArea(),
             ),
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: 4),
-              child: CustomSearchBar(),
+            const Flexible(
+              flex: 2,
+              child: Padding(
+                padding: EdgeInsets.symmetric(vertical: 4),
+                child: CustomSearchBar(),
+              ),
             ),
             const Expanded(
               child: DraggableArea(),
