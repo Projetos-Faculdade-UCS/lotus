@@ -2,7 +2,7 @@ flutter_app:
   command: lotus
   arch: x64
   parent: /usr/local/lib
-  nonInteractive: false
+  nonInteractive: true
 
 control:
   Package: lotus
