@@ -41,6 +41,7 @@ class _HoverableContainerState extends State<HoverableContainer> {
     final decoration = widget.decoration?.resolve(_states);
 
     return MouseRegion(
+      cursor: SystemMouseCursors.click,
       onEnter: (_) => _updateState(WidgetState.hovered, true),
       onExit: (_) => _updateState(WidgetState.hovered, false),
       child: GestureDetector(
@@ -48,9 +49,12 @@ class _HoverableContainerState extends State<HoverableContainer> {
         onTapUp: (_) => _updateState(WidgetState.pressed, false),
         onTapCancel: () => _updateState(WidgetState.pressed, false),
         onTap: widget.onTap,
-        child: Container(
-          decoration: decoration,
-          child: widget.child,
+        child: DefaultTextStyle(
+          style: Theme.of(context).textTheme.bodyMedium!,
+          child: Container(
+            decoration: decoration,
+            child: widget.child,
+          ),
         ),
       ),
     );

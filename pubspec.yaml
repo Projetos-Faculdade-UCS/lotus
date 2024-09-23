@@ -33,6 +33,7 @@ dependencies:
   vector_graphics: ^1.1.11
   window_manager: ^0.4.2
   hugeicons: ^0.0.7
+  super_sliver_list: ^0.4.1
 
 dev_dependencies:
   flutter_test:
