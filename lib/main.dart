@@ -33,7 +33,7 @@ void main() async {
 
 Future<void> _initSearchHotkey() async {
   final hotKey = HotKey(
-    key: PhysicalKeyboardKey.keyF,
+    key: PhysicalKeyboardKey.keyP,
     modifiers: [HotKeyModifier.control],
     scope: HotKeyScope.inapp,
   );
