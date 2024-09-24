@@ -8,11 +8,7 @@ class SearchModal extends StatelessWidget {
   /// Default constructor.
   const SearchModal({super.key});
 
-  // TODO(marhaubrich): Remover;
-  static final _mockedResult = List.generate(
-    200000,
-    (index) => index + 1,
-  );
+  static const int _itemCount = 2000000;
 
   static const _modalKey = ValueKey('search-modal');
 
@@ -83,10 +79,10 @@ class SearchModal extends StatelessWidget {
                 child: SuperListView.builder(
                   padding: const EdgeInsets.all(8),
                   restorationId: 'search-list',
-                  itemCount: _mockedResult.length,
+                  itemCount: _itemCount,
                   itemBuilder: (context, index) => ListTile(
                     key: ValueKey('search-list-item-$index'),
-                    title: Text('Ativo ${_mockedResult[index]}'),
+                    title: Text('Ativo ${index + 1}'),
                     leading: const Icon(HugeIcons.strokeRoundedComputer),
                   ),
                 ),
