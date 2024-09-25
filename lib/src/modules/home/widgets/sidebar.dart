@@ -1,6 +1,7 @@
 // lib/widgets/sidebar.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:lotus/src/lotus_icon.dart';
 import 'package:lotus/src/theme/sidebar_theme_extension.dart';
 import 'package:sidebarx/sidebarx.dart';
@@ -16,7 +17,7 @@ class Sidebar extends StatelessWidget {
   // Moved static items outside the class to prevent them from being recreated.
   static final List<_SidebarItem> _items = [
     _SidebarItem(
-      icon: Icons.dashboard,
+      icon: HugeIcons.strokeRoundedDashboardSquare01,
       label: 'Dashboard',
       route: '/dashboard/',
     ),
@@ -25,25 +26,25 @@ class Sidebar extends StatelessWidget {
       label: 'Ativos',
       route: '/ativos/',
     ),
-    _SidebarItem(
-      icon: Icons.shopping_cart,
+    _SidebarItem((
+      icon: HugeIcons.strokeRoundedShoppingCart01,
       label: 'Shop',
       route: '/shop/',
     ),
     _SidebarItem(
-      icon: Icons.icecream,
+      icon: HugeIcons.strokeRoundedIceCream03,
       label: 'Ice-Cream',
       route: '/ice-cream/',
     ),
     _SidebarItem(
-      icon: Icons.search,
+      icon: HugeIcons.strokeRoundedSearch02,
       label: 'Search',
       route: '/search/',
     ),
   ];
   static final List<_SidebarItem> _footerItems = [
     _SidebarItem(
-      icon: Icons.settings,
+      icon: HugeIcons.strokeRoundedSettings03,
       label: 'Settings',
       route: '/settings/',
     ),
