@@ -18,3 +18,6 @@ const Color darkBackground = Color(0xFF121212);
 
 /// Dark Gray for Body Text in Dark Theme
 const Color darkBodyText = Color(0xFFE0E0E0);
+
+/// text color for light theme
+const Color lightBodyText = Color(0xFF1D192B);

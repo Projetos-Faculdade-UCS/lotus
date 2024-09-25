@@ -83,4 +83,9 @@ final ThemeData darkTheme = ThemeData(
     ),
     iconTheme: IconThemeData(color: branco),
   ),
+  listTileTheme: const ListTileThemeData(
+    subtitleTextStyle: TextStyle(
+      color: Color(0xFFC0BDC6),
+    ),
+  ),
 );
