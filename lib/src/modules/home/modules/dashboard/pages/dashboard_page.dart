@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lotus/src/modules/home/widgets/example_card.dart';
 import 'package:lotus/src/modules/home/widgets/example_context_menu.dart';
-import 'package:lotus/src/modules/home/widgets/miolo.dart';
+import 'package:lotus_ui/lotus_ui.dart';
 
 /// The Dashboard page of the application.
 class DashboardPage extends StatelessWidget {

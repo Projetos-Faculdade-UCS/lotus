@@ -1,0 +1,25 @@
+name: lotus_ui
+description: A Very Good Project created by Very Good CLI.
+version: 0.1.0+1
+publish_to: none
+
+environment:
+  sdk: ^3.5.0
+  flutter: ^3.24.3
+
+dependencies:
+  adaptive_theme: ^3.6.0
+  
+  flutter:
+    sdk: flutter
+    
+
+  sidebarx:
+    git:
+      url: https://github.com/mrhaubrich/sidebarx.git
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  mocktail: ^1.0.4
+  very_good_analysis: ^6.0.0

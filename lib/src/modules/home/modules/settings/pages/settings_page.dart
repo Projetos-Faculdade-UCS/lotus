@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:lotus/src/modules/home/controllers/bottom_bar_controller.dart';
 import 'package:lotus/src/modules/home/controllers/menu_bar_controller.dart';
-import 'package:lotus/src/modules/home/widgets/miolo.dart';
+import 'package:lotus_ui/lotus_ui.dart';
 
 /// The Settings page of the application.
 class SettingsPage extends StatelessWidget {
@@ -27,8 +27,12 @@ class SettingsPage extends StatelessWidget {
                 onChanged: (value) {
                   Modular.get<BottomBarController>().isBottomBarVisible = value;
                 },
-                title: const Text('Show Bottom Bar'),
-                subtitle: const Text('Show or hide the bottom bar.'),
+                title: const Text(
+                  'Show Bottom Bar',
+                ),
+                subtitle: const Text(
+                  'Show or hide the bottom bar.',
+                ),
               );
             },
           ),
@@ -40,8 +44,12 @@ class SettingsPage extends StatelessWidget {
                 onChanged: (value) {
                   Modular.get<MenuBarController>().toggle();
                 },
-                title: const Text('Show Menu Bar'),
-                subtitle: const Text('Show or hide the menu bar.'),
+                title: const Text(
+                  'Show Menu Bar',
+                ),
+                subtitle: const Text(
+                  'Show or hide the menu bar.',
+                ),
               );
             },
           ),
@@ -49,8 +57,12 @@ class SettingsPage extends StatelessWidget {
             listenable: AdaptiveTheme.of(context).modeChangeNotifier,
             builder: (context, snapshot) {
               return ListTile(
-                title: const Text('Theme'),
+                title: const Text(
+                  'Theme',
+                  style: TextStyle(),
+                ),
                 trailing: DropdownButton<AdaptiveThemeMode>(
+                  focusColor: Colors.transparent,
                   value: AdaptiveTheme.of(context).mode,
                   onChanged: (value) {
                     AdaptiveTheme.of(context).setThemeMode(

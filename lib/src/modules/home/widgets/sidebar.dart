@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:lotus/src/lotus_icon.dart';
-import 'package:lotus/src/theme/sidebar_theme_extension.dart';
+import 'package:lotus_ui/lotus_ui.dart';
 import 'package:sidebarx/sidebarx.dart';
 
 /// Sidebar controller.

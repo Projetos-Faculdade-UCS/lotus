@@ -1,7 +1,7 @@
+import 'package:ativos_base/ativos_base.dart';
+import 'package:ativos_ui/src/widgets/ativo_card.dart';
 import 'package:flutter/material.dart';
-import 'package:lotus/src/modules/home/modules/ativos/business_logic/models/ativo.dart';
-import 'package:lotus/src/modules/home/modules/ativos/widgets/ativo_card.dart';
-import 'package:lotus/src/modules/home/widgets/miolo.dart';
+import 'package:lotus_ui/lotus_ui.dart';
 
 /// Página de ativos de TI (lista)
 class AtivosPage extends StatelessWidget {

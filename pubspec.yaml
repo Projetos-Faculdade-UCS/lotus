@@ -7,6 +7,7 @@ version: 1.0.0+1
 
 environment:
   sdk: ^3.5.0
+  flutter: ^3.24.3
 
 dependencies:
   flutter:
@@ -36,11 +37,22 @@ dependencies:
   flutter_svg: ^2.0.10
   vector_graphics: ^1.1.11
   hugeicons: ^0.0.7
-  timeago: ^3.7.0
   flutter_localizations:
     sdk: flutter
   intl: any
   flutter_layout_grid: ^2.0.7
+
+  ativos_base:
+    path: packages/ativos_base
+
+  ativos_ui:
+    path: packages/ativos_ui
+
+  lotus_ui:
+    path: packages/lotus_ui
+
+  lotus_utils:
+    path: packages/lotus_utils
 
 dev_dependencies:
   flutter_test:

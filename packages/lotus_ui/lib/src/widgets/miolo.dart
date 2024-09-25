@@ -17,9 +17,13 @@ class Miolo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: appBar,
-      body: child,
+    return Column(
+      children: [
+        if (appBar != null) appBar!,
+        Expanded(
+          child: child,
+        ),
+      ],
     );
   }
 }

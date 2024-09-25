@@ -1,0 +1,31 @@
+name: ativos_ui
+description: A Very Good Project created by Very Good CLI.
+version: 0.1.0+1
+publish_to: none
+
+environment:
+  sdk: ^3.5.0
+  flutter: ^3.24.0
+
+dependencies:
+  ativos_base:
+    path: ../ativos_base
+
+  flutter:
+    sdk: flutter
+    
+  flutter_svg: 2.0.10
+  
+  hugeicons: ^0.0.7
+
+  lotus_ui:
+    path: ../lotus_ui
+
+  lotus_utils:
+    path: ../lotus_utils
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  mocktail: ^1.0.4
+  very_good_analysis: ^6.0.0

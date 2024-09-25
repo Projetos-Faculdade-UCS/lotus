@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:lotus/src/modules/home/widgets/miolo.dart';
+import 'package:lotus_ui/lotus_ui.dart';
 
 /// The Search module of the application.
 class SearchModule extends Module {

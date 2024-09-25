@@ -1,10 +1,10 @@
+import 'package:ativos_base/ativos_base.dart';
+import 'package:ativos_ui/src/widgets/custom_badge.dart';
+import 'package:ativos_ui/src/widgets/tipo_ativo_icone.dart';
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
-import 'package:lotus/src/constants/colors.dart';
-import 'package:lotus/src/extensions/datetime_extension.dart';
-import 'package:lotus/src/modules/home/modules/ativos/business_logic/models/ativo.dart';
-import 'package:lotus/src/modules/home/modules/ativos/widgets/custom_badge.dart';
-import 'package:lotus/src/modules/home/modules/ativos/widgets/tipo_ativo_icone.dart';
+import 'package:lotus_ui/lotus_ui.dart';
+import 'package:lotus_utils/lotus_utils.dart';
 
 /// Card de ativo de TI.
 class AtivoCard extends StatelessWidget {
@@ -37,7 +37,8 @@ class AtivoCard extends StatelessWidget {
               ),
             ),
             subtitle: Text(
-              '#${ativo.patrimonio}  •  Atualizado ${ativo.ultimaAtualizacao.timeAgo}',
+              '#${ativo.patrimonio}  • '
+              ' Atualizado ${ativo.ultimaAtualizacao.timeAgo}',
               style: const TextStyle(
                 fontSize: 16,
                 // fontWeight: FontWeight.w500,
@@ -66,7 +67,8 @@ class AtivoCard extends StatelessWidget {
                     ),
                     const SizedBox(width: 8),
                     Text(
-                      '${ativo.sala?.bloco.nome ?? 'Sem bloco'} - ${ativo.sala?.nome ?? 'Sem sala'}',
+                      '${ativo.sala?.bloco.nome ?? 'Sem bloco'} - '
+                      '${ativo.sala?.nome ?? 'Sem sala'}',
                       style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,

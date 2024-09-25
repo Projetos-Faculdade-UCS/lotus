@@ -1,31 +1,33 @@
-// lib/themes/theme_light.dart
+// lib/themes/theme_dark.dart
+
 import 'package:flutter/material.dart';
-import 'package:lotus/src/constants/colors.dart';
-import 'package:lotus/src/theme/sidebar_theme_extension.dart';
+import 'package:lotus_ui/lotus_ui.dart';
 import 'package:sidebarx/sidebarx.dart';
 
-/// The light theme of the application.
-final ThemeData lightTheme = ThemeData(
-  brightness: Brightness.light,
+/// The dark theme of the application.
+final ThemeData darkTheme = ThemeData(
+  brightness: Brightness.dark,
   primaryColor: azulInstitucional,
-  scaffoldBackgroundColor: branco,
-  colorScheme: const ColorScheme.light(
+  scaffoldBackgroundColor: darkBackground,
+  colorScheme: const ColorScheme.dark(
     primary: azulInstitucional,
     secondary: azulCeu,
     error: vermelhoInstitucional,
+    surface: Color(0xFF1E1E1E),
+    onPrimary: branco,
     onSecondary: branco,
+    onError: branco,
   ),
   extensions: [
     SidebarXThemeExtension(
       sidebarXTheme: SidebarXTheme(
         margin: const EdgeInsets.all(10),
-        hoverColor: azulInstitucional.withOpacity(0.2),
         decoration: BoxDecoration(
           color: azulInstitucional
               .withOpacity(0.15), // Fundo azul claro com transparência
           borderRadius: BorderRadius.circular(20),
         ),
-        textStyle: const TextStyle(color: Colors.black),
+        textStyle: const TextStyle(color: Colors.white),
         selectedTextStyle: const TextStyle(color: Colors.white),
         itemTextPadding: const EdgeInsets.only(left: 30),
         selectedItemTextPadding: const EdgeInsets.only(left: 30),
@@ -46,7 +48,7 @@ final ThemeData lightTheme = ThemeData(
           ],
         ),
         iconTheme: const IconThemeData(
-          color: Colors.black,
+          color: branco,
           size: 20,
         ),
         selectedIconTheme: const IconThemeData(
@@ -54,15 +56,16 @@ final ThemeData lightTheme = ThemeData(
           size: 24,
         ),
         selectedItemPadding: const EdgeInsets.all(6),
+        itemPadding: const EdgeInsets.all(10),
         selectedItemMargin: const EdgeInsets.symmetric(
           horizontal: 10,
           vertical: 5,
         ),
+        hoverTextStyle: const TextStyle(color: azulCeu),
         itemMargin: const EdgeInsets.symmetric(
           horizontal: 10,
           vertical: 5,
         ),
-        itemPadding: const EdgeInsets.all(10),
       ),
       extendedSidebarXTheme: const SidebarXTheme(
         width: 250,
@@ -74,18 +77,24 @@ final ThemeData lightTheme = ThemeData(
     backgroundColor: Colors.transparent, // Fundo transparente
     elevation: 0, // Remove a sombra padrão
     titleTextStyle: TextStyle(
-      color: Colors.black,
+      color: branco,
       fontSize: 20,
       fontWeight: FontWeight.bold,
     ),
-    iconTheme: IconThemeData(color: Colors.black),
+    iconTheme: IconThemeData(color: branco),
   ),
-  listTileTheme: const ListTileThemeData(
-    subtitleTextStyle: TextStyle(
-      color: Color(0xFF625B71),
-    ),
-    titleTextStyle: TextStyle(
-      color: lightBodyText,
-    ),
-  ),
+  // listTileTheme: const ListTileThemeData(
+  //   subtitleTextStyle: TextStyle(
+  //     color: Color(0xFFC0BDC6),
+  //     backgroundColor: Colors.transparent,
+  //     wordSpacing: 1.5,
+  //     decorationThickness: 2,
+  //   ),
+  //   titleTextStyle: TextStyle(
+  //     color: darkBodyText,
+  //     backgroundColor: Colors.transparent,
+  //     wordSpacing: 1.5,
+  //     decorationThickness: 2,
+  //   ),
+  // ),
 );

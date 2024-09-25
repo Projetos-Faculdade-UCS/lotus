@@ -5,8 +5,8 @@ import 'package:hotkey_manager/hotkey_manager.dart';
 import 'package:lotus/src/app_widget.dart';
 import 'package:lotus/src/modules/app_module.dart';
 import 'package:lotus/src/modules/home/widgets/title_bar/search_bar/search_modal.dart';
+import 'package:lotus_utils/lotus_utils.dart';
 import 'package:menubar/menubar.dart';
-import 'package:timeago/timeago.dart' as timeago;
 import 'package:window_manager/window_manager.dart';
 
 void main() async {
@@ -23,7 +23,7 @@ void main() async {
   await hotKeyManager.unregisterAll();
 
   await _initSearchHotkey();
-  timeago.setLocaleMessages('pt', timeago.PtBrMessages());
+  initTimeAgo();
 
   return runApp(
     ModularApp(
