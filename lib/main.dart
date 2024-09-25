@@ -6,8 +6,8 @@ import 'package:lotus/src/app_widget.dart';
 import 'package:lotus/src/modules/app_module.dart';
 import 'package:lotus/src/modules/home/widgets/title_bar/search_bar/search_modal.dart';
 import 'package:menubar/menubar.dart';
-import 'package:window_manager/window_manager.dart';
 import 'package:timeago/timeago.dart' as timeago;
+import 'package:window_manager/window_manager.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

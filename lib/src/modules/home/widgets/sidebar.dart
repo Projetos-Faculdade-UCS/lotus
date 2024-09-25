@@ -14,6 +14,11 @@ class MySideBarController extends SidebarXController {
 
 /// Sidebar widget.
 class Sidebar extends StatelessWidget {
+  /// Sidebar widget.
+  const Sidebar({
+    required this.controller,
+    super.key,
+  });
   // Moved static items outside the class to prevent them from being recreated.
   static final List<_SidebarItem> _items = [
     _SidebarItem(
@@ -26,7 +31,7 @@ class Sidebar extends StatelessWidget {
       label: 'Ativos',
       route: '/ativos/',
     ),
-    _SidebarItem((
+    _SidebarItem(
       icon: HugeIcons.strokeRoundedShoppingCart01,
       label: 'Shop',
       route: '/shop/',
@@ -52,12 +57,6 @@ class Sidebar extends StatelessWidget {
 
   /// The controller of the sidebar.
   final SidebarXController controller;
-
-  /// Sidebar widget.
-  const Sidebar({
-    required this.controller,
-    super.key,
-  });
 
   @override
   Widget build(BuildContext context) {
@@ -128,12 +127,12 @@ class Sidebar extends StatelessWidget {
 }
 
 class _SidebarItem extends SidebarXItem {
-  final String route;
   _SidebarItem({
     required this.route,
     super.icon,
     super.label,
   });
+  final String route;
 
   @override
   void Function() get onTap => _onTap;
