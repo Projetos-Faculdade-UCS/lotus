@@ -1,5 +1,6 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:lotus/src/theme/dark_theme.dart';
 import 'package:lotus/src/theme/light_theme.dart';
@@ -21,6 +22,15 @@ class AppWidget extends StatelessWidget {
           theme: light,
           darkTheme: dark,
           routerConfig: Modular.routerConfig,
+          locale: const Locale('pt'),
+          localizationsDelegates: const [
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: const [
+            Locale('pt'),
+          ],
         );
       },
     ); //added by extension

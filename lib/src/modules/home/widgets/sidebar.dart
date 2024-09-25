@@ -13,18 +13,17 @@ class MySideBarController extends SidebarXController {
 
 /// Sidebar widget.
 class Sidebar extends StatelessWidget {
-  /// Sidebar widget.
-  const Sidebar({
-    required this.controller,
-    super.key,
-  });
-
   // Moved static items outside the class to prevent them from being recreated.
   static final List<_SidebarItem> _items = [
     _SidebarItem(
       icon: Icons.dashboard,
       label: 'Dashboard',
       route: '/dashboard/',
+    ),
+    _SidebarItem(
+      icon: Icons.computer_outlined,
+      label: 'Ativos',
+      route: '/ativos/',
     ),
     _SidebarItem(
       icon: Icons.shopping_cart,
@@ -42,7 +41,6 @@ class Sidebar extends StatelessWidget {
       route: '/search/',
     ),
   ];
-
   static final List<_SidebarItem> _footerItems = [
     _SidebarItem(
       icon: Icons.settings,
@@ -53,6 +51,12 @@ class Sidebar extends StatelessWidget {
 
   /// The controller of the sidebar.
   final SidebarXController controller;
+
+  /// Sidebar widget.
+  const Sidebar({
+    required this.controller,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -123,11 +127,15 @@ class Sidebar extends StatelessWidget {
 }
 
 class _SidebarItem extends SidebarXItem {
+  final String route;
   _SidebarItem({
     required this.route,
     super.icon,
     super.label,
   });
+
+  @override
+  void Function() get onTap => _onTap;
 
   void _onTap() {
     // Navigate only if the route is different
@@ -136,9 +144,4 @@ class _SidebarItem extends SidebarXItem {
       Modular.to.navigate(route);
     }
   }
-
-  @override
-  void Function() get onTap => _onTap;
-
-  final String route;
 }
