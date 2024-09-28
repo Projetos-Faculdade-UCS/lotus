@@ -1,5 +1,5 @@
 import 'package:ativos_base/ativos_base.dart';
-import 'package:ativos_ui/src/widgets/ativo_card.dart';
+import 'package:ativos_ui/ativos_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:lotus_ui/lotus_ui.dart';
 
@@ -67,27 +67,21 @@ class AtivosPage extends StatelessWidget {
         title: const Text('Ativos de TI'),
       ),
       child: ListView.builder(
-        itemCount: ativos.length,
+        itemCount: ativos.length ~/ 2, // divisão inteira
         itemBuilder: (context, index) {
-          final ativo = ativos[index];
-          return AtivoCard(ativo: ativo);
+          return Row(
+            children: [
+              Expanded(
+                child: AtivoCard(ativo: ativos[index * 2]),
+              ),
+              const SizedBox(width: 8),
+              Expanded(
+                child: AtivoCard(ativo: ativos[index * 2 + 1]),
+              ),
+            ],
+          );
         },
       ),
-      // child: SingleChildScrollView(
-      //   child: LayoutGrid(
-      //     columnSizes: [
-      //       1.fr,
-      //       1.fr,
-      //     ],
-      //     rowSizes: List.filled((ativos + ativos + ativos).length, auto),
-      //     columnGap: 16,
-      //     rowGap: 16,
-      //     gridFit: GridFit.passthrough,
-      //     children: (ativos + ativos + ativos)
-      //         .map((ativo) => AtivoCard(ativo: ativo))
-      //         .toList(),
-      //   ),
-      // ),
     );
   }
 }
