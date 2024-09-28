@@ -33,6 +33,20 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.11.0"
+  ativos_base:
+    dependency: "direct main"
+    description:
+      path: "packages/ativos_base"
+      relative: true
+    source: path
+    version: "0.1.0+1"
+  ativos_ui:
+    dependency: "direct main"
+    description:
+      path: "packages/ativos_ui"
+      relative: true
+    source: path
+    version: "0.1.0+1"
   auto_injector:
     dependency: transitive
     description:
@@ -239,10 +253,10 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_svg
-      sha256: "7b4ca6cf3304575fe9c8ec64813c8d02ee41d2afe60bcfe0678bcb5375d596a2"
+      sha256: "8f11725d2b075516efc364ec2cbcaacdf76e292725f02afa2657fbfb8af4a781"
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.10+1"
+    version: "2.0.10"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -413,6 +427,20 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.0"
+  lotus_ui:
+    dependency: "direct main"
+    description:
+      path: "packages/lotus_ui"
+      relative: true
+    source: path
+    version: "0.1.0+1"
+  lotus_utils:
+    dependency: "direct main"
+    description:
+      path: "packages/lotus_utils"
+      relative: true
+    source: path
+    version: "0.1.0+1"
   markdown:
     dependency: transitive
     description:
@@ -717,7 +745,7 @@ packages:
     source: hosted
     version: "0.7.2"
   timeago:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: timeago
       sha256: "054cedf68706bb142839ba0ae6b135f6b68039f0b8301cbe8784ae653d5ff8de"
@@ -854,4 +882,4 @@ packages:
     version: "3.1.2"
 sdks:
   dart: ">=3.5.0 <4.0.0"
-  flutter: ">=3.22.0"
+  flutter: ">=3.24.3"

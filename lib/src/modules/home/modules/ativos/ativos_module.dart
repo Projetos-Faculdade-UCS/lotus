@@ -1,7 +1,7 @@
+import 'package:ativos_ui/ativos_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:lotus/src/modules/home/modules/ativos/pages/ativos_page.dart';
-import 'package:lotus/src/modules/home/widgets/miolo.dart';
+import 'package:lotus_ui/lotus_ui.dart';
 
 /// Módulo de ativos de TI (lista, detalhes, etc.).
 class AtivosModule extends Module {

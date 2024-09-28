@@ -1,6 +1,6 @@
+import 'package:ativos_base/ativos_base.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:lotus/src/modules/home/modules/ativos/business_logic/models/ativo.dart';
 
 /// Ícone de um tipo de ativo de TI.
 class TipoAtivoIcone extends StatelessWidget {
