@@ -48,11 +48,15 @@ dependencies:
   ativos_ui:
     path: packages/ativos_ui
 
+  lotus_api_client:
+    path: packages/lotus_api_client
+
   lotus_ui:
     path: packages/lotus_ui
 
   lotus_utils:
     path: packages/lotus_utils
+  envied: ^0.5.4+1
 
 dev_dependencies:
   flutter_test:
@@ -63,6 +67,8 @@ dev_dependencies:
   very_good_analysis: ^6.0.0
   flutter_launcher_icons: ^0.14.1
   flutter_to_debian: ^2.0.2
+  envied_generator: ^0.5.4+1
+  build_runner: ^2.4.13
 
 flutter:
   uses-material-design: true
