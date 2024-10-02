@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:lotus_repository/src/models/base/ativo.dart';
-import 'package:lotus_repository/src/models/sala.dart';
+import 'package:repositories/src/models/base/ativo.dart';
+import 'package:repositories/src/models/sala.dart';
 
 part 'computador.g.dart';
 

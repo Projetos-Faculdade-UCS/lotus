@@ -3,8 +3,12 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'bloco.g.dart';
 
+/// {@template bloco}
+/// A building in a campus.
+/// {@endtemplate}
 @JsonSerializable()
 class Bloco extends Equatable {
+  /// {@macro bloco}
   const Bloco({
     required this.id,
     required this.nome,
@@ -12,11 +16,22 @@ class Bloco extends Equatable {
     required this.campus,
   });
 
+  /// Converts a JSON object to a [Bloco].
   factory Bloco.fromJson(Map<String, dynamic> json) => _$BlocoFromJson(json);
+
+  /// The unique identifier of the building.
   final int id;
+
+  /// The name of the building.
   final String nome;
+
+  /// The city where the building is located.
   final String cidade;
+
+  /// The campus where the building is located.
   final String campus;
+
+  /// Converts this [Bloco] to a JSON object.
   Map<String, dynamic> toJson() => _$BlocoToJson(this);
 
   @override

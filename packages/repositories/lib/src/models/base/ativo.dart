@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:lotus_repository/src/models/sala.dart';
+import 'package:repositories/src/models/sala.dart';
 
 part 'ativo.g.dart';
 

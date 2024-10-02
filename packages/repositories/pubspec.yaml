@@ -1,4 +1,4 @@
-name: lotus_repository
+name: repositories
 description: A Very Good Project created by Very Good CLI.
 version: 0.1.0+1
 publish_to: none
@@ -12,7 +12,11 @@ dev_dependencies:
   mocktail: ^1.0.4
   test: ^1.25.8
   very_good_analysis: ^6.0.0
+
 dependencies:
-  dio: ^5.7.0
   equatable: ^2.0.5
   json_annotation: ^4.9.0
+
+  lotus_api_client:
+    path: ../lotus_api_client
+  rxdart: ^0.28.0
