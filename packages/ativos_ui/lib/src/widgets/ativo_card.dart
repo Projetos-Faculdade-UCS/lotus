@@ -2,7 +2,6 @@ import 'package:ativos_ui/src/widgets/custom_badge.dart';
 import 'package:ativos_ui/src/widgets/tipo_ativo_icone.dart';
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
-import 'package:lotus_ui/lotus_ui.dart';
 import 'package:lotus_utils/lotus_utils.dart';
 import 'package:repositories/repositories.dart';
 
@@ -19,8 +18,8 @@ class AtivoCard extends StatelessWidget {
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
-        side: const BorderSide(
-          color: Color(0xFFA1A1AA),
+        side: BorderSide(
+          color: Theme.of(context).colorScheme.onSurface.withOpacity(0.3),
         ),
       ),
       child: Column(
@@ -60,9 +59,12 @@ class AtivoCard extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    const HugeIcon(
+                    HugeIcon(
                       icon: HugeIcons.strokeRoundedBuilding03,
-                      color: lightBodyText,
+                      color: Theme.of(context)
+                          .colorScheme
+                          .onSurface
+                          .withOpacity(0.6),
                       size: 20,
                     ),
                     const SizedBox(width: 8),
@@ -79,7 +81,10 @@ class AtivoCard extends StatelessWidget {
                       icon: ativo.emUso
                           ? HugeIcons.strokeRoundedUser
                           : HugeIcons.strokeRoundedPackage,
-                      color: lightBodyText,
+                      color: Theme.of(context)
+                          .colorScheme
+                          .onSurface
+                          .withOpacity(0.6),
                       size: 20,
                     ),
                     const SizedBox(width: 8),
@@ -95,9 +100,12 @@ class AtivoCard extends StatelessWidget {
                 const SizedBox(height: 8),
                 Row(
                   children: [
-                    const HugeIcon(
+                    HugeIcon(
                       icon: HugeIcons.strokeRoundedWorkflowSquare06,
-                      color: lightBodyText,
+                      color: Theme.of(context)
+                          .colorScheme
+                          .onSurface
+                          .withOpacity(0.6),
                       size: 20,
                     ),
                     const SizedBox(width: 8),
