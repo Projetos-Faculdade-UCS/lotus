@@ -1,53 +1,71 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:lotus/src/modules/home/widgets/bottom_bar.dart';
 import 'package:lotus/src/modules/home/widgets/sidebar.dart';
 import 'package:lotus/src/modules/home/widgets/title_bar/title_bar.dart';
 import 'package:sidebarx/sidebarx.dart';
 import 'package:window_manager/window_manager.dart';
 
 /// A scaffold with a sidebar.
-class DesktopScaffold extends StatefulWidget {
+class DesktopScaffold extends StatelessWidget {
   /// A scaffold with a sidebar.
   const DesktopScaffold({super.key});
-
-  @override
-  State<DesktopScaffold> createState() => _DesktopScaffoldState();
-}
-
-class _DesktopScaffoldState extends State<DesktopScaffold> {
-  late final SidebarXController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = Modular.get();
-  }
 
   @override
   Widget build(BuildContext context) {
     return DragToResizeArea(
       child: Scaffold(
-        body: Column(
+        body: LayoutGrid(
+          areas: '''
+                  titlebar titlebar
+                  sidebar content
+                ''',
+          columnSizes: [auto, 1.fr],
+          rowSizes: [auto, 1.fr],
+          columnGap: 0,
+          rowGap: 0,
           children: [
-            const RepaintBoundary(child: TitleBar()),
-            Expanded(
-              child: Row(
-                children: [
-                  RepaintBoundary(
-                    child: Sidebar(
-                      controller: _controller,
-                    ),
-                  ),
-                  const Expanded(
-                    child: RouterOutlet(),
-                  ),
-                ],
-              ),
-            ),
-            const BottomBar(),
+            // Title bar in its own area
+            const TitleBar().inGridArea('titlebar'),
+            // Sidebar in its own area
+            const SidebarWidget().inGridArea('sidebar'),
+            // Main content area
+            const RouterOutlet().inGridArea('content'),
           ],
         ),
+      ),
+    );
+  }
+}
+
+/// Sidebar widget separated to localize state changes.
+class SidebarWidget extends StatefulWidget {
+  const SidebarWidget({super.key});
+
+  @override
+  _SidebarWidgetState createState() => _SidebarWidgetState();
+}
+
+class _SidebarWidgetState extends State<SidebarWidget> {
+  late final SidebarXController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = Modular.get<SidebarXController>();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return RepaintBoundary(
+      child: Sidebar(
+        controller: _controller,
       ),
     );
   }

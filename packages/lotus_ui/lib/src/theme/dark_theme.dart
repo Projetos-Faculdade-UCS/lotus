@@ -9,11 +9,11 @@ final ThemeData darkTheme = ThemeData(
   brightness: Brightness.dark,
   primaryColor: azulInstitucional,
   scaffoldBackgroundColor: darkBackground,
-  colorScheme: const ColorScheme.dark(
+  colorScheme: ColorScheme.dark(
     primary: azulInstitucional,
     secondary: azulCeu,
     error: vermelhoInstitucional,
-    surface: Color(0xFF1E1E1E),
+    surface: const Color(0xFF1E1E1E),
     onPrimary: branco,
     onSecondary: branco,
     onError: branco,
@@ -47,7 +47,7 @@ final ThemeData darkTheme = ThemeData(
             ),
           ],
         ),
-        iconTheme: const IconThemeData(
+        iconTheme: IconThemeData(
           color: branco,
           size: 20,
         ),
@@ -61,7 +61,7 @@ final ThemeData darkTheme = ThemeData(
           horizontal: 10,
           vertical: 5,
         ),
-        hoverTextStyle: const TextStyle(color: azulCeu),
+        hoverTextStyle: TextStyle(color: azulCeu),
         itemMargin: const EdgeInsets.symmetric(
           horizontal: 10,
           vertical: 5,
@@ -73,7 +73,7 @@ final ThemeData darkTheme = ThemeData(
       ),
     ),
   ],
-  appBarTheme: const AppBarTheme(
+  appBarTheme: AppBarTheme(
     backgroundColor: Colors.transparent, // Fundo transparente
     elevation: 0, // Remove a sombra padrão
     titleTextStyle: TextStyle(
