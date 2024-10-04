@@ -8,7 +8,7 @@ final ThemeData lightTheme = ThemeData(
   brightness: Brightness.light,
   primaryColor: azulInstitucional,
   scaffoldBackgroundColor: branco,
-  colorScheme: ColorScheme.light(
+  colorScheme: const ColorScheme.light(
     primary: azulInstitucional,
     secondary: azulCeu,
     tertiary: tertiary,
