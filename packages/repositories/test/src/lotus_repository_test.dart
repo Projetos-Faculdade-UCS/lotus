@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors
-import 'package:repositories/repositories.dart';
 import 'package:lotus_api_client/lotus_api_client.dart';
+import 'package:repositories/repositories.dart';
 import 'package:test/test.dart';
 
 void main() {

@@ -8,7 +8,7 @@ part of 'computador.dart';
 
 Computador _$ComputadorFromJson(Map<String, dynamic> json) => Computador(
       id: (json['id'] as num).toInt(),
-      tipo: json['tipo'] as String,
+      tipo: $enumDecode(_$TipoAtivoEnumMap, json['tipo']),
       nome: json['nome'] as String,
       fabricante: json['fabricante'] as String,
       emUso: json['emUso'] as bool,
@@ -38,7 +38,7 @@ Computador _$ComputadorFromJson(Map<String, dynamic> json) => Computador(
 Map<String, dynamic> _$ComputadorToJson(Computador instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'tipo': instance.tipo,
+      'tipo': _$TipoAtivoEnumMap[instance.tipo]!,
       'nome': instance.nome,
       'fabricante': instance.fabricante,
       'numeroSerie': instance.numeroSerie,
@@ -59,6 +59,13 @@ Map<String, dynamic> _$ComputadorToJson(Computador instance) =>
       'aprovado': instance.aprovado,
       'ultimaAtualizacao': instance.ultimaAtualizacao.toIso8601String(),
     };
+
+const _$TipoAtivoEnumMap = {
+  TipoAtivo.computador: 'Computador',
+  TipoAtivo.monitor: 'Monitor',
+  TipoAtivo.impressora: 'Impressora',
+  TipoAtivo.licencaSoftware: 'licencaSoftware',
+};
 
 const _$CriticidadeDadosEnumMap = {
   CriticidadeDados.baixa: 'baixa',

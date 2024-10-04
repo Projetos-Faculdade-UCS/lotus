@@ -1,6 +1,6 @@
-import 'package:ativos_base/ativos_base.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:repositories/repositories.dart';
 
 /// Ícone de um tipo de ativo de TI.
 class TipoAtivoIcone extends StatelessWidget {
@@ -22,23 +22,9 @@ class TipoAtivoIcone extends StatelessWidget {
         shape: BoxShape.circle,
       ),
       child: SvgPicture.asset(
-        imagem,
+        tipo.icon,
         width: 50,
       ),
     );
-  }
-
-  /// Retorna uma imagem diferente para cada tipo de ativo.
-  String get imagem {
-    switch (tipo) {
-      case TipoAtivo.computador:
-        return 'assets/ativos/computador.svg';
-      case TipoAtivo.monitor:
-        return 'assets/ativos/monitor.svg';
-      case TipoAtivo.impressora:
-        return 'assets/ativos/impressora.svg';
-      case TipoAtivo.licencaSoftware:
-        return 'assets/ativos/licenca-software.svg';
-    }
   }
 }

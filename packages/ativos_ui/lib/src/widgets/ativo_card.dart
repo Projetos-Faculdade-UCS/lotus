@@ -1,10 +1,10 @@
-import 'package:ativos_base/ativos_base.dart';
 import 'package:ativos_ui/src/widgets/custom_badge.dart';
 import 'package:ativos_ui/src/widgets/tipo_ativo_icone.dart';
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:lotus_ui/lotus_ui.dart';
 import 'package:lotus_utils/lotus_utils.dart';
+import 'package:repositories/repositories.dart';
 
 /// Card de ativo de TI.
 class AtivoCard extends StatelessWidget {
@@ -38,7 +38,7 @@ class AtivoCard extends StatelessWidget {
             ),
             subtitle: Text(
               '#${ativo.patrimonio}  • '
-              ' Atualizado ${ativo.ultimaAtualizacao.timeAgo}',
+              ' Atualizado ${ativo.ultimaAtualizacao?.timeAgo}',
               style: const TextStyle(
                 fontSize: 16,
                 // fontWeight: FontWeight.w500,
@@ -67,8 +67,8 @@ class AtivoCard extends StatelessWidget {
                     ),
                     const SizedBox(width: 8),
                     Text(
-                      '${ativo.sala?.bloco.nome ?? 'Sem bloco'} - '
-                      '${ativo.sala?.nome ?? 'Sem sala'}',
+                      '${ativo.sala.bloco.nome} - '
+                      '${ativo.sala.nome}',
                       style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,

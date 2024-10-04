@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:lotus_api_client/lotus_api_client.dart';
 import 'package:repositories/repositories.dart';
-import 'package:rxdart/rxdart.dart';
 
 /// {@template lotus_repository}
 /// A Very Good Project created by Very Good CLI.
@@ -13,39 +12,28 @@ class ComputadorRepository {
 
   final LotusApiClient _lotusApiClient;
 
-  // Replace StreamController with BehaviorSubject
-  final _computadoresSubject = BehaviorSubject<List<Ativo>>();
-
-  /// Exposes a stream of [Ativo] (computadores).
-  Stream<List<Ativo>> get computadoresStream => _computadoresSubject.stream;
-
   /// Fetches the list of [Computador]s and adds them to the stream.
-  Future<void> fetchComputadores() async {
-    try {
-      final computadoresResponse =
-          await _lotusApiClient.get<List<dynamic>>('/computadores');
+  Future<List<Ativo>> fetchComputadores() async {
+    final computadoresResponse =
+        await _lotusApiClient.get<List<dynamic>>('/computadores');
 
-      if (computadoresResponse.data == null ||
-          computadoresResponse.statusCode != 200) {
-        return;
-      }
-
-      if (!computadoresResponse.data!.every((element) => element is Map)) {
-        return;
-      }
-
-      final computadoresMap =
-          computadoresResponse.data!.cast<Map<String, dynamic>>();
-
-      final computadores = computadoresMap.map((computadorMap) {
-        return Ativo.fromJson(computadorMap);
-      }).toList();
-
-      // Emit the new data to the BehaviorSubject, which retains the latest value
-      _computadoresSubject.add(computadores);
-    } catch (e) {
-      _computadoresSubject.addError('Failed to fetch computadores: $e');
+    if (computadoresResponse.data == null ||
+        computadoresResponse.statusCode != 200) {
+      throw ComputadorRepositoryException('Failed to fetch computadores');
     }
+
+    if (!computadoresResponse.data!.every((element) => element is Map)) {
+      throw ComputadorRepositoryException('Not all computadores are maps');
+    }
+
+    final computadoresMap =
+        computadoresResponse.data!.cast<Map<String, dynamic>>();
+
+    final computadores = computadoresMap.map((computadorMap) {
+      return Ativo.fromJson(computadorMap);
+    }).toList();
+
+    return computadores;
   }
 
   /// Fetches a [Computador] by its [id].
@@ -72,9 +60,18 @@ class ComputadorRepository {
     // Automatically refetches and adds the new list of computadores to the stream
     unawaited(fetchComputadores());
   }
+}
 
-  /// Disposes of the resources used by the repository.
-  void dispose() {
-    _computadoresSubject.close();
-  }
+/// {@template computador_repository_exception}
+/// Exception thrown by the [ComputadorRepository].
+/// {@endtemplate}
+class ComputadorRepositoryException implements Exception {
+  /// {@macro computador_repository_exception}
+  ComputadorRepositoryException(this.message);
+
+  /// Message describing the exception.
+  final String message;
+
+  @override
+  String toString() => 'ComputadorRepositoryException: $message';
 }

@@ -8,7 +8,7 @@ part of 'ativo.dart';
 
 Ativo _$AtivoFromJson(Map<String, dynamic> json) => Ativo(
       id: (json['id'] as num).toInt(),
-      tipo: json['tipo'] as String,
+      tipo: $enumDecode(_$TipoAtivoEnumMap, json['tipo']),
       nome: json['nome'] as String,
       fabricante: json['fabricante'] as String,
       emUso: json['emUso'] as bool,
@@ -19,11 +19,14 @@ Ativo _$AtivoFromJson(Map<String, dynamic> json) => Ativo(
       relacionamentos: (json['relacionamentos'] as num).toInt(),
       responsavel: json['responsavel'] as String,
       numeroSerie: json['numeroSerie'] as String?,
+      ultimaAtualizacao: json['ultimaAtualizacao'] == null
+          ? null
+          : DateTime.parse(json['ultimaAtualizacao'] as String),
     );
 
 Map<String, dynamic> _$AtivoToJson(Ativo instance) => <String, dynamic>{
       'id': instance.id,
-      'tipo': instance.tipo,
+      'tipo': _$TipoAtivoEnumMap[instance.tipo]!,
       'nome': instance.nome,
       'fabricante': instance.fabricante,
       'numeroSerie': instance.numeroSerie,
@@ -34,4 +37,12 @@ Map<String, dynamic> _$AtivoToJson(Ativo instance) => <String, dynamic>{
       'sala': instance.sala.toJson(),
       'relacionamentos': instance.relacionamentos,
       'responsavel': instance.responsavel,
+      'ultimaAtualizacao': instance.ultimaAtualizacao?.toIso8601String(),
     };
+
+const _$TipoAtivoEnumMap = {
+  TipoAtivo.computador: 'Computador',
+  TipoAtivo.monitor: 'Monitor',
+  TipoAtivo.impressora: 'Impressora',
+  TipoAtivo.licencaSoftware: 'licencaSoftware',
+};

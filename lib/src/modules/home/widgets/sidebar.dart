@@ -28,8 +28,8 @@ class Sidebar extends StatelessWidget {
     ),
     _SidebarItem(
       icon: Icons.computer_outlined,
-      label: 'Ativos',
-      route: '/ativos/',
+      label: 'Computadores',
+      route: '/computadores/',
     ),
     _SidebarItem(
       icon: HugeIcons.strokeRoundedShoppingCart01,

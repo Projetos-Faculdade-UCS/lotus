@@ -63,25 +63,12 @@ class Computador extends Ativo {
   final bool aprovado;
 
   /// The last update.
+  @override
   final DateTime ultimaAtualizacao;
 
   /// Converts this [Computador] to a JSON object.
   @override
   Map<String, dynamic> toJson() => _$ComputadorToJson(this);
-
-  @override
-  List<Object?> get props => [
-        ...super.props,
-        criticidadeDados,
-        tamanhoRam,
-        modeloCpu,
-        programasInstalados,
-        monitores,
-        licencas,
-        usuarioLogado,
-        aprovado,
-        ultimaAtualizacao,
-      ];
 }
 
 /// The criticality of the data.

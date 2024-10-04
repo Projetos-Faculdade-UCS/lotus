@@ -8,9 +8,6 @@ environment:
   flutter: ^3.24.0
 
 dependencies:
-  ativos_base:
-    path: ../ativos_base
-
   flutter:
     sdk: flutter
     
@@ -23,6 +20,9 @@ dependencies:
 
   lotus_utils:
     path: ../lotus_utils
+
+  repositories:
+    path: ../repositories
 
 dev_dependencies:
   flutter_test:

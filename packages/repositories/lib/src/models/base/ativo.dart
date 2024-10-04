@@ -23,6 +23,7 @@ class Ativo extends Equatable {
     required this.relacionamentos,
     required this.responsavel,
     this.numeroSerie,
+    this.ultimaAtualizacao,
   });
 
   /// Converts a JSON object to a [Ativo].
@@ -32,7 +33,7 @@ class Ativo extends Equatable {
   final int id;
 
   /// The type of the IT asset.
-  final String tipo;
+  final TipoAtivo tipo;
 
   /// The name of the IT asset.
   final String nome;
@@ -64,23 +65,15 @@ class Ativo extends Equatable {
   /// The responsible for the IT asset.
   final String responsavel;
 
+  /// The last update of the IT asset.
+  final DateTime? ultimaAtualizacao;
+
   /// Converts this [Ativo] to a JSON object.
   Map<String, dynamic> toJson() => _$AtivoToJson(this);
 
   @override
   List<Object?> get props => [
         id,
-        tipo,
-        nome,
-        fabricante,
-        numeroSerie,
-        emUso,
-        descricao,
-        automatico,
-        patrimonio,
-        sala,
-        relacionamentos,
-        responsavel,
       ];
 
   @override
@@ -89,7 +82,7 @@ class Ativo extends Equatable {
   /// Returns a copy of this Ativo with the given fields updated.
   Ativo copyWith({
     int? id,
-    String? tipo,
+    TipoAtivo? tipo,
     String? nome,
     String? fabricante,
     String? numeroSerie,
@@ -100,6 +93,7 @@ class Ativo extends Equatable {
     Sala? sala,
     int? relacionamentos,
     String? responsavel,
+    DateTime? ultimaAtualizacao,
   }) {
     return Ativo(
       id: id ?? this.id,
@@ -114,6 +108,33 @@ class Ativo extends Equatable {
       sala: sala ?? this.sala,
       relacionamentos: relacionamentos ?? this.relacionamentos,
       responsavel: responsavel ?? this.responsavel,
+      ultimaAtualizacao: ultimaAtualizacao ?? this.ultimaAtualizacao,
     );
   }
+}
+
+/// The type of an IT asset.
+enum TipoAtivo {
+  /// A computer.
+  @JsonValue('Computador')
+  computador('assets/ativos/computador.svg'),
+
+  /// A monitor.
+  @JsonValue('Monitor')
+  monitor('assets/ativos/monitor.svg'),
+
+  /// A printer.
+  @JsonValue('Impressora')
+  impressora('assets/ativos/impressora.svg'),
+
+  /// A software license.
+  @JsonValue('licencaSoftware')
+  licencaSoftware('assets/ativos/licenca-software.svg');
+
+  const TipoAtivo(
+    this.icon,
+  );
+
+  /// The icon of the IT asset type.
+  final String icon;
 }
