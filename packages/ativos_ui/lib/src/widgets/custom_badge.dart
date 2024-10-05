@@ -12,10 +12,13 @@ class CustomBadge extends StatelessWidget {
       color: Colors.white,
       fontSize: 12,
     ),
+    this.borderColor = Colors.transparent,
   });
 
   /// Cor de fundo.
   final Color backgroundColor;
+
+  final Color borderColor;
 
   /// Rótulo.
   final Widget label;
@@ -33,6 +36,9 @@ class CustomBadge extends StatelessWidget {
       decoration: BoxDecoration(
         color: backgroundColor,
         borderRadius: BorderRadius.circular(6),
+        border: Border.all(
+          color: borderColor,
+        ),
       ),
       child: DefaultTextStyle(
         style: textStyle,

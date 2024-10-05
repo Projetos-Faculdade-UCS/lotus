@@ -24,7 +24,7 @@ class DashboardPage extends StatelessWidget {
                 children: [
                   ExampleContextMenu(
                     child: ExampleCard(
-                      title: Text('Card 1'),
+                      title: Text('Detalhe computador'),
                       subtitle: Text('Right-click me!'),
                     ),
                   ),

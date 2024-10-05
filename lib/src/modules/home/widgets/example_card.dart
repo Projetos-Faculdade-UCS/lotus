@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 /// An example card widget.
 class ExampleCard extends StatelessWidget {
@@ -15,6 +16,11 @@ class ExampleCard extends StatelessWidget {
   /// The subtitle widget.
   final Widget subtitle;
 
+  void _onTap() {
+    print('Card tapped!');
+    Modular.to.navigate('/computadores/2');
+  }
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -23,6 +29,7 @@ class ExampleCard extends StatelessWidget {
       child: Card(
         surfaceTintColor: Colors.black,
         child: InkWell(
+          onTap: _onTap,
           borderRadius: BorderRadius.circular(10),
           onSecondaryTap: () {},
           child: Padding(

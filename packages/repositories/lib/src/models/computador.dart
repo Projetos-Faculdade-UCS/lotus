@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:json_annotation/json_annotation.dart';
 import 'package:repositories/src/models/base/ativo.dart';
 import 'package:repositories/src/models/sala.dart';
@@ -91,4 +93,27 @@ enum CriticidadeDados {
 
   @override
   String toString() => name;
+}
+
+/// The type of how critical the data is.
+enum TipoCriticidade {
+  @JsonValue('Alta')
+  alta('Alta prioridade', color: Color(0xFFB91C1C)),
+
+  @JsonValue('Média')
+  media(
+    'Média prioridade',
+    color: Color(0xFFA16207),
+  ),
+
+  @JsonValue('Baixa')
+  baixa('Baixa prioridade', color: Color(0xFF1D4ED8));
+
+  const TipoCriticidade(
+    this.name, {
+    this.color = const Color(0xFF000000),
+  });
+
+  final String name;
+  final Color color;
 }
