@@ -8,6 +8,6 @@ class NestedPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DesktopScaffold();
+    return const DesktopScaffold();
   }
 }

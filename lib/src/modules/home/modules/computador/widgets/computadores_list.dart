@@ -17,12 +17,20 @@ class ComputadoresList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder(
+    return StreamBuilder<List<Ativo>>(
       stream: computadores,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           final computadores = snapshot.data!;
-          return ListView.builder(
+
+          return GridView.builder(
+            padding: const EdgeInsets.all(10),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              mainAxisSpacing: 10,
+              mainAxisExtent: 170,
+              crossAxisSpacing: 10,
+            ),
             itemCount: computadores.length,
             itemBuilder: (context, index) {
               final computador = computadores[index];
