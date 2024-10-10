@@ -15,6 +15,8 @@ class ComputadoresList extends StatelessWidget {
   /// Lista de computadores.
   final Stream<List<Ativo>> computadores;
 
+  static const _maxCardSize = 570.0;
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<List<Ativo>>(
@@ -25,8 +27,8 @@ class ComputadoresList extends StatelessWidget {
 
           return GridView.builder(
             padding: const EdgeInsets.all(10),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
+            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+              maxCrossAxisExtent: _maxCardSize,
               mainAxisSpacing: 10,
               mainAxisExtent: 170,
               crossAxisSpacing: 10,
