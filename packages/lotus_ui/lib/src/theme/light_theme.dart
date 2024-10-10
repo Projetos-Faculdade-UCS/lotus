@@ -14,6 +14,7 @@ final ThemeData lightTheme = ThemeData(
     tertiary: tertiary,
     error: vermelhoInstitucional,
     onSecondary: branco,
+    onSurfaceVariant: lightMutedText,
   ),
   extensions: [
     SidebarXThemeExtension(

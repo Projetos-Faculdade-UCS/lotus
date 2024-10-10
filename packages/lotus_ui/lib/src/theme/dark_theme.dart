@@ -17,6 +17,7 @@ final ThemeData darkTheme = ThemeData(
     onPrimary: branco,
     onSecondary: branco,
     onError: branco,
+    onSurfaceVariant: darkMutedText,
   ),
   extensions: [
     SidebarXThemeExtension(

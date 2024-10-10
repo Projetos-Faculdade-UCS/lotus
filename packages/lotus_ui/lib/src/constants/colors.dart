@@ -47,3 +47,10 @@ const darkBodyText = Color(0xFFE0E0E0);
 
 /// Material color for light theme
 const lightBodyText = Color(0xFF1D192B);
+
+// Cor para labels e outros textos sem destaque
+/// no o tema claro
+const lightMutedText = Color(0xFF737373);
+
+/// no tema escuro
+const darkMutedText = Color(0xFF707070);

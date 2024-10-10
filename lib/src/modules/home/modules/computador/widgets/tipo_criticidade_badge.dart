@@ -8,16 +8,17 @@ class TipoCriticidadeBadge extends StatelessWidget {
     super.key,
   });
 
-  final TipoCriticidade criticidade;
+  final CriticidadeDados criticidade;
 
   @override
   Widget build(BuildContext context) {
     return CustomBadge(
       label: Text(criticidade.name),
       backgroundColor: Colors.transparent,
-      borderColor: criticidade.color,
+      borderColor: Color(criticidade.color),
       textStyle: TextStyle(
-        color: criticidade.color,
+        color: Color(criticidade.color),
+        fontSize: 12,
       ),
     );
   }

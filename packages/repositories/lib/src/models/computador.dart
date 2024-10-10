@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:json_annotation/json_annotation.dart';
 import 'package:repositories/src/models/base/ativo.dart';
 import 'package:repositories/src/models/sala.dart';
@@ -73,47 +71,25 @@ class Computador extends Ativo {
   Map<String, dynamic> toJson() => _$ComputadorToJson(this);
 }
 
-/// The criticality of the data.
-enum CriticidadeDados {
-  /// Low criticality.
-  baixa(name: 'Baixa'),
-
-  /// Medium criticality.
-  media(name: 'Média'),
-
-  /// High criticality.
-  alta(name: 'Alta');
-
-  const CriticidadeDados({
-    required this.name,
-  });
-
-  /// The verbose name of the criticality.
-  final String name;
-
-  @override
-  String toString() => name;
-}
-
 /// The type of how critical the data is.
-enum TipoCriticidade {
+enum CriticidadeDados {
   @JsonValue('Alta')
-  alta('Alta prioridade', color: Color(0xFFB91C1C)),
+  alta('Alta prioridade', color: 0xFFB91C1C),
 
   @JsonValue('Média')
   media(
     'Média prioridade',
-    color: Color(0xFFA16207),
+    color: 0xFFA16207,
   ),
 
   @JsonValue('Baixa')
-  baixa('Baixa prioridade', color: Color(0xFF1D4ED8));
+  baixa('Baixa prioridade', color: 0xFF1D4ED8);
 
-  const TipoCriticidade(
+  const CriticidadeDados(
     this.name, {
-    this.color = const Color(0xFF000000),
+    this.color = 0xFF000000,
   });
 
   final String name;
-  final Color color;
+  final int color;
 }
