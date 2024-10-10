@@ -5,22 +5,22 @@ import 'package:repositories/repositories.dart';
 /// {@template computadores_list}
 /// Lista de computadores.
 /// {@endtemplate}
-class ComputadoresList extends StatelessWidget {
+class AtivosList extends StatelessWidget {
   /// {@macro computadores_list}
-  const ComputadoresList({
-    required this.computadores,
+  const AtivosList({
+    required this.ativos,
     super.key,
   });
 
   /// Lista de computadores.
-  final Stream<List<Ativo>> computadores;
+  final Stream<List<Ativo>> ativos;
 
   static const _maxCardSize = 570.0;
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<List<Ativo>>(
-      stream: computadores,
+      stream: ativos,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           final computadores = snapshot.data!;
