@@ -14,6 +14,7 @@ final ThemeData darkTheme = ThemeData(
     secondary: azulCeu,
     error: vermelhoInstitucional,
     surface: Color(0xFF1E1E1E),
+    shadow: darkShadow,
     onPrimary: branco,
     onSecondary: branco,
     onError: branco,

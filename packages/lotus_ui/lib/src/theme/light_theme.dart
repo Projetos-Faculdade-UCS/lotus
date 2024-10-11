@@ -12,8 +12,10 @@ final ThemeData lightTheme = ThemeData(
     primary: azulInstitucional,
     secondary: azulCeu,
     tertiary: tertiary,
+    surface: tertiary,
     error: vermelhoInstitucional,
     onSecondary: branco,
+    shadow: lightShadow,
     onSurfaceVariant: lightMutedText,
   ),
   extensions: [

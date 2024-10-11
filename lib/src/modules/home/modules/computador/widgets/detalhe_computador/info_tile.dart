@@ -5,28 +5,29 @@ class InfoTile extends StatelessWidget {
   const InfoTile({
     required this.title,
     required this.value,
+    this.icon,
     super.key,
-    this.icon = HugeIcons.strokeRoundedUser,
   });
 
   final String title;
 
-  final String value;
+  final Widget value;
 
-  final IconData icon;
+  final IconData? icon;
 
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
-
+    final hasIcon = icon != null;
     return Row(
       children: [
-        HugeIcon(
-          icon: HugeIcons.strokeRoundedUser,
-          color: colorScheme.primary,
-          size: 25,
-        ),
-        const SizedBox(width: 8),
+        if (hasIcon)
+          HugeIcon(
+            icon: icon!,
+            color: colorScheme.primary,
+            size: 25,
+          ),
+        if (hasIcon) const SizedBox(width: 12),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -37,13 +38,7 @@ class InfoTile extends StatelessWidget {
                 color: colorScheme.onSurfaceVariant,
               ),
             ),
-            Text(
-              value,
-              style: TextStyle(
-                fontSize: 16,
-                color: colorScheme.onSurface,
-              ),
-            ),
+            value,
           ],
         ),
       ],
