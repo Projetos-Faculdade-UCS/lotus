@@ -30,7 +30,9 @@ Computador _$ComputadorFromJson(Map<String, dynamic> json) => Computador(
       licencas:
           (json['licencas'] as List<dynamic>).map((e) => e as String).toList(),
       aprovado: json['aprovado'] as bool,
-      ultimaAtualizacao: DateTime.parse(json['ultimaAtualizacao'] as String),
+      ultimaAtualizacao: json['ultimaAtualizacao'] == null
+          ? null
+          : DateTime.parse(json['ultimaAtualizacao'] as String),
       usuarioLogado: json['usuarioLogado'] as String?,
       numeroSerie: json['numeroSerie'] as String?,
     );
@@ -49,6 +51,7 @@ Map<String, dynamic> _$ComputadorToJson(Computador instance) =>
       'sala': instance.sala.toJson(),
       'relacionamentos': instance.relacionamentos,
       'responsavel': instance.responsavel,
+      'ultimaAtualizacao': instance.ultimaAtualizacao?.toIso8601String(),
       'criticidadeDados': _$CriticidadeDadosEnumMap[instance.criticidadeDados]!,
       'tamanhoRam': instance.tamanhoRam,
       'modeloCpu': instance.modeloCpu,
@@ -57,7 +60,6 @@ Map<String, dynamic> _$ComputadorToJson(Computador instance) =>
       'licencas': instance.licencas,
       'usuarioLogado': instance.usuarioLogado,
       'aprovado': instance.aprovado,
-      'ultimaAtualizacao': instance.ultimaAtualizacao.toIso8601String(),
     };
 
 const _$TipoAtivoEnumMap = {

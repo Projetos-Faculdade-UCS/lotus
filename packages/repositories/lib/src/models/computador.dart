@@ -29,7 +29,7 @@ class Computador extends Ativo {
     required this.monitores,
     required this.licencas,
     required this.aprovado,
-    required this.ultimaAtualizacao,
+    required super.ultimaAtualizacao,
     this.usuarioLogado,
     super.numeroSerie,
   });
@@ -61,10 +61,6 @@ class Computador extends Ativo {
 
   /// Either the computer is approved.
   final bool aprovado;
-
-  /// The last update.
-  @override
-  final DateTime ultimaAtualizacao;
 
   /// Converts this [Computador] to a JSON object.
   @override
