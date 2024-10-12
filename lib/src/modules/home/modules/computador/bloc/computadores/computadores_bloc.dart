@@ -29,7 +29,7 @@ class ComputadoresBloc extends Bloc<ComputadoresEvent, ComputadoresState> {
   ) async {
     emit(ComputadoresLoading());
     try {
-      final computadores = await _repository.fetchComputadores();
+      final computadores = await _repository.fetchAll();
       _computadoresSubject.add(computadores);
       emit(ComputadoresSuccess(_computadoresStream));
     } catch (e) {
