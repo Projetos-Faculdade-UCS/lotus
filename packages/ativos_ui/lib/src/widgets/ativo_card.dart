@@ -10,11 +10,15 @@ class AtivoCard extends StatelessWidget {
   /// Cria um card de ativo de TI.
   const AtivoCard({
     required this.ativo,
+    this.onTap,
     super.key,
   });
 
   /// Ativo de TI.
   final Ativo ativo;
+
+  /// Função chamada quando o card é pressionado.
+  final VoidCallback? onTap;
 
   // Define text styles as static constants for reuse.
   static const TextStyle _titleTextStyle = TextStyle(
@@ -35,19 +39,23 @@ class AtivoCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       shape: _buildCardShape(context),
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _Header(
-              ativo: ativo,
-              titleTextStyle: _titleTextStyle,
-              subtitleTextStyle: _subtitleTextStyle,
-            ),
-            const SizedBox(height: 16),
-            _Info(ativo: ativo),
-          ],
+      child: InkWell(
+        borderRadius: BorderRadius.circular(12),
+        onTap: onTap,
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _Header(
+                ativo: ativo,
+                titleTextStyle: _titleTextStyle,
+                subtitleTextStyle: _subtitleTextStyle,
+              ),
+              const SizedBox(height: 16),
+              _Info(ativo: ativo),
+            ],
+          ),
         ),
       ),
     );

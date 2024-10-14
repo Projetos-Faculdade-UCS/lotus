@@ -38,6 +38,11 @@ class AtivosList extends StatelessWidget {
               final computador = computadores[index];
               return AtivoCard(
                 ativo: computador,
+                onTap: () {
+                  Navigator.of(context).pushNamed(
+                    '/computadores/${computador.id}',
+                  );
+                },
               );
             },
           );
