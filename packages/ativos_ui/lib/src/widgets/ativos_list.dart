@@ -48,7 +48,7 @@ class AtivosList extends StatelessWidget {
           );
         } else {
           return const Center(
-            child: Text('Nenhum computador encontrado.'),
+            child: Text('Nada encontrado.'),
           );
         }
       },
