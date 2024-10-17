@@ -22,7 +22,7 @@ final class ComputadoresSuccess extends ComputadoresState {
   const ComputadoresSuccess(this.computadores);
 
   /// Lista de computadores.
-  final Stream<List<Ativo>> computadores;
+  final List<Ativo> computadores;
 
   @override
   List<Object> get props => [computadores];

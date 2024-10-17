@@ -66,7 +66,6 @@ const _$TipoAtivoEnumMap = {
   TipoAtivo.computador: 'Computador',
   TipoAtivo.monitor: 'Monitor',
   TipoAtivo.impressora: 'Impressora',
-  TipoAtivo.licencaSoftware: 'licencaSoftware',
 };
 
 const _$CriticidadeDadosEnumMap = {

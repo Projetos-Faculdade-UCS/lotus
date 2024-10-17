@@ -1,7 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:repositories/repositories.dart';
-import 'package:rxdart/rxdart.dart';
 
 part 'computadores_event.dart';
 part 'computadores_state.dart';
@@ -17,12 +16,6 @@ class ComputadoresBloc extends Bloc<ComputadoresEvent, ComputadoresState> {
 
   final ComputadorRepository _repository;
 
-  // Replace StreamController with BehaviorSubject
-  final _computadoresSubject = BehaviorSubject<List<Ativo>>();
-
-  /// Exposes a stream of [Ativo] (computadores).
-  Stream<List<Ativo>> get _computadoresStream => _computadoresSubject.stream;
-
   Future<void> _onFetch(
     ComputadoresFetch event,
     Emitter<ComputadoresState> emit,
@@ -30,8 +23,7 @@ class ComputadoresBloc extends Bloc<ComputadoresEvent, ComputadoresState> {
     emit(ComputadoresLoading());
     try {
       final computadores = await _repository.fetchAll();
-      _computadoresSubject.add(computadores);
-      emit(ComputadoresSuccess(_computadoresStream));
+      emit(ComputadoresSuccess(computadores));
     } catch (e) {
       emit(ComputadoresFailure());
     }

@@ -121,6 +121,7 @@ enum TipoAtivo {
     'assets/ativos/computador.svg',
     name: 'Computador',
     pluralName: 'Computadores',
+    route: '/computadores',
   ),
 
   /// A monitor.
@@ -129,6 +130,7 @@ enum TipoAtivo {
     'assets/ativos/monitor.svg',
     name: 'Monitor',
     pluralName: 'Monitores',
+    route: '/monitores',
   ),
 
   /// A printer.
@@ -137,20 +139,14 @@ enum TipoAtivo {
     'assets/ativos/impressora.svg',
     name: 'Impressora',
     pluralName: 'Impressoras',
-  ),
-
-  /// A software license.
-  @JsonValue('licencaSoftware')
-  licencaSoftware(
-    'assets/ativos/licenca-software.svg',
-    name: 'Licença de Software',
-    pluralName: 'Licenças de Software',
+    route: '/impressoras',
   );
 
   const TipoAtivo(
     this.icon, {
     required this.name,
     required this.pluralName,
+    required this.route,
   });
 
   /// The icon of the IT asset type.
@@ -161,4 +157,7 @@ enum TipoAtivo {
 
   /// The plural name of the IT asset type.
   final String pluralName;
+
+  /// The route of the type.
+  final String route;
 }
