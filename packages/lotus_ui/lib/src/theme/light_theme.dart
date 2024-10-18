@@ -11,6 +11,7 @@ final ThemeData lightTheme = ThemeData(
   colorScheme: const ColorScheme.light(
     primary: azulInstitucional,
     secondary: azulCeu,
+    tertiary: tertiary,
     error: vermelhoInstitucional,
     onSecondary: branco,
   ),
@@ -92,18 +93,4 @@ final ThemeData lightTheme = ThemeData(
     ),
     iconTheme: IconThemeData(color: Colors.black),
   ),
-  // listTileTheme: const ListTileThemeData(
-  //   subtitleTextStyle: TextStyle(
-  //     color: Color(0xFF625B71),
-  //     backgroundColor: Colors.transparent,
-  //     wordSpacing: 1.5,
-  //     decorationThickness: 2,
-  //   ),
-  //   titleTextStyle: TextStyle(
-  //     color: lightBodyText,
-  //     backgroundColor: Colors.transparent,
-  //     wordSpacing: 1.5,
-  //     decorationThickness: 2,
-  //   ),
-  // ),
 );

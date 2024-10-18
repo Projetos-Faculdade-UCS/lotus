@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:hugeicons/hugeicons.dart';
-import 'package:lotus/src/lotus_icon.dart';
+import 'package:lotus/src/modules/home/widgets/sidebar_header.dart';
 import 'package:lotus_ui/lotus_ui.dart';
 import 'package:sidebarx/sidebarx.dart';
 
@@ -28,8 +28,8 @@ class Sidebar extends StatelessWidget {
     ),
     _SidebarItem(
       icon: Icons.computer_outlined,
-      label: 'Ativos',
-      route: '/ativos/',
+      label: 'Computadores',
+      route: '/computadores/',
     ),
     _SidebarItem(
       icon: HugeIcons.strokeRoundedShoppingCart01,
@@ -72,7 +72,13 @@ class Sidebar extends StatelessWidget {
           color: Colors.white,
           thickness: 0.5,
         ),
-        headerBuilder: _buildHeader,
+        headerBuilder: (context, extended) {
+          return SidebarHeader(
+            controller: controller,
+            context: context,
+            extended: extended,
+          );
+        },
         items: _items,
         footerItems: _footerItems,
         footerFitType: FooterFitType.fit,
@@ -81,46 +87,6 @@ class Sidebar extends StatelessWidget {
             height: 10,
           );
         },
-      ),
-    );
-  }
-
-  Widget _buildHeader(BuildContext context, bool extended) {
-    return InkWell(
-      onTap: controller.toggleExtended,
-      borderRadius: const BorderRadius.only(
-        topLeft: Radius.circular(20),
-        topRight: Radius.circular(20),
-      ),
-      child: DrawerHeader(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Expanded(
-              child: LotusIcon(),
-            ),
-            AnimatedContainer(
-              duration: const Duration(milliseconds: 300),
-              curve: Curves.easeInOutCubic,
-              height: extended ? 40 : 0,
-              alignment: Alignment.center,
-              child: AnimatedOpacity(
-                duration: const Duration(milliseconds: 300),
-                curve: Curves.easeInOutCubic,
-                opacity: extended ? 1 : 0,
-                child: const Text(
-                  'Project Lotus',
-                  style: TextStyle(
-                    fontSize: 24,
-                  ),
-                  softWrap: false,
-                  overflow: TextOverflow.fade,
-                  maxLines: 1,
-                ),
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }
