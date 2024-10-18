@@ -21,7 +21,11 @@ class Miolo extends StatelessWidget {
       color: Theme.of(context).scaffoldBackgroundColor,
       child: Column(
         children: [
-          if (appBar != null) appBar!,
+          if (appBar != null)
+            SizedBox(
+              height: appBar!.preferredSize.height,
+              child: appBar,
+            ),
           Expanded(
             child: child,
           ),
