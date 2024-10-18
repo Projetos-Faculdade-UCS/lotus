@@ -1,11 +1,12 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:hugeicons/hugeicons.dart';
 
 class InfoTile extends StatelessWidget {
   const InfoTile({
     required this.title,
     required this.value,
-    this.icon,
+    this.width,
+    this.leading,
     super.key,
   });
 
@@ -13,35 +14,33 @@ class InfoTile extends StatelessWidget {
 
   final Widget value;
 
-  final IconData? icon;
+  final double? width;
+
+  final Widget? leading;
 
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
-    final hasIcon = icon != null;
-    return Row(
-      children: [
-        if (hasIcon)
-          HugeIcon(
-            icon: icon!,
-            color: colorScheme.primary,
-            size: 25,
+    return Container(
+      constraints: BoxConstraints(
+        minHeight: 50,
+        maxHeight: 100,
+        maxWidth: width ?? double.infinity,
+      ),
+      child: ListTile(
+        leading: leading,
+        contentPadding: EdgeInsets.zero,
+        title: AutoSizeText(
+          title,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: TextStyle(
+            fontSize: 14,
+            color: colorScheme.onSurfaceVariant,
           ),
-        if (hasIcon) const SizedBox(width: 12),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              title,
-              style: TextStyle(
-                fontSize: 14,
-                color: colorScheme.onSurfaceVariant,
-              ),
-            ),
-            value,
-          ],
         ),
-      ],
+        subtitle: value,
+      ),
     );
   }
 }

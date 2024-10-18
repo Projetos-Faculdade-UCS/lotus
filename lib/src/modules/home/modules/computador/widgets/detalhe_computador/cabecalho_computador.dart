@@ -11,6 +11,8 @@ class CabecalhoComputador extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -31,19 +33,26 @@ class CabecalhoComputador extends StatelessWidget {
         ),
         const SizedBox(height: 12),
         Row(
+          mainAxisSize: MainAxisSize.min,
           children: [
-            const InfoTile(
+            InfoTile(
+              width: 200,
               title: 'Responsável',
-              value: Text(
+              value: const Text(
                 'João da Silva',
                 style: TextStyle(
                   fontSize: 16,
                 ),
               ),
-              icon: HugeIcons.strokeRoundedUser,
+              leading: HugeIcon(
+                icon: HugeIcons.strokeRoundedUser,
+                color: colorScheme.primary,
+                size: 25,
+              ),
             ),
             const SizedBox(width: 32),
             InfoTile(
+              width: 200,
               title: 'Ativos relacionados',
               value: TextButton(
                 onPressed: () => showDialog<String>(
@@ -69,7 +78,11 @@ class CabecalhoComputador extends StatelessWidget {
                   ],
                 ),
               ),
-              icon: HugeIcons.strokeRoundedWorkflowSquare06,
+              leading: HugeIcon(
+                icon: HugeIcons.strokeRoundedWorkflowSquare06,
+                color: colorScheme.primary,
+                size: 25,
+              ),
             ),
           ],
         ),
