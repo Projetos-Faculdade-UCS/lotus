@@ -102,7 +102,7 @@ class _Tile extends StatelessWidget {
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
             fontSize: 14,
-            color: colorScheme.onSurfaceVariant,
+            color: colorScheme.onPrimary.withOpacity(0.5),
           ),
         ),
         AutoSizeText(
