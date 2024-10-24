@@ -14,6 +14,22 @@ class CardLocal extends StatelessWidget {
         child: Stack(
           alignment: Alignment.bottomCenter,
           children: [
+            ColoredBox(
+              color: Theme.of(context).colorScheme.onSurface.withOpacity(.20),
+              child: Center(
+                child: AutoSizeText(
+                  'Localização',
+                  maxLines: 1,
+                  style: TextStyle(
+                    fontSize: 24,
+                    color: Theme.of(context)
+                        .colorScheme
+                        .onPrimary
+                        .withOpacity(0.5),
+                  ),
+                ),
+              ),
+            ),
             Positioned.fill(
               child: _buildBluttedImage(context),
             ),
@@ -53,9 +69,9 @@ class CardLocal extends StatelessWidget {
       edges: [
         EdgeBlur(
           type: EdgeType.bottomEdge,
-          size: 100,
+          size: 110,
           sigma: 30,
-          tintColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.5),
+          tintColor: const Color(0x4D000000).withOpacity(0.5),
           controlPoints: [
             ControlPoint(
               position: 0.5,

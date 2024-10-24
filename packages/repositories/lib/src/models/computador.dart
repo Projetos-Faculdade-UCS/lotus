@@ -1,5 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:repositories/src/models/base/ativo.dart';
+import 'package:repositories/src/models/licenca_software.dart';
+import 'package:repositories/src/models/programa.dart';
 import 'package:repositories/src/models/sala.dart';
 
 part 'computador.g.dart';
@@ -22,15 +24,17 @@ class Computador extends Ativo {
     required super.sala,
     required super.relacionamentos,
     required super.responsavel,
-    required this.criticidadeDados,
+    required this.criticidade,
     required this.tamanhoRam,
     required this.modeloCpu,
+    required this.sistemaOperacional,
     required this.programasInstalados,
-    required this.monitores,
     required this.licencas,
-    required this.aprovado,
+    required this.valido,
     required this.ultimaAtualizacao,
-    this.usuarioLogado,
+    required this.placaMae,
+    required this.hd,
+    this.ultimoUsuarioLogado,
     super.numeroSerie,
   });
 
@@ -39,7 +43,7 @@ class Computador extends Ativo {
       _$ComputadorFromJson(json);
 
   /// The criticality of the data.
-  final CriticidadeDados criticidadeDados;
+  final CriticidadeDados criticidade;
 
   /// The amount of RAM.
   final String tamanhoRam;
@@ -47,20 +51,23 @@ class Computador extends Ativo {
   /// The CPU model.
   final String modeloCpu;
 
-  /// The installed programs.
-  final List<String> programasInstalados;
+  /// The motherboard.
+  final String placaMae;
 
-  /// The monitors.
-  final List<String> monitores;
+  /// The hard drive.
+  final String hd;
 
-  /// The licenses.
-  final List<String> licencas;
-
-  /// The logged in user.
-  final String? usuarioLogado;
+  final String sistemaOperacional;
 
   /// Either the computer is approved.
-  final bool aprovado;
+  final bool valido;
+
+  final List<Programa> programasInstalados;
+
+  final List<LicencaSoftware> licencas;
+
+  /// The logged in user.
+  final String? ultimoUsuarioLogado;
 
   /// The last update.
   @override

@@ -18,20 +18,21 @@ Computador _$ComputadorFromJson(Map<String, dynamic> json) => Computador(
       sala: Sala.fromJson(json['sala'] as Map<String, dynamic>),
       relacionamentos: (json['relacionamentos'] as num).toInt(),
       responsavel: json['responsavel'] as String,
-      criticidadeDados:
-          $enumDecode(_$CriticidadeDadosEnumMap, json['criticidadeDados']),
+      criticidade: $enumDecode(_$CriticidadeDadosEnumMap, json['criticidade']),
       tamanhoRam: json['tamanhoRam'] as String,
       modeloCpu: json['modeloCpu'] as String,
+      sistemaOperacional: json['sistemaOperacional'] as String,
       programasInstalados: (json['programasInstalados'] as List<dynamic>)
-          .map((e) => e as String)
+          .map((e) => Programa.fromJson(e as Map<String, dynamic>))
           .toList(),
-      monitores:
-          (json['monitores'] as List<dynamic>).map((e) => e as String).toList(),
-      licencas:
-          (json['licencas'] as List<dynamic>).map((e) => e as String).toList(),
-      aprovado: json['aprovado'] as bool,
+      licencas: (json['licencas'] as List<dynamic>)
+          .map((e) => LicencaSoftware.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      valido: json['valido'] as bool,
       ultimaAtualizacao: DateTime.parse(json['ultimaAtualizacao'] as String),
-      usuarioLogado: json['usuarioLogado'] as String?,
+      placaMae: json['placaMae'] as String,
+      hd: json['hd'] as String,
+      ultimoUsuarioLogado: json['ultimoUsuarioLogado'] as String?,
       numeroSerie: json['numeroSerie'] as String?,
     );
 
@@ -49,14 +50,17 @@ Map<String, dynamic> _$ComputadorToJson(Computador instance) =>
       'sala': instance.sala.toJson(),
       'relacionamentos': instance.relacionamentos,
       'responsavel': instance.responsavel,
-      'criticidadeDados': _$CriticidadeDadosEnumMap[instance.criticidadeDados]!,
+      'criticidade': _$CriticidadeDadosEnumMap[instance.criticidade]!,
       'tamanhoRam': instance.tamanhoRam,
       'modeloCpu': instance.modeloCpu,
-      'programasInstalados': instance.programasInstalados,
-      'monitores': instance.monitores,
-      'licencas': instance.licencas,
-      'usuarioLogado': instance.usuarioLogado,
-      'aprovado': instance.aprovado,
+      'placaMae': instance.placaMae,
+      'hd': instance.hd,
+      'sistemaOperacional': instance.sistemaOperacional,
+      'valido': instance.valido,
+      'programasInstalados':
+          instance.programasInstalados.map((e) => e.toJson()).toList(),
+      'licencas': instance.licencas.map((e) => e.toJson()).toList(),
+      'ultimoUsuarioLogado': instance.ultimoUsuarioLogado,
       'ultimaAtualizacao': instance.ultimaAtualizacao.toIso8601String(),
     };
 
@@ -68,7 +72,7 @@ const _$TipoAtivoEnumMap = {
 };
 
 const _$CriticidadeDadosEnumMap = {
-  CriticidadeDados.baixa: 'baixa',
-  CriticidadeDados.media: 'media',
-  CriticidadeDados.alta: 'alta',
+  CriticidadeDados.alta: 'Alta',
+  CriticidadeDados.media: 'Média',
+  CriticidadeDados.baixa: 'Baixa',
 };
