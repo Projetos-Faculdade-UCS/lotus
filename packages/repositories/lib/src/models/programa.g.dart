@@ -7,7 +7,7 @@ part of 'programa.dart';
 // **************************************************************************
 
 Programa _$ProgramaFromJson(Map<String, dynamic> json) => Programa(
-      id: json['id'] as String,
+      id: (json['id'] as num).toInt(),
       nome: json['nome'] as String,
       versao: json['versao'] as String,
     );

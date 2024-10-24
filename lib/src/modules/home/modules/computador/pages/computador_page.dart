@@ -81,6 +81,30 @@ class ComputadorPage extends StatelessWidget {
                           ),
                           const SizedBox(height: 4),
                           const CardLocal(),
+                          const SizedBox(height: 16),
+                          Row(
+                            children: [
+                              const SizedBox(
+                                width: 8,
+                              ),
+                              HugeIcon(
+                                icon: HugeIcons.strokeRoundedClock04,
+                                color: colorScheme.onSurfaceVariant,
+                                size: 20,
+                              ),
+                              const SizedBox(width: 4),
+                              Text(
+                                'Histórico de movimentações',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  color: colorScheme.onSurfaceVariant,
+                                ),
+                              ),
+                            ],
+                          ),
+                          const Expanded(
+                            child: Placeholder(),
+                          ),
                         ],
                       ),
                     ),

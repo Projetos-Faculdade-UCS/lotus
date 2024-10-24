@@ -8,11 +8,11 @@ part of 'licenca_software.dart';
 
 LicencaSoftware _$LicencaSoftwareFromJson(Map<String, dynamic> json) =>
     LicencaSoftware(
-      id: json['id'] as String,
+      id: (json['id'] as num).toInt(),
       nome: json['nome'] as String,
       dataExpiracao: DateTime.parse(json['dataExpiracao'] as String),
-      quantidade: json['quantidade'] as String,
-      quantidadeEmUso: json['quantidadeEmUso'] as String,
+      quantidade: (json['quantidade'] as num).toInt(),
+      quantidadeEmUso: (json['quantidadeEmUso'] as num).toInt(),
       descricao: json['descricao'] as String,
     );
 
