@@ -62,7 +62,7 @@ class FichaTecnicaTabs extends StatelessWidget {
                     computador: computador,
                   ),
                   _LicencasTab(licencas: computador.licencas),
-                  _ProgramasTab(programas: computador.programasInstalados),
+                  _ProgramasTab(programas: computador.programas),
                 ],
               ),
             ),

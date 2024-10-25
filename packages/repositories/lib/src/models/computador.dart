@@ -28,7 +28,7 @@ class Computador extends Ativo {
     required this.tamanhoRam,
     required this.modeloCpu,
     required this.sistemaOperacional,
-    required this.programasInstalados,
+    required this.programas,
     required this.licencas,
     required this.valido,
     required super.ultimaAtualizacao,
@@ -57,13 +57,16 @@ class Computador extends Ativo {
   /// The hard drive.
   final String hd;
 
+  /// The operating system.
   final String sistemaOperacional;
 
   /// Either the computer is approved.
   final bool valido;
 
-  final List<Programa> programasInstalados;
+  /// The installed programs.
+  final List<Programa> programas;
 
+  /// The software licenses.
   final List<LicencaSoftware> licencas;
 
   /// The logged in user.
@@ -76,15 +79,18 @@ class Computador extends Ativo {
 
 /// The type of how critical the data is.
 enum CriticidadeDados {
+  /// High priority.
   @JsonValue('alta')
   alta('Alta prioridade', color: 0xFFB91C1C),
 
+  /// Medium priority.
   @JsonValue('media')
   media(
     'Média prioridade',
     color: 0xFFA16207,
   ),
 
+  /// Low priority.
   @JsonValue('baixa')
   baixa('Baixa prioridade', color: 0xFF1D4ED8);
 
@@ -93,6 +99,9 @@ enum CriticidadeDados {
     this.color = 0xFF000000,
   });
 
+  /// The name of the priority.
   final String name;
+
+  /// The color of the priority.
   final int color;
 }

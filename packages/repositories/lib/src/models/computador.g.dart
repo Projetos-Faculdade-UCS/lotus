@@ -22,7 +22,7 @@ Computador _$ComputadorFromJson(Map<String, dynamic> json) => Computador(
       tamanhoRam: json['tamanhoRam'] as String,
       modeloCpu: json['modeloCpu'] as String,
       sistemaOperacional: json['sistemaOperacional'] as String,
-      programasInstalados: (json['programasInstalados'] as List<dynamic>)
+      programas: (json['programas'] as List<dynamic>)
           .map((e) => Programa.fromJson(e as Map<String, dynamic>))
           .toList(),
       licencas: (json['licencas'] as List<dynamic>)
@@ -60,8 +60,7 @@ Map<String, dynamic> _$ComputadorToJson(Computador instance) =>
       'hd': instance.hd,
       'sistemaOperacional': instance.sistemaOperacional,
       'valido': instance.valido,
-      'programasInstalados':
-          instance.programasInstalados.map((e) => e.toJson()).toList(),
+      'programas': instance.programas.map((e) => e.toJson()).toList(),
       'licencas': instance.licencas.map((e) => e.toJson()).toList(),
       'ultimoUsuarioLogado': instance.ultimoUsuarioLogado,
     };
