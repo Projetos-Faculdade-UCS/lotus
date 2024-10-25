@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lotus/src/modules/home/modules/computador/bloc/computador/computador_bloc.dart';
 import 'package:lotus/src/modules/home/modules/computador/widgets/detalhe_computador/computador_widget.dart';
-import 'package:lotus_ui/lotus_ui.dart';
+import 'package:lotus/src/modules/home/widgets/breadcrumb/miolo_with_breadcrumb.dart';
 
 /// {@template computador_page}
 /// Página de detalhes do computador.
@@ -23,7 +23,7 @@ class ComputadorPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Miolo(
+    return MioloWithBreadcrumb(
       child: Padding(
         padding: const EdgeInsets.all(24),
         child: BlocProvider(

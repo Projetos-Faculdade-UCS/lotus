@@ -7,11 +7,13 @@ class Miolo extends StatelessWidget {
     required this.child,
     super.key,
     this.appBar,
-    this.padding = const EdgeInsets.all(0),
+    this.padding = EdgeInsets.zero,
   });
 
   /// Child widget that will be displayed in the main content.
   final Widget child;
+
+  /// Padding of the main content.
   final EdgeInsetsGeometry padding;
 
   /// The app bar of the application.
@@ -21,16 +23,16 @@ class Miolo extends StatelessWidget {
   Widget build(BuildContext context) {
     return ColoredBox(
       color: Theme.of(context).scaffoldBackgroundColor,
-      child: Padding(
-        padding: padding,
-        child: Column(
-          children: [
-            if (appBar != null) appBar!,
-            Expanded(
+      child: Column(
+        children: [
+          if (appBar != null) appBar!,
+          Expanded(
+            child: Padding(
+              padding: padding,
               child: child,
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
