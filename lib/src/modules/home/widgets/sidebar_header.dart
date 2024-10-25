@@ -28,7 +28,9 @@ class SidebarHeader extends StatelessWidget {
   final bool extended;
 
   MaterialColor get _primaryColor {
-    final primaryColor = Theme.of(context).colorScheme.primary;
+    final primaryColor = ColorExtension(Theme.of(context).colorScheme.primary)
+        .materialColor
+        .shade50;
     return ColorExtension(primaryColor).materialColor;
   }
 
@@ -37,7 +39,7 @@ class SidebarHeader extends StatelessWidget {
     return InkWell(
       onTap: controller.toggleExtended,
       splashFactory: NoSplash.splashFactory,
-      hoverColor: _primaryColor.shade50.withOpacity(.2),
+      hoverColor: _primaryColor.shade50,
       borderRadius: const BorderRadius.only(
         topLeft: Radius.circular(20),
         topRight: Radius.circular(20),

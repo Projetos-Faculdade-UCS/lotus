@@ -38,12 +38,15 @@ class DesktopScaffold extends StatelessWidget {
   }
 }
 
+/// {@template sidebar_widget}
 /// Sidebar widget separated to localize state changes.
+/// {@endtemplate}
 class SidebarWidget extends StatefulWidget {
+  /// {@macro sidebar_widget}
   const SidebarWidget({super.key});
 
   @override
-  _SidebarWidgetState createState() => _SidebarWidgetState();
+  State<SidebarWidget> createState() => _SidebarWidgetState();
 }
 
 class _SidebarWidgetState extends State<SidebarWidget> {

@@ -117,24 +117,47 @@ class Ativo extends Equatable {
 enum TipoAtivo {
   /// A computer.
   @JsonValue('Computador')
-  computador('assets/ativos/computador.svg'),
+  computador(
+    'assets/ativos/computador.svg',
+    name: 'Computador',
+    pluralName: 'Computadores',
+    route: '/computadores',
+  ),
 
   /// A monitor.
   @JsonValue('Monitor')
-  monitor('assets/ativos/monitor.svg'),
+  monitor(
+    'assets/ativos/monitor.svg',
+    name: 'Monitor',
+    pluralName: 'Monitores',
+    route: '/monitores',
+  ),
 
   /// A printer.
   @JsonValue('Impressora')
-  impressora('assets/ativos/impressora.svg'),
-
-  /// A software license.
-  @JsonValue('licencaSoftware')
-  licencaSoftware('assets/ativos/licenca-software.svg');
+  impressora(
+    'assets/ativos/impressora.svg',
+    name: 'Impressora',
+    pluralName: 'Impressoras',
+    route: '/impressoras',
+  );
 
   const TipoAtivo(
-    this.icon,
-  );
+    this.icon, {
+    required this.name,
+    required this.pluralName,
+    required this.route,
+  });
 
   /// The icon of the IT asset type.
   final String icon;
+
+  /// The name of the IT asset type.
+  final String name;
+
+  /// The plural name of the IT asset type.
+  final String pluralName;
+
+  /// The route of the type.
+  final String route;
 }

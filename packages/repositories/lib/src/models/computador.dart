@@ -31,7 +31,7 @@ class Computador extends Ativo {
     required this.programasInstalados,
     required this.licencas,
     required this.valido,
-    required this.ultimaAtualizacao,
+    required super.ultimaAtualizacao,
     required this.placaMae,
     required this.hd,
     this.ultimoUsuarioLogado,
@@ -68,10 +68,6 @@ class Computador extends Ativo {
 
   /// The logged in user.
   final String? ultimoUsuarioLogado;
-
-  /// The last update.
-  @override
-  final DateTime ultimaAtualizacao;
 
   /// Converts this [Computador] to a JSON object.
   @override

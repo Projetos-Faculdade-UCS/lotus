@@ -1,7 +1,7 @@
+import 'package:ativos_ui/ativos_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lotus/src/modules/home/modules/computador/bloc/computadores/computadores_bloc.dart';
-import 'package:lotus/src/modules/home/modules/computador/widgets/computadores_list.dart';
 import 'package:lotus_ui/lotus_ui.dart';
 
 /// {@template computadores_page}
@@ -33,8 +33,8 @@ class ComputadoresPage extends StatelessWidget {
                   child: CircularProgressIndicator(),
                 );
               } else if (state is ComputadoresSuccess) {
-                return ComputadoresList(
-                  computadores: state.computadores,
+                return AtivosList(
+                  ativos: state.computadores,
                 );
               } else {
                 return const Center(
