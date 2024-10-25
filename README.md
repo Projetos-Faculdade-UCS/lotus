@@ -70,3 +70,14 @@ flutter run
 See also the list of [contributors](https://github.com/mrhaubrich/lotus/contributors) who participated in this project.
 
 [todoReference]: TODO.md
+
+
+## Build de Models
+
+Os models deste sistema estão no package repository e eles se utilizam de
+json annotations. Para criar um model com sucesso é necessário buildar o package.
+Dentro do package rode o comando:
+
+```shell
+dart run build_runner build -d
+```

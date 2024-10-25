@@ -1,5 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:repositories/src/models/base/ativo.dart';
+import 'package:repositories/src/models/licenca_software.dart';
+import 'package:repositories/src/models/programa.dart';
 import 'package:repositories/src/models/sala.dart';
 
 part 'computador.g.dart';
@@ -22,15 +24,17 @@ class Computador extends Ativo {
     required super.sala,
     required super.relacionamentos,
     required super.responsavel,
-    required this.criticidadeDados,
+    required this.criticidade,
     required this.tamanhoRam,
     required this.modeloCpu,
-    required this.programasInstalados,
-    required this.monitores,
+    required this.sistemaOperacional,
+    required this.programas,
     required this.licencas,
-    required this.aprovado,
+    required this.valido,
     required super.ultimaAtualizacao,
-    this.usuarioLogado,
+    required this.placaMae,
+    required this.hd,
+    this.ultimoUsuarioLogado,
     super.numeroSerie,
   });
 
@@ -39,7 +43,7 @@ class Computador extends Ativo {
       _$ComputadorFromJson(json);
 
   /// The criticality of the data.
-  final CriticidadeDados criticidadeDados;
+  final CriticidadeDados criticidade;
 
   /// The amount of RAM.
   final String tamanhoRam;
@@ -47,44 +51,57 @@ class Computador extends Ativo {
   /// The CPU model.
   final String modeloCpu;
 
-  /// The installed programs.
-  final List<String> programasInstalados;
+  /// The motherboard.
+  final String placaMae;
 
-  /// The monitors.
-  final List<String> monitores;
+  /// The hard drive.
+  final String hd;
 
-  /// The licenses.
-  final List<String> licencas;
-
-  /// The logged in user.
-  final String? usuarioLogado;
+  /// The operating system.
+  final String sistemaOperacional;
 
   /// Either the computer is approved.
-  final bool aprovado;
+  final bool valido;
+
+  /// The installed programs.
+  final List<Programa> programas;
+
+  /// The software licenses.
+  final List<LicencaSoftware> licencas;
+
+  /// The logged in user.
+  final String? ultimoUsuarioLogado;
 
   /// Converts this [Computador] to a JSON object.
   @override
   Map<String, dynamic> toJson() => _$ComputadorToJson(this);
 }
 
-/// The criticality of the data.
+/// The type of how critical the data is.
 enum CriticidadeDados {
-  /// Low criticality.
-  baixa(name: 'Baixa'),
+  /// High priority.
+  @JsonValue('alta')
+  alta('Alta prioridade', color: 0xFFB91C1C),
 
-  /// Medium criticality.
-  media(name: 'Média'),
+  /// Medium priority.
+  @JsonValue('media')
+  media(
+    'Média prioridade',
+    color: 0xFFA16207,
+  ),
 
-  /// High criticality.
-  alta(name: 'Alta');
+  /// Low priority.
+  @JsonValue('baixa')
+  baixa('Baixa prioridade', color: 0xFF1D4ED8);
 
-  const CriticidadeDados({
-    required this.name,
+  const CriticidadeDados(
+    this.name, {
+    this.color = 0xFF000000,
   });
 
-  /// The verbose name of the criticality.
+  /// The name of the priority.
   final String name;
 
-  @override
-  String toString() => name;
+  /// The color of the priority.
+  final int color;
 }

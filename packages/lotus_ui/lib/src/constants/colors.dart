@@ -42,8 +42,21 @@ const vermelhoInstitucional = Color(0xFFEE3244);
 /// Material Color for Dark Gray Background
 const darkBackground = Color(0xFF121212);
 
+/// Material Color for shadow
+const lightShadow = Color(0x4D000000);
+
+/// Material Color for shadow
+const darkShadow = Color(0x4DFFFFFF);
+
 /// Text color for dark theme
 const darkBodyText = Color(0xFFE0E0E0);
 
 /// Material color for light theme
 const lightBodyText = Color(0xFF1D192B);
+
+// Cor para labels e outros textos sem destaque
+/// no o tema claro
+const lightMutedText = Color(0xFF737373);
+
+/// no tema escuro
+const darkMutedText = Color(0xFF707070);
