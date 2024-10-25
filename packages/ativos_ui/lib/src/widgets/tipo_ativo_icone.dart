@@ -8,6 +8,7 @@ class TipoAtivoIcone extends StatelessWidget {
   const TipoAtivoIcone({
     required this.tipo,
     this.size = 50,
+    this.width = 50,
     super.key,
   });
 
@@ -17,26 +18,29 @@ class TipoAtivoIcone extends StatelessWidget {
   /// Size of the icon.
   final double size;
 
+  /// Width of the icon.
+  final double? width;
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: size,
+    return SizedBox(
+      width: width,
       height: size,
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.secondary.withOpacity(0.5),
-        boxShadow: [
-          BoxShadow(
-            color: Theme.of(context).colorScheme.onSurface.withOpacity(0.3),
-            blurRadius: 4,
-            offset: const Offset(0, 2),
-          ),
-        ],
-        shape: BoxShape.circle,
-      ),
-      child: SvgPicture.asset(
-        tipo.icon,
-        width: size,
-        height: size,
+      child: Container(
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.secondary.withOpacity(0.5),
+          boxShadow: [
+            BoxShadow(
+              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.3),
+              blurRadius: 4,
+              offset: const Offset(0, 2),
+            ),
+          ],
+          shape: BoxShape.circle,
+        ),
+        child: SvgPicture.asset(
+          tipo.icon,
+        ),
       ),
     );
   }

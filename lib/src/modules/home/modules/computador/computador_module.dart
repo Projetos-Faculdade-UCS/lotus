@@ -1,9 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:lotus/src/modules/home/modules/computador/bloc/computadores/computadores_bloc.dart';
+import 'package:lotus/src/modules/home/modules/computador/pages/computador_page.dart';
 import 'package:lotus/src/modules/home/modules/computador/pages/computadores_page.dart';
 import 'package:lotus/src/modules/home/nested_module.dart';
-import 'package:lotus_ui/lotus_ui.dart';
 import 'package:repositories/repositories.dart';
 
 /// Módulo de ativos de TI (lista, detalhes, etc.).
@@ -29,11 +28,7 @@ class ComputadorModule extends Module {
       )
       ..child(
         '/:slug',
-        child: (_) => const Miolo(
-          child: Center(
-            child: Text('Detalhes do ativo de TI'),
-          ),
-        ),
+        child: (_) => ComputadorPage(),
       );
   }
 }
