@@ -29,7 +29,9 @@ Computador _$ComputadorFromJson(Map<String, dynamic> json) => Computador(
           .map((e) => LicencaSoftware.fromJson(e as Map<String, dynamic>))
           .toList(),
       valido: json['valido'] as bool,
-      ultimaAtualizacao: DateTime.parse(json['ultimaAtualizacao'] as String),
+      ultimaAtualizacao: json['ultimaAtualizacao'] == null
+          ? null
+          : DateTime.parse(json['ultimaAtualizacao'] as String),
       placaMae: json['placaMae'] as String,
       hd: json['hd'] as String,
       ultimoUsuarioLogado: json['ultimoUsuarioLogado'] as String?,
@@ -50,6 +52,7 @@ Map<String, dynamic> _$ComputadorToJson(Computador instance) =>
       'sala': instance.sala.toJson(),
       'relacionamentos': instance.relacionamentos,
       'responsavel': instance.responsavel,
+      'ultimaAtualizacao': instance.ultimaAtualizacao?.toIso8601String(),
       'criticidade': _$CriticidadeDadosEnumMap[instance.criticidade]!,
       'tamanhoRam': instance.tamanhoRam,
       'modeloCpu': instance.modeloCpu,
@@ -61,7 +64,6 @@ Map<String, dynamic> _$ComputadorToJson(Computador instance) =>
           instance.programasInstalados.map((e) => e.toJson()).toList(),
       'licencas': instance.licencas.map((e) => e.toJson()).toList(),
       'ultimoUsuarioLogado': instance.ultimoUsuarioLogado,
-      'ultimaAtualizacao': instance.ultimaAtualizacao.toIso8601String(),
     };
 
 const _$TipoAtivoEnumMap = {
@@ -71,7 +73,7 @@ const _$TipoAtivoEnumMap = {
 };
 
 const _$CriticidadeDadosEnumMap = {
-  CriticidadeDados.alta: 'Alta',
-  CriticidadeDados.media: 'Média',
-  CriticidadeDados.baixa: 'Baixa',
+  CriticidadeDados.alta: 'alta',
+  CriticidadeDados.media: 'media',
+  CriticidadeDados.baixa: 'baixa',
 };

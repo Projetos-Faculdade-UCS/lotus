@@ -147,24 +147,21 @@ class _InfoTab extends StatelessWidget {
                 color: colorScheme.onSurfaceVariant,
               ),
             ),
-            subtitle: Flexible(
-              fit: FlexFit.tight,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(height: 4),
-                  for (final hd in hds) ...[
-                    Text(
-                      hd.trim(),
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: colorScheme.onSurface,
-                      ),
+            subtitle: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 4),
+                for (final hd in hds) ...[
+                  Text(
+                    hd.trim(),
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: colorScheme.onSurface,
                     ),
-                    const SizedBox(height: 2),
-                  ],
+                  ),
+                  const SizedBox(height: 2),
                 ],
-              ),
+              ],
             ),
           ),
           InfoTile(

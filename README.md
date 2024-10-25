@@ -79,5 +79,5 @@ json annotations. Para criar um model com sucesso é necessário buildar o packa
 Dentro do package rode o comando:
 
 ```shell
-dart run build_runner build
+dart run build_runner build -d
 ```
