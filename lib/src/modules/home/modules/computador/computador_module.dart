@@ -28,7 +28,7 @@ class ComputadorModule extends Module {
       )
       ..child(
         '/:slug',
-        child: (_) => const ComputadorPage(),
+        child: (_) => ComputadorPage(),
       );
   }
 }

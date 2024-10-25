@@ -80,16 +80,16 @@ class Computador extends Ativo {
 
 /// The type of how critical the data is.
 enum CriticidadeDados {
-  @JsonValue('Alta')
+  @JsonValue('alta')
   alta('Alta prioridade', color: 0xFFB91C1C),
 
-  @JsonValue('Média')
+  @JsonValue('media')
   media(
     'Média prioridade',
     color: 0xFFA16207,
   ),
 
-  @JsonValue('Baixa')
+  @JsonValue('baixa')
   baixa('Baixa prioridade', color: 0xFF1D4ED8);
 
   const CriticidadeDados(

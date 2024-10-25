@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
+import 'package:intl/intl.dart';
 import 'package:lotus/src/modules/home/modules/computador/widgets/detalhe_computador/info_tile.dart';
+import 'package:repositories/repositories.dart';
 
+/// Widget que exibe as abas de informações de um computador.
 class FichaTecnicaTabs extends StatelessWidget {
-  const FichaTecnicaTabs({super.key});
+  /// Cria uma instância de [FichaTecnicaTabs].
+  const FichaTecnicaTabs({required this.computador, super.key});
+
+  /// O computador que será exibido.
+  final Computador computador;
 
   @override
   Widget build(BuildContext context) {
@@ -22,23 +29,17 @@ class FichaTecnicaTabs extends StatelessWidget {
           ),
         ],
       ),
-      child: const DefaultTabController(
+      child: DefaultTabController(
         length: 3,
         child: Column(
           children: [
-            TabBar(
+            const TabBar(
               tabs: [
                 Tab(
-                  text: 'Informações',
+                  text: 'Geral',
                   icon: Icon(
                     HugeIcons.strokeRoundedInformationCircle,
                   ),
-                ),
-                Tab(
-                  icon: Icon(
-                    HugeIcons.strokeRoundedCd,
-                  ),
-                  text: 'Programas',
                 ),
                 Tab(
                   icon: Icon(
@@ -46,14 +47,22 @@ class FichaTecnicaTabs extends StatelessWidget {
                   ),
                   text: 'Licenças',
                 ),
+                Tab(
+                  icon: Icon(
+                    HugeIcons.strokeRoundedCd,
+                  ),
+                  text: 'Programas',
+                ),
               ],
             ),
             Flexible(
               child: TabBarView(
                 children: [
-                  _InfoTab(),
-                  Icon(Icons.directions_transit),
-                  Icon(Icons.directions_bike),
+                  _InfoTab(
+                    computador: computador,
+                  ),
+                  _LicencasTab(licencas: computador.licencas),
+                  _ProgramasTab(programas: computador.programasInstalados),
                 ],
               ),
             ),
@@ -66,78 +75,105 @@ class FichaTecnicaTabs extends StatelessWidget {
 
 class _InfoTab extends StatelessWidget {
   const _InfoTab({
-    super.key,
+    required this.computador,
   });
+
+  final Computador computador;
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final hds = computador.hd.split(';');
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: 16,
         vertical: 8,
       ),
       child: ListView(
-        children: const [
+        children: [
+          ListTile(
+            contentPadding: EdgeInsets.zero,
+            title: Text(
+              'Descrição',
+              style: TextStyle(
+                fontSize: 14,
+                color: colorScheme.onSurfaceVariant,
+              ),
+            ),
+            subtitle: Text(
+              computador.descricao,
+              style: TextStyle(
+                fontSize: 16,
+                color: colorScheme.onSurface,
+              ),
+            ),
+          ),
+          InfoTile(
+            title: 'Sistema Operacional',
+            value: Text(
+              computador.sistemaOperacional,
+              style: TextStyle(
+                fontSize: 16,
+                color: colorScheme.onSurface,
+              ),
+            ),
+          ),
+          InfoTile(
+            title: 'Processador',
+            value: Text(
+              computador.modeloCpu,
+              style: TextStyle(
+                fontSize: 16,
+                color: colorScheme.onSurface,
+              ),
+            ),
+          ),
           InfoTile(
             title: 'Memória RAM',
             value: Text(
-              '16GB DDR4',
+              computador.tamanhoRam,
               style: TextStyle(
                 fontSize: 16,
+                color: colorScheme.onSurface,
+              ),
+            ),
+          ),
+          ListTile(
+            contentPadding: EdgeInsets.zero,
+            title: Text(
+              'Armazenamento',
+              style: TextStyle(
+                fontSize: 14,
+                color: colorScheme.onSurfaceVariant,
+              ),
+            ),
+            subtitle: Flexible(
+              fit: FlexFit.tight,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 4),
+                  for (final hd in hds) ...[
+                    Text(
+                      hd.trim(),
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: colorScheme.onSurface,
+                      ),
+                    ),
+                    const SizedBox(height: 2),
+                  ],
+                ],
               ),
             ),
           ),
           InfoTile(
-            title: 'Armazenamento',
+            title: 'Placa mãe',
             value: Text(
-              '512GB SSD',
+              computador.placaMae,
               style: TextStyle(
                 fontSize: 16,
-              ),
-            ),
-          ),
-          InfoTile(
-            title: 'Processador',
-            value: Text(
-              'Intel Core i7 10ª Geração',
-              style: TextStyle(
-                fontSize: 16,
-              ),
-            ),
-          ),
-          InfoTile(
-            title: 'Processador',
-            value: Text(
-              'Intel Core i7 10ª Geração',
-              style: TextStyle(
-                fontSize: 16,
-              ),
-            ),
-          ),
-          InfoTile(
-            title: 'Processador',
-            value: Text(
-              'Intel Core i7 10ª Geração',
-              style: TextStyle(
-                fontSize: 16,
-              ),
-            ),
-          ),
-          InfoTile(
-            title: 'Processador',
-            value: Text(
-              'Intel Core i7 10ª Geração',
-              style: TextStyle(
-                fontSize: 16,
-              ),
-            ),
-          ),
-          InfoTile(
-            title: 'Processador',
-            value: Text(
-              'Intel Core i7 10ª Geração',
-              style: TextStyle(
-                fontSize: 16,
+                color: colorScheme.onSurface,
               ),
             ),
           ),
@@ -149,8 +185,11 @@ class _InfoTab extends StatelessWidget {
 
 class _ProgramasTab extends StatelessWidget {
   const _ProgramasTab({
+    required this.programas,
     super.key,
   });
+
+  final List<Programa> programas;
 
   @override
   Widget build(BuildContext context) {
@@ -159,18 +198,94 @@ class _ProgramasTab extends StatelessWidget {
         horizontal: 16,
         vertical: 8,
       ),
-      itemCount: 10,
+      itemCount: programas.length,
       itemBuilder: (context, index) {
-        return InfoTile(
-          title: 'Programa $index',
-          value: const Text(
-            'Versão 1.0',
-            style: TextStyle(
-              fontSize: 16,
-            ),
+        return ListTile(
+          //small height
+          title: Text(
+            programas[index].nome,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
+          subtitle: Text(
+            'Versão: ${programas[index].versao}',
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
           ),
         );
       },
     );
+  }
+}
+
+class _LicencasTab extends StatelessWidget {
+  const _LicencasTab({
+    required this.licencas,
+  });
+
+  final List<LicencaSoftware> licencas;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 16,
+        vertical: 8,
+      ),
+      itemCount: licencas.length,
+      itemBuilder: (context, index) {
+        final licenca = licencas[index];
+        final isAtivo = licenca.dataExpiracao.isAfter(DateTime.now());
+        return ListTile(
+          contentPadding: EdgeInsets.zero,
+          horizontalTitleGap: 12,
+          leading: SizedBox(
+            width: 55,
+            child: Column(
+              children: [
+                Icon(
+                  isAtivo ? Icons.check_circle : Icons.error,
+                  color: isAtivo ? Colors.green : Colors.red,
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  isAtivo ? 'Ativo' : 'Expirado',
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ],
+            ),
+          ),
+          title: Text(
+            licenca.nome,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
+          subtitle: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Usando ${licenca.quantidadeEmUso} '
+                'de ${licenca.quantidade} licenças',
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+              Text(
+                isAtivo
+                    ? 'Válido até ${formatData(licenca.dataExpiracao)}'
+                    : 'Expirado em ${formatData(licenca.dataExpiracao)}',
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  /// recebe um objeto DateTime e retorna uma string no formato 10 Jan 2022
+  String formatData(DateTime data) {
+    return DateFormat('dd MMM yyyy').format(data);
   }
 }

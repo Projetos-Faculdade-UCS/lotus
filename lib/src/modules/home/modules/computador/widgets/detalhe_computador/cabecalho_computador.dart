@@ -7,7 +7,20 @@ import 'package:lotus/src/modules/home/modules/computador/widgets/detalhe_comput
 import 'package:repositories/repositories.dart';
 
 class CabecalhoComputador extends StatelessWidget {
-  const CabecalhoComputador({super.key});
+  const CabecalhoComputador({
+    required this.computadorNome,
+    required this.computadorResponsavel,
+    required this.computadorRelacionamentos,
+    required this.computadorAutomatico,
+    required this.computadorCriticidade,
+    super.key,
+  });
+
+  final String computadorNome;
+  final String computadorResponsavel;
+  final int computadorRelacionamentos;
+  final bool computadorAutomatico;
+  final CriticidadeDados computadorCriticidade;
 
   @override
   Widget build(BuildContext context) {
@@ -16,18 +29,21 @@ class CabecalhoComputador extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const ListTile(
-          leading: TipoAtivoIcone(
+        ListTile(
+          leading: const TipoAtivoIcone(
             tipo: TipoAtivo.computador,
           ),
           title: Text(
-            'Computador Dell 2023',
-            style: TextStyle(
+            computadorNome,
+            style: const TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
             ),
           ),
-          subtitle: ComputadorBadges(),
+          subtitle: ComputadorBadges(
+            isAutomatico: computadorAutomatico,
+            criticidade: computadorCriticidade,
+          ),
           //padding
           contentPadding: EdgeInsets.zero,
         ),
@@ -38,10 +54,11 @@ class CabecalhoComputador extends StatelessWidget {
             InfoTile(
               width: 200,
               title: 'Responsável',
-              value: const Text(
-                'João da Silva',
+              value: Text(
+                computadorResponsavel,
                 style: TextStyle(
                   fontSize: 16,
+                  color: colorScheme.onSurface,
                 ),
               ),
               leading: HugeIcon(
@@ -63,7 +80,7 @@ class CabecalhoComputador extends StatelessWidget {
                 child: Row(
                   children: [
                     Text(
-                      '1',
+                      computadorRelacionamentos.toString(),
                       style: TextStyle(
                         fontSize: 16,
                         color: Theme.of(context).colorScheme.onSurface,

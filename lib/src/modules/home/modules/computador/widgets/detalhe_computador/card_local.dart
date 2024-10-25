@@ -1,9 +1,12 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:repositories/repositories.dart';
 import 'package:soft_edge_blur/soft_edge_blur.dart';
 
 class CardLocal extends StatelessWidget {
-  const CardLocal({super.key});
+  const CardLocal({required this.sala, super.key});
+
+  final Sala sala;
 
   @override
   Widget build(BuildContext context) {
@@ -33,29 +36,35 @@ class CardLocal extends StatelessWidget {
             Positioned.fill(
               child: _buildBluttedImage(context),
             ),
-            const Padding(
-              padding: EdgeInsets.all(16),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  _Tile(
-                    title: 'Sala',
-                    value: '307',
-                  ),
-                  _Tile(
-                    title: 'Bloco',
-                    value: '71',
-                  ),
-                  _Tile(
-                    title: 'Campus',
-                    value: 'Principal',
-                  ),
-                  _Tile(
-                    title: 'Prédio',
-                    value: 'Principal',
-                  ),
-                ],
+            Positioned(
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child: Container(
+                padding: const EdgeInsets.all(16),
+                color: Theme.of(context).colorScheme.onSurface.withOpacity(0.4),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    _Tile(
+                      title: 'Sala',
+                      value: sala.nome,
+                    ),
+                    _Tile(
+                      title: 'Bloco',
+                      value: sala.bloco.nome,
+                    ),
+                    _Tile(
+                      title: 'Campus',
+                      value: sala.bloco.campus,
+                    ),
+                    _Tile(
+                      title: 'Cidade',
+                      value: sala.bloco.cidade,
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
@@ -66,23 +75,23 @@ class CardLocal extends StatelessWidget {
 
   SoftEdgeBlur _buildBluttedImage(BuildContext context) {
     return SoftEdgeBlur(
-      edges: [
-        EdgeBlur(
-          type: EdgeType.bottomEdge,
-          size: 110,
-          sigma: 30,
-          tintColor: const Color(0x4D000000).withOpacity(0.5),
-          controlPoints: [
-            ControlPoint(
-              position: 0.5,
-              type: ControlPointType.visible,
-            ),
-            ControlPoint(
-              position: 1,
-              type: ControlPointType.transparent,
-            ),
-          ],
-        ),
+      edges: const [
+        // EdgeBlur(
+        //   type: EdgeType.bottomEdge,
+        //   size: 110,
+        //   sigma: 30,
+        //   tintColor: const Color(0x4D000000).withOpacity(0.5),
+        //   controlPoints: [
+        //     ControlPoint(
+        //       position: 0.5,
+        //       type: ControlPointType.visible,
+        //     ),
+        //     ControlPoint(
+        //       position: 1,
+        //       type: ControlPointType.transparent,
+        //     ),
+        //   ],
+        // ),
       ],
       child: Image.asset(
         'assets/ativos/local-fallback.png',

@@ -4,20 +4,28 @@ import 'package:lotus/src/modules/home/modules/computador/widgets/detalhe_comput
 import 'package:repositories/repositories.dart';
 
 class ComputadorBadges extends StatelessWidget {
-  const ComputadorBadges({super.key});
+  const ComputadorBadges({
+    required this.isAutomatico,
+    required this.criticidade,
+    super.key,
+  });
+
+  final bool isAutomatico;
+  final CriticidadeDados criticidade;
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        CustomBadge(
-          label: const Text('Automático'),
-          backgroundColor: Theme.of(context).colorScheme.primary,
-          borderColor: Theme.of(context).colorScheme.primary,
-        ),
+        if (isAutomatico)
+          CustomBadge(
+            label: const Text('Automático'),
+            backgroundColor: Theme.of(context).colorScheme.primary,
+            borderColor: Theme.of(context).colorScheme.primary,
+          ),
         const SizedBox(width: 8),
-        const TipoCriticidadeBadge(
-          criticidade: CriticidadeDados.media,
+        TipoCriticidadeBadge(
+          criticidade: criticidade,
         ),
       ],
     );
