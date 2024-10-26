@@ -20,26 +20,11 @@ class CardLocal extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(8),
         child: Stack(
+          fit: StackFit.expand,
           alignment: Alignment.bottomCenter,
           children: [
-            ColoredBox(
-              color: Theme.of(context).colorScheme.onSurface.withOpacity(.20),
-              child: Center(
-                child: AutoSizeText(
-                  'Localização',
-                  maxLines: 1,
-                  style: TextStyle(
-                    fontSize: 24,
-                    color: Theme.of(context)
-                        .colorScheme
-                        .onPrimary
-                        .withOpacity(0.5),
-                  ),
-                ),
-              ),
-            ),
-            Positioned.fill(
-              child: _buildBluttedImage(context),
+            const Positioned.fill(
+              child: _BlurredImage(),
             ),
             Positioned(
               bottom: 0,
@@ -47,7 +32,7 @@ class CardLocal extends StatelessWidget {
               right: 0,
               child: Container(
                 padding: const EdgeInsets.all(16),
-                color: Theme.of(context).colorScheme.onSurface.withOpacity(0.4),
+                // color: Theme.of(context).colorScheme.onSurface.withOpacity(0.4),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -77,30 +62,40 @@ class CardLocal extends StatelessWidget {
       ),
     );
   }
+}
 
-  SoftEdgeBlur _buildBluttedImage(BuildContext context) {
-    return SoftEdgeBlur(
-      edges: const [
-        // EdgeBlur(
-        //   type: EdgeType.bottomEdge,
-        //   size: 110,
-        //   sigma: 30,
-        //   tintColor: const Color(0x4D000000).withOpacity(0.5),
-        //   controlPoints: [
-        //     ControlPoint(
-        //       position: 0.5,
-        //       type: ControlPointType.visible,
-        //     ),
-        //     ControlPoint(
-        //       position: 1,
-        //       type: ControlPointType.transparent,
-        //     ),
-        //   ],
-        // ),
-      ],
-      child: Image.asset(
-        'assets/ativos/local-fallback.png',
-        fit: BoxFit.cover,
+class _BlurredImage extends StatelessWidget {
+  const _BlurredImage({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return RepaintBoundary(
+      child: SoftEdgeBlur(
+        edges: [
+          EdgeBlur(
+            type: EdgeType.bottomEdge,
+            size: 110,
+            sigma: 30,
+            tileMode: TileMode.repeated,
+            tintColor: const Color(0x4D000000).withOpacity(0.5),
+            controlPoints: [
+              ControlPoint(
+                position: 0.5,
+                type: ControlPointType.visible,
+              ),
+              ControlPoint(
+                position: 1,
+                type: ControlPointType.transparent,
+              ),
+            ],
+          ),
+        ],
+        child: Image.asset(
+          'assets/ativos/local-fallback.png',
+          fit: BoxFit.cover,
+        ),
       ),
     );
   }

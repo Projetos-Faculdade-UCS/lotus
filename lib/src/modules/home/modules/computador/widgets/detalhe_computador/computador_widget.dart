@@ -98,11 +98,16 @@ class ComputadorWidget extends StatelessWidget {
                               size: 20,
                             ),
                             const SizedBox(width: 4),
-                            Text(
-                              'Histórico de movimentações',
-                              style: TextStyle(
-                                fontSize: 18,
-                                color: colorScheme.onSurfaceVariant,
+                            Flexible(
+                              fit: FlexFit.tight,
+                              child: Text(
+                                'Histórico de movimentações',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  color: colorScheme.onSurfaceVariant,
+                                ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
                               ),
                             ),
                           ],
