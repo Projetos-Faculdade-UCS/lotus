@@ -24,28 +24,25 @@ class ComputadorPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MioloWithBreadcrumb(
-      child: Padding(
-        padding: const EdgeInsets.all(24),
-        child: BlocProvider(
-          create: (context) => computadorBloc
-            ..add(
-              ComputadorFetch(id),
-            ),
-          child: BlocBuilder<ComputadorBloc, ComputadorState>(
-            builder: (context, state) {
-              if (state is ComputadorLoading || state is ComputadorInitial) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              } else if (state is ComputadorSuccess) {
-                return ComputadorWidget(computador: state.computador);
-              } else {
-                return const Center(
-                  child: Text('Erro ao carregar computador.'),
-                );
-              }
-            },
+      child: BlocProvider(
+        create: (context) => computadorBloc
+          ..add(
+            ComputadorFetch(id),
           ),
+        child: BlocBuilder<ComputadorBloc, ComputadorState>(
+          builder: (context, state) {
+            if (state is ComputadorLoading || state is ComputadorInitial) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            } else if (state is ComputadorSuccess) {
+              return ComputadorWidget(computador: state.computador);
+            } else {
+              return const Center(
+                child: Text('Erro ao carregar computador.'),
+              );
+            }
+          },
         ),
       ),
     );

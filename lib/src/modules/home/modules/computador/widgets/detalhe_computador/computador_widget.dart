@@ -34,7 +34,8 @@ class ComputadorWidget extends StatelessWidget {
                   offset: const Offset(
                     0,
                     1,
-                  ), // Sombra apenas para baixo (eixo Y positivo)
+                  ),
+                  blurRadius: 4,
                 ),
                 BoxShadow(
                   color: theme.scaffoldBackgroundColor,
