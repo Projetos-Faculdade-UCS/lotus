@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
+import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:lotus/src/modules/home/modules/computador/widgets/detalhe_computador/cabecalho_computador.dart';
 import 'package:lotus/src/modules/home/modules/computador/widgets/detalhe_computador/card_local.dart';
@@ -33,16 +34,10 @@ class ComputadorWidget extends StatelessWidget {
                   color: colorScheme.shadow,
                   offset: const Offset(
                     0,
-                    1,
+                    -4,
                   ),
+                  inset: true,
                   blurRadius: 4,
-                ),
-                BoxShadow(
-                  color: theme.scaffoldBackgroundColor,
-                  offset: const Offset(
-                    0,
-                    -8,
-                  ), // Sombra apenas para baixo (eixo Y positivo)
                 ),
               ],
             ),
