@@ -183,7 +183,6 @@ class _InfoTab extends StatelessWidget {
 class _ProgramasTab extends StatelessWidget {
   const _ProgramasTab({
     required this.programas,
-    super.key,
   });
 
   final List<Programa> programas;

@@ -3,7 +3,7 @@ import 'package:lotus/src/env/env.dart';
 import 'package:lotus/src/modules/home/controllers/menu_bar_controller.dart';
 import 'package:lotus/src/modules/home/modules/computador/computador_module.dart';
 import 'package:lotus/src/modules/home/modules/dashboard/dashboard_module.dart';
-import 'package:lotus/src/modules/home/modules/ice_cream/ice_cream_module.dart';
+import 'package:lotus/src/modules/home/modules/impressora/impressora_module.dart';
 import 'package:lotus/src/modules/home/modules/search/search_module.dart';
 import 'package:lotus/src/modules/home/modules/settings/settings_module.dart';
 import 'package:lotus/src/modules/home/modules/shop/shop_module.dart';
@@ -48,7 +48,7 @@ class NestedModule extends Module {
         ParallelRoute.module('/dashboard', module: DashboardModule()),
         ParallelRoute.module('/shop', module: ShopModule()),
         ParallelRoute.module('/computadores', module: ComputadorModule()),
-        ParallelRoute.module('/ice-cream', module: IceCreamModule()),
+        ParallelRoute.module('/impressoras', module: ImpressoraModule()),
         ParallelRoute.module('/search', module: SearchModule()),
       ],
       transition: TransitionType.fadeIn,

@@ -6,7 +6,11 @@ import 'package:lotus/src/modules/home/modules/computador/widgets/detalhe_comput
 import 'package:lotus/src/modules/home/modules/computador/widgets/detalhe_computador/info_tile.dart';
 import 'package:repositories/repositories.dart';
 
+/// {@template cabecalho_computador}
+/// Cabeçalho de um computador.
+/// {@endtemplate}
 class CabecalhoComputador extends StatelessWidget {
+  /// {@macro cabecalho_computador}
   const CabecalhoComputador({
     required this.computadorNome,
     required this.computadorResponsavel,
@@ -16,10 +20,19 @@ class CabecalhoComputador extends StatelessWidget {
     super.key,
   });
 
+  /// O nome do computador.
   final String computadorNome;
+
+  /// O responsável pelo computador.
   final String computadorResponsavel;
+
+  /// A quantidade de ativos relacionados ao computador.
   final int computadorRelacionamentos;
+
+  /// Indica se o computador é automático.
   final bool computadorAutomatico;
+
+  /// A criticidade dos dados do computador.
   final CriticidadeDados computadorCriticidade;
 
   @override

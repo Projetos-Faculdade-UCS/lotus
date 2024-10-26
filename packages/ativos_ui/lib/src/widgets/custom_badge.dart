@@ -18,6 +18,7 @@ class CustomBadge extends StatelessWidget {
   /// Cor de fundo.
   final Color backgroundColor;
 
+  /// Cor da borda.
   final Color borderColor;
 
   /// Rótulo.

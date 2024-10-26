@@ -32,9 +32,9 @@ class Sidebar extends StatelessWidget {
       route: '/computadores/',
     ),
     _SidebarItem(
-      icon: HugeIcons.strokeRoundedShoppingCart01,
-      label: 'Shop',
-      route: '/shop/',
+      icon: HugeIcons.strokeRoundedPrinter,
+      label: 'Impressoras',
+      route: '/impressoras/',
     ),
     _SidebarItem(
       icon: HugeIcons.strokeRoundedIceCream03,

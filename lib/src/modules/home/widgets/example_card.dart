@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 
 /// An example card widget.
 class ExampleCard extends StatelessWidget {
@@ -18,7 +17,7 @@ class ExampleCard extends StatelessWidget {
 
   void _onTap() {
     print('Card tapped!');
-    Modular.to.navigate('/computadores/2');
+    // Modular.to.navigate('/computadores/2');
   }
 
   @override

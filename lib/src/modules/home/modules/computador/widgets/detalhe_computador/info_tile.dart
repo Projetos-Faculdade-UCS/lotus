@@ -1,7 +1,11 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
+/// {@template info_tile}
+/// Tile que exibe informações.
+/// {@endtemplate}
 class InfoTile extends StatelessWidget {
+  /// {@macro info_tile}
   const InfoTile({
     required this.title,
     required this.value,
@@ -10,12 +14,16 @@ class InfoTile extends StatelessWidget {
     super.key,
   });
 
+  /// O título do tile.
   final String title;
 
+  /// O valor do tile.
   final Widget value;
 
+  /// A largura do tile.
   final double? width;
 
+  /// O widget que será exibido à esquerda do tile.
   final Widget? leading;
 
   @override
