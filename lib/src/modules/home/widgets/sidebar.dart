@@ -1,7 +1,9 @@
+// lib/widgets/sidebar.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:lotus/src/colors.dart';
-import 'package:lotus/src/lotus_icon.dart';
+import 'package:hugeicons/hugeicons.dart';
+import 'package:lotus/src/modules/home/widgets/sidebar_header.dart';
+import 'package:lotus_ui/lotus_ui.dart';
 import 'package:sidebarx/sidebarx.dart';
 
 /// Sidebar controller.
@@ -17,34 +19,37 @@ class Sidebar extends StatelessWidget {
     required this.controller,
     super.key,
   });
-
   // Moved static items outside the class to prevent them from being recreated.
   static final List<_SidebarItem> _items = [
     _SidebarItem(
-      icon: Icons.dashboard,
+      icon: HugeIcons.strokeRoundedDashboardSquare01,
       label: 'Dashboard',
       route: '/dashboard/',
     ),
     _SidebarItem(
-      icon: Icons.shopping_cart,
+      icon: Icons.computer_outlined,
+      label: 'Computadores',
+      route: '/computadores/',
+    ),
+    _SidebarItem(
+      icon: HugeIcons.strokeRoundedShoppingCart01,
       label: 'Shop',
       route: '/shop/',
     ),
     _SidebarItem(
-      icon: Icons.icecream,
+      icon: HugeIcons.strokeRoundedIceCream03,
       label: 'Ice-Cream',
       route: '/ice-cream/',
     ),
     _SidebarItem(
-      icon: Icons.search,
+      icon: HugeIcons.strokeRoundedSearch02,
       label: 'Search',
       route: '/search/',
     ),
   ];
-
   static final List<_SidebarItem> _footerItems = [
     _SidebarItem(
-      icon: Icons.settings,
+      icon: HugeIcons.strokeRoundedSettings03,
       label: 'Settings',
       route: '/settings/',
     ),
@@ -55,16 +60,25 @@ class Sidebar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final sidebarXThemeExtension =
+        Theme.of(context).extension<SidebarXThemeExtension>();
+
     return RepaintBoundary(
       child: SidebarX(
         controller: controller,
-        theme: _sidebarTheme,
-        extendedTheme: _extendedTheme,
+        theme: sidebarXThemeExtension!.sidebarXTheme,
+        extendedTheme: sidebarXThemeExtension.extendedSidebarXTheme,
         footerDivider: const Divider(
           color: Colors.white,
           thickness: 0.5,
         ),
-        headerBuilder: _buildHeader,
+        headerBuilder: (context, extended) {
+          return SidebarHeader(
+            controller: controller,
+            context: context,
+            extended: extended,
+          );
+        },
         items: _items,
         footerItems: _footerItems,
         footerFitType: FooterFitType.fit,
@@ -76,86 +90,6 @@ class Sidebar extends StatelessWidget {
       ),
     );
   }
-
-  // Extracted themes to constants to prevent rebuilding them.
-  static final SidebarXTheme _sidebarTheme = SidebarXTheme(
-    margin: const EdgeInsets.all(10),
-    decoration: BoxDecoration(
-      color: canvasColor,
-      borderRadius: BorderRadius.circular(20),
-    ),
-    textStyle: const TextStyle(color: Colors.white),
-    selectedTextStyle: const TextStyle(color: Colors.white),
-    itemTextPadding: const EdgeInsets.only(left: 30),
-    selectedItemTextPadding: const EdgeInsets.only(left: 30),
-    itemDecoration: BoxDecoration(
-      border: Border.all(color: canvasColor),
-    ),
-    selectedItemDecoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(10),
-      border: Border.all(
-        color: actionColor.withOpacity(0.37),
-      ),
-      gradient: const LinearGradient(
-        colors: [accentCanvasColor, canvasColor],
-      ),
-      boxShadow: const [
-        BoxShadow(
-          color: Colors.black26, // Reduced opacity for better performance.
-          blurRadius: 30,
-        ),
-      ],
-    ),
-    iconTheme: const IconThemeData(
-      color: Colors.white,
-      size: 20,
-    ),
-  );
-
-  static final SidebarXTheme _extendedTheme = SidebarXTheme(
-    width: 250,
-    decoration: BoxDecoration(
-      color: canvasColor,
-      borderRadius: BorderRadius.circular(20),
-    ),
-    margin: const EdgeInsets.all(10),
-  );
-
-  Widget _buildHeader(BuildContext context, bool extended) {
-    return InkWell(
-      onTap: controller.toggleExtended,
-      child: DrawerHeader(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Expanded(
-              child: AnimatedRotation(
-                duration: const Duration(milliseconds: 300),
-                turns: extended ? 1 : 0,
-                child: const LotusIcon(),
-              ),
-            ),
-            AnimatedSize(
-              duration: const Duration(milliseconds: 300),
-              child: SizedBox(
-                height: extended ? 50 : 0,
-                child: const Text(
-                  'Project Lotus',
-                  style: TextStyle(
-                    color: white,
-                    fontSize: 24,
-                  ),
-                  softWrap: false,
-                  overflow: TextOverflow.fade,
-                  maxLines: 1,
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
 }
 
 class _SidebarItem extends SidebarXItem {
@@ -164,6 +98,10 @@ class _SidebarItem extends SidebarXItem {
     super.icon,
     super.label,
   });
+  final String route;
+
+  @override
+  void Function() get onTap => _onTap;
 
   void _onTap() {
     // Navigate only if the route is different
@@ -172,9 +110,4 @@ class _SidebarItem extends SidebarXItem {
       Modular.to.navigate(route);
     }
   }
-
-  @override
-  void Function() get onTap => _onTap;
-
-  final String route;
 }

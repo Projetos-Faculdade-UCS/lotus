@@ -7,6 +7,7 @@ version: 1.0.0+1
 
 environment:
   sdk: ^3.5.0
+  flutter: ^3.24.3
 
 dependencies:
   flutter:
@@ -28,6 +29,41 @@ dependencies:
       ref: 12decbe0f592e14e03223f6f2c0c7e0e2dbd70a1
   file_picker: ^8.1.2
   super_context_menu: ^0.8.22
+  adaptive_theme: ^3.6.0
+  window_manager: ^0.4.2
+  super_sliver_list: ^0.4.1
+  hotkey_manager: ^0.2.3
+  keymap: ^0.0.92
+  flutter_svg: ^2.0.10
+  vector_graphics: ^1.1.11
+  hugeicons: ^0.0.7
+  flutter_localizations:
+    sdk: flutter
+  intl: any
+  flutter_layout_grid: ^2.0.7
+
+  ativos_ui:
+    path: packages/ativos_ui
+
+  repositories:
+    path: packages/repositories
+
+  lotus_api_client:
+    path: packages/lotus_api_client
+
+  lotus_ui:
+    path: packages/lotus_ui
+
+  lotus_utils:
+    path: packages/lotus_utils
+  envied: ^0.5.4+1
+  flutter_bloc: ^8.1.6
+  equatable: ^2.0.5
+  rxdart: ^0.28.0
+  flutter_animate: ^4.5.0
+  recase: ^4.1.0
+  soft_edge_blur: ^0.1.3
+  flutter_inset_box_shadow: ^1.0.8
 
 dev_dependencies:
   flutter_test:
@@ -36,9 +72,14 @@ dev_dependencies:
   # ignore: sort_pub_dependencies
   flutter_lints: ^4.0.0
   very_good_analysis: ^6.0.0
-  flutter_launcher_icons: ^0.13.1
+  flutter_launcher_icons: ^0.14.1
+  flutter_to_debian: ^2.0.2
+  envied_generator: ^0.5.4+1
+  build_runner: ^2.4.13
 
 flutter:
   uses-material-design: true
   assets:
     - assets/logo/lotus_icon.png
+    - assets/logo/ucs-logo.svg.vec
+    - assets/ativos/

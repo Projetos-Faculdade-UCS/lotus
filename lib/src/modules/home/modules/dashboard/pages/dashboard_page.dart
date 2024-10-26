@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:lotus/src/modules/home/modules/dashboard/pages/widgets/test_area.dart';
 import 'package:lotus/src/modules/home/widgets/example_card.dart';
 import 'package:lotus/src/modules/home/widgets/example_context_menu.dart';
-import 'package:lotus/src/modules/home/widgets/miolo.dart';
+import 'package:lotus_ui/lotus_ui.dart';
 
 /// The Dashboard page of the application.
 class DashboardPage extends StatelessWidget {
@@ -15,18 +16,33 @@ class DashboardPage extends StatelessWidget {
         centerTitle: true,
         title: const Text('Dashboard'),
       ),
-      child: const SizedBox(
-        width: double.infinity,
-        child: Wrap(
-          children: [
-            ExampleContextMenu(
-              child: ExampleCard(
-                title: Text('Card 1'),
-                subtitle: Text('Right-click me!'),
+      child: Column(
+        children: [
+          const Expanded(
+            child: SizedBox.expand(
+              child: Wrap(
+                children: [
+                  ExampleContextMenu(
+                    child: ExampleCard(
+                      title: Text('Detalhe computador'),
+                      subtitle: Text('Right-click me!'),
+                    ),
+                  ),
+                ],
               ),
             ),
-          ],
-        ),
+          ),
+          Text(
+            'Área de Testes',
+            style: Theme.of(context).textTheme.titleLarge,
+          ),
+          const Expanded(
+            child: Padding(
+              padding: EdgeInsets.all(8),
+              child: TestArea(),
+            ),
+          ),
+        ],
       ),
     );
   }
