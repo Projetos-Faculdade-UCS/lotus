@@ -37,9 +37,9 @@ class Sidebar extends StatelessWidget {
       route: '/impressoras/',
     ),
     _SidebarItem(
-      icon: HugeIcons.strokeRoundedIceCream03,
-      label: 'Ice-Cream',
-      route: '/ice-cream/',
+      icon: HugeIcons.strokeRoundedTv02,
+      label: 'Monitores',
+      route: '/monitores/',
     ),
     _SidebarItem(
       icon: HugeIcons.strokeRoundedSearch02,

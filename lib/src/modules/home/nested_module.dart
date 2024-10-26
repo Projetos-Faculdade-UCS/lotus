@@ -4,9 +4,8 @@ import 'package:lotus/src/modules/home/controllers/menu_bar_controller.dart';
 import 'package:lotus/src/modules/home/modules/computador/computador_module.dart';
 import 'package:lotus/src/modules/home/modules/dashboard/dashboard_module.dart';
 import 'package:lotus/src/modules/home/modules/impressora/impressora_module.dart';
-import 'package:lotus/src/modules/home/modules/search/search_module.dart';
+import 'package:lotus/src/modules/home/modules/monitor_module/monitor_module.dart';
 import 'package:lotus/src/modules/home/modules/settings/settings_module.dart';
-import 'package:lotus/src/modules/home/modules/shop/shop_module.dart';
 import 'package:lotus/src/modules/home/pages/nested_page.dart';
 import 'package:lotus/src/modules/home/widgets/sidebar.dart';
 import 'package:lotus_api_client/lotus_api_client.dart';
@@ -46,10 +45,9 @@ class NestedModule extends Module {
       children: [
         ParallelRoute.module('/settings', module: SettingsModule()),
         ParallelRoute.module('/dashboard', module: DashboardModule()),
-        ParallelRoute.module('/shop', module: ShopModule()),
         ParallelRoute.module('/computadores', module: ComputadorModule()),
         ParallelRoute.module('/impressoras', module: ImpressoraModule()),
-        ParallelRoute.module('/search', module: SearchModule()),
+        ParallelRoute.module('/monitores', module: MonitorModule()),
       ],
       transition: TransitionType.fadeIn,
     );
