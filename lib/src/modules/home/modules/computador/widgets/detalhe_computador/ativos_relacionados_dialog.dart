@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
+/// {@template ativos_relacionados_dialog}
+/// Diálogo que exibe os ativos relacionados a um computador.
+/// {@endtemplate}
 class AtivosRelacionadosDialog extends StatelessWidget {
+  /// {@macro ativos_relacionados_dialog}
   const AtivosRelacionadosDialog({super.key});
 
   @override

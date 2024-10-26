@@ -3,9 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:repositories/repositories.dart';
 import 'package:soft_edge_blur/soft_edge_blur.dart';
 
+/// {@template card_local}
+/// Card que exibe informações sobre a localização de um ativo.
+/// {@endtemplate}
 class CardLocal extends StatelessWidget {
+  /// {@macro card_local}
   const CardLocal({required this.sala, super.key});
 
+  /// A sala do ativo.
   final Sala sala;
 
   @override
@@ -105,7 +110,6 @@ class _Tile extends StatelessWidget {
   const _Tile({
     required this.title,
     required this.value,
-    super.key,
   });
 
   final String title;

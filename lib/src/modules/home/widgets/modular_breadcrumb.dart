@@ -3,7 +3,8 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:recase/recase.dart';
 
 /// {@template breadcrumb}
-/// A breadcrumb widget that provides navigation based on the current modular route.
+/// A breadcrumb widget that provides navigation based on the current
+/// modular route.
 /// {@endtemplate}
 class ModularBreadcrumb extends StatelessWidget {
   /// {@macro breadcrumb}

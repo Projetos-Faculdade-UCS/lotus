@@ -99,7 +99,8 @@ class _Header extends StatelessWidget {
               ),
               const SizedBox(height: 6),
               Text(
-                '#${ativo.patrimonio} • Atualizado ${ativo.ultimaAtualizacao?.timeAgo}',
+                '#${ativo.patrimonio} • '
+                'Atualizado ${ativo.ultimaAtualizacao?.timeAgo}',
                 style: subtitleTextStyle,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
