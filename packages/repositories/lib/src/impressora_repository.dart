@@ -4,16 +4,16 @@ import 'package:repositories/src/base_repository.dart';
 /// {@template impressora_repository}
 /// A Very Good Project created by Very Good CLI.
 /// {@endtemplate}
-class ImpressoraRepository extends BaseAtivoRepository<Ativo> {
+class ImpressoraRepository extends BaseAtivoRepository<Impressora> {
   /// {@macro impressora_repository}
   const ImpressoraRepository(super._lotusApiClient);
 
   @override
-  String get baseUrl => '/computadores';
+  String get baseUrl => '/impressoras';
 
   @override
-  TipoAtivo get tipo => TipoAtivo.computador;
+  TipoAtivo get tipo => TipoAtivo.impressora;
 
   @override
-  Computador fromJson(Map<String, dynamic> json) => Computador.fromJson(json);
+  Impressora fromJson(Map<String, dynamic> json) => Impressora.fromJson(json);
 }
