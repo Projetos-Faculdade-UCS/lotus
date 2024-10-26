@@ -10,6 +10,7 @@ class ComputadorWidget extends StatelessWidget {
   /// Cria uma instância de [ComputadorWidget].
   const ComputadorWidget({required this.computador, super.key});
 
+  /// Computador a ser exibido.
   final Computador computador;
 
   @override
@@ -30,7 +31,6 @@ class ComputadorWidget extends StatelessWidget {
               boxShadow: [
                 BoxShadow(
                   color: colorScheme.shadow,
-                  blurRadius: 4,
                   offset: const Offset(
                     0,
                     1,
