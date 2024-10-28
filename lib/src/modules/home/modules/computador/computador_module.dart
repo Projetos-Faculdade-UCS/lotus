@@ -1,6 +1,5 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:lotus/src/modules/home/modules/computador/bloc/computador/computador_bloc.dart';
-import 'package:lotus/src/modules/home/modules/computador/bloc/computadores/computadores_bloc.dart';
 import 'package:lotus/src/modules/home/modules/computador/pages/computador_page.dart';
 import 'package:lotus/src/modules/home/modules/computador/pages/computadores_page.dart';
 import 'package:lotus/src/modules/home/nested_module.dart';
@@ -15,7 +14,6 @@ class ComputadorModule extends Module {
   void binds(Injector i) {
     i
       ..addLazySingleton<ComputadorRepository>(ComputadorRepository.new)
-      ..add<ComputadoresBloc>(ComputadoresBloc.new)
       ..add<ComputadorBloc>(ComputadorBloc.new);
   }
 
@@ -25,7 +23,7 @@ class ComputadorModule extends Module {
       ..child(
         '/',
         child: (_) => ComputadoresPage(
-          computadoresBloc: Modular.get(),
+          computadorBloc: Modular.get(),
         ),
       )
       ..child(
