@@ -17,7 +17,9 @@ class TitleBar extends StatelessWidget {
       child: const Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Menu(),
+          Menu(
+            position: Offset(0, 36),
+          ),
           Expanded(
             child: DraggableArea(),
           ),
