@@ -24,48 +24,49 @@ class Menu extends StatefulWidget {
 class _MenuState extends State<Menu> {
   final year = DateTime.now().year;
 
-  late final entries = <ContextMenuEntry>[
-    MenuItem<void>(
-      label: 'Ativar admin',
-      icon: HugeIcons.strokeRoundedShield02,
-      onSelected: () {
-        debugPrint('Ativar admin');
-      },
-    ),
-    MenuItem<void>(
-      label: 'Mudar Tema',
-      icon: HugeIcons.strokeRoundedMoon,
-      onSelected: () {
-        AdaptiveTheme.of(context).toggleThemeMode(useSystem: false);
-      },
-    ),
-    MenuDivider(
-      thickness: 1,
-      height: 1,
-      color: Theme.of(context).dividerColor.withOpacity(0.5),
-    ),
-    MenuItem<void>(
-      label: 'Sobre',
-      icon: HugeIcons.strokeRoundedInformationCircle,
-      onSelected: () {
-        showAboutDialog(
-          context: context,
-          applicationIcon: const SizedBox(
-            width: 48,
-            height: 48,
-            child: LotusIcon(),
-          ),
-          applicationName: 'Lotus',
-          applicationVersion: '1.0.0',
-          applicationLegalese:
-              '© $year Universidade de Caxias do Sul. All rights reserved.',
-        );
-      },
-    ),
-  ];
+  List<ContextMenuEntry> get entries => <ContextMenuEntry>[
+        MenuItem<void>(
+          label: 'Ativar admin',
+          icon: HugeIcons.strokeRoundedShield02,
+          onSelected: () {
+            debugPrint('Ativar admin');
+          },
+        ),
+        MenuItem<void>(
+          label: 'Mudar Tema',
+          icon: HugeIcons.strokeRoundedMoon,
+          onSelected: () {
+            AdaptiveTheme.of(context).toggleThemeMode(useSystem: false);
+          },
+        ),
+        MenuDivider(
+          thickness: 1,
+          height: 1,
+          color: Theme.of(context).dividerColor.withOpacity(0.5),
+        ),
+        MenuItem<void>(
+          label: 'Sobre',
+          icon: HugeIcons.strokeRoundedInformationCircle,
+          onSelected: () {
+            showAboutDialog(
+              context: context,
+              applicationIcon: const SizedBox(
+                width: 48,
+                height: 48,
+                child: LotusIcon(),
+              ),
+              applicationName: 'Lotus',
+              applicationVersion: '1.0.0',
+              applicationLegalese:
+                  '© $year Universidade de Caxias do Sul. All rights reserved.',
+            );
+          },
+        ),
+      ];
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return IconButton(
       style: ButtonStyle(
         shape: WidgetStateProperty.all<RoundedRectangleBorder>(
@@ -91,10 +92,10 @@ class _MenuState extends State<Menu> {
               bottomRight: Radius.circular(8),
             ),
             boxDecoration: BoxDecoration(
-              color: Theme.of(context).canvasColor,
+              color: theme.canvasColor,
               boxShadow: [
                 BoxShadow(
-                  color: Theme.of(context).shadowColor.withOpacity(0.2),
+                  color: theme.shadowColor.withOpacity(0.3),
                   blurRadius: 4,
                   offset: const Offset(0, 4),
                 ),
