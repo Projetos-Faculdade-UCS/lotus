@@ -21,7 +21,7 @@ class MonitoresPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MioloWithBreadcrumb(
       child: BlocProvider.value(
-        value: monitoresBloc..add(MonitoresFetch()),
+        value: monitoresBloc..add(GetAllMonitores()),
         child: BlocBuilder<MonitoresBloc, MonitoresState>(
           builder: (context, state) {
             if (state is MonitoresInitial || state is MonitoresLoading) {

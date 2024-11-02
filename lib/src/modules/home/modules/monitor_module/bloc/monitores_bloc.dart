@@ -13,19 +13,37 @@ part 'monitores_state.dart';
 class MonitoresBloc extends Bloc<MonitoresEvent, MonitoresState> {
   /// {@macro monitores_bloc}
   MonitoresBloc(this._monitorRepository) : super(MonitoresInitial()) {
-    on<MonitoresFetch>(_onMonitoresFetch);
+    on<GetAllMonitores>(_onGetAllMonitores);
+    on<GetMonitor>(_onGetMonitor);
   }
 
   final MonitorRepository _monitorRepository;
 
-  FutureOr<void> _onMonitoresFetch(
-    MonitoresFetch event,
+  FutureOr<void> _onGetAllMonitores(
+    GetAllMonitores event,
     Emitter<MonitoresState> emit,
   ) async {
     emit(MonitoresLoading());
     try {
       final monitores = await _monitorRepository.fetchAll();
       emit(MonitoresSuccess(monitores));
+    } catch (e) {
+      emit(MonitoresError());
+    }
+  }
+
+  FutureOr<void> _onGetMonitor(
+    GetMonitor event,
+    Emitter<MonitoresState> emit,
+  ) async {
+    emit(MonitoresLoading());
+    final id = event.id;
+    try {
+      final monitor = await _monitorRepository.getById(id);
+      if (monitor == null) {
+        throw Exception('Monitor não encontrado.');
+      }
+      emit(MonitorSuccess(monitor));
     } catch (e) {
       emit(MonitoresError());
     }

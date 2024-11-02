@@ -11,4 +11,13 @@ sealed class MonitoresEvent extends Equatable {
 }
 
 /// Evento para buscar as monitores.
-class MonitoresFetch extends MonitoresEvent {}
+class GetAllMonitores extends MonitoresEvent {}
+
+/// Evento para buscar um monitor.
+class GetMonitor extends MonitoresEvent {
+  /// {@macro monitores_get}
+  const GetMonitor(this.id);
+
+  /// ID do monitor.
+  final int id;
+}

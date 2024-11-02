@@ -30,5 +30,17 @@ final class MonitoresSuccess extends MonitoresState {
   List<Object> get props => [monitores];
 }
 
+/// Estado de sucesso ao carregar um monitor.
+final class MonitorSuccess extends MonitoresState {
+  /// {@macro monitor_success}
+  const MonitorSuccess(this.monitor);
+
+  /// Monitor carregado.
+  final Ativo monitor;
+
+  @override
+  List<Object> get props => [monitor];
+}
+
 /// Estado de erro ao carregar a lista de monitores.
 final class MonitoresError extends MonitoresState {}
