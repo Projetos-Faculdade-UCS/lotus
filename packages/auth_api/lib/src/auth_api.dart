@@ -20,13 +20,13 @@ final class FakeAuthApi implements AuthApi {
   @override
   Future<bool> login() async {
     // Simulate API call
-    await Future.delayed(const Duration(milliseconds: 50), () {});
+    await Future.delayed(const Duration(milliseconds: 300), () {});
     return true;
   }
 
   @override
   Future<void> logout() async {
     // Simulate API call
-    await Future.delayed(const Duration(milliseconds: 50), () {});
+    await Future.delayed(const Duration(milliseconds: 300), () {});
   }
 }
