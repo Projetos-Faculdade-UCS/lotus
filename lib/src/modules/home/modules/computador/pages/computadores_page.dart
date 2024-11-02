@@ -1,7 +1,7 @@
 import 'package:ativos_ui/ativos_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lotus/src/modules/home/modules/computador/bloc/computadores/computadores_bloc.dart';
+import 'package:lotus/src/modules/home/modules/computador/bloc/computador/computador_bloc.dart';
 import 'package:lotus/src/modules/home/widgets/breadcrumb/miolo_with_breadcrumb.dart';
 
 /// {@template computadores_page}
@@ -9,15 +9,13 @@ import 'package:lotus/src/modules/home/widgets/breadcrumb/miolo_with_breadcrumb.
 /// {@endtemplate}
 class ComputadoresPage extends StatelessWidget {
   /// {@macro computadores_page}
-  ComputadoresPage({
-    required this.computadoresBloc,
+  const ComputadoresPage({
+    required this.computadorBloc,
     super.key,
-  }) {
-    computadoresBloc.add(ComputadoresFetch());
-  }
+  });
 
   /// Bloc de computadores.
-  final ComputadoresBloc computadoresBloc;
+  final ComputadorBloc computadorBloc;
 
   @override
   Widget build(BuildContext context) {
@@ -25,15 +23,15 @@ class ComputadoresPage extends StatelessWidget {
       title: 'Computadores',
       child: Padding(
         padding: const EdgeInsets.all(8),
-        child: BlocProvider(
-          create: (context) => computadoresBloc,
-          child: BlocBuilder<ComputadoresBloc, ComputadoresState>(
+        child: BlocProvider.value(
+          value: computadorBloc..add(FetchComputadores()),
+          child: BlocBuilder<ComputadorBloc, ComputadorState>(
             builder: (context, state) {
-              if (state is ComputadoresLoading) {
+              if (state is ComputadorLoading) {
                 return const Center(
                   child: CircularProgressIndicator(),
                 );
-              } else if (state is ComputadoresSuccess) {
+              } else if (state is FetchComputadoresSuccess) {
                 return AtivosList(
                   ativos: state.computadores,
                 );

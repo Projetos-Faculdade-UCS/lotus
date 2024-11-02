@@ -11,10 +11,13 @@ sealed class ComputadorEvent extends Equatable {
 }
 
 /// Evento para buscar a lista de computadores.
-final class ComputadorFetch extends ComputadorEvent {
+final class GetComputador extends ComputadorEvent {
   /// {@macro computadores_fetch}
-  const ComputadorFetch(this.id);
+  const GetComputador(this.id);
 
   /// ID do computador.
   final int id;
 }
+
+/// Evento para buscar a lista de computadores.
+final class FetchComputadores extends ComputadorEvent {}

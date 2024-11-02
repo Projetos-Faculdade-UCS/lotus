@@ -17,15 +17,27 @@ final class ComputadorInitial extends ComputadorState {}
 final class ComputadorLoading extends ComputadorState {}
 
 /// Estado de sucesso ao carregar a lista de computadores.
-final class ComputadorSuccess extends ComputadorState {
+final class GetComputadorSuccess extends ComputadorState {
   /// {@macro computadores_success}
-  const ComputadorSuccess(this.computador);
+  const GetComputadorSuccess(this.computador);
 
   /// Lista de computadores.
   final Computador computador;
 
   @override
   List<Object> get props => [computador];
+}
+
+/// Estado de sucesso ao carregar a lista de computadores.
+final class FetchComputadoresSuccess extends ComputadorState {
+  /// {@macro computadores_success}
+  const FetchComputadoresSuccess(this.computadores);
+
+  /// Lista de computadores.
+  final List<Ativo> computadores;
+
+  @override
+  List<Object> get props => [computadores];
 }
 
 /// Estado de falha ao carregar a lista de computadores.

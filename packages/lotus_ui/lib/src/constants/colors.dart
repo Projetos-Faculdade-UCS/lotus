@@ -46,7 +46,7 @@ const darkBackground = Color(0xFF121212);
 const lightShadow = Color(0x4D000000);
 
 /// Material Color for shadow
-const darkShadow = Color(0x4DFFFFFF);
+const darkShadow = Color.fromARGB(223, 0, 0, 0);
 
 /// Text color for dark theme
 const darkBodyText = Color(0xFFE0E0E0);
