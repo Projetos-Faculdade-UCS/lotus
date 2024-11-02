@@ -1,8 +1,12 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_context_menu/flutter_context_menu.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:lotus/src/lotus_icon.dart';
+import 'package:lotus/src/modules/auth/bloc/auth_bloc.dart';
+import 'package:lotus/src/modules/auth/widgets/admin_login_dialog.dart';
 
 /// {@template menu}
 /// A widget that represents a menu.
@@ -23,13 +27,44 @@ class Menu extends StatefulWidget {
 
 class _MenuState extends State<Menu> {
   final year = DateTime.now().year;
+  bool get isAdmin => Modular.get<AuthBloc>().state.isAdmin;
 
   List<ContextMenuEntry> get entries => <ContextMenuEntry>[
         MenuItem<void>(
-          label: 'Ativar admin',
+          label: isAdmin ? 'Desativar admin' : 'Ativar admin',
           icon: HugeIcons.strokeRoundedShield02,
           onSelected: () {
-            debugPrint('Ativar admin');
+            if (isAdmin) {
+              Modular.get<AuthBloc>().add(const Logout());
+              return;
+            }
+
+            Modular.to.push<void>(
+              PageRouteBuilder<void>(
+                fullscreenDialog: true,
+                opaque: false,
+                barrierColor: Colors.black38,
+                barrierDismissible: true,
+                barrierLabel: 'search-modal',
+                transitionsBuilder:
+                    (context, animation, secondaryAnimation, child) {
+                  return FadeTransition(
+                    opacity: animation,
+                    child: child,
+                  );
+                },
+                settings: const RouteSettings(
+                  name: 'search-modal',
+                ),
+                pageBuilder: (context, animation, secondaryAnimation) {
+                  return AdminLoginDialog(
+                    onConfirm: () {
+                      Modular.get<AuthBloc>().add(const Login());
+                    },
+                  );
+                },
+              ),
+            );
           },
         ),
         MenuItem<void>(
@@ -67,42 +102,55 @@ class _MenuState extends State<Menu> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return IconButton(
-      style: ButtonStyle(
-        shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(0),
-          ),
-        ),
-      ),
-      icon: const Icon(
-        HugeIcons.strokeRoundedMenu04,
-      ),
-      hoverColor: Colors.grey.withOpacity(0.5),
-      alignment: Alignment.center,
-      padding: EdgeInsets.zero,
-      onPressed: () {
-        showContextMenu<void>(
-          context,
-          contextMenu: ContextMenu(
-            entries: entries,
-            position: const Offset(0, 36),
-            borderRadius: const BorderRadius.only(
-              bottomLeft: Radius.circular(8),
-              bottomRight: Radius.circular(8),
+    return BlocBuilder<AuthBloc, AuthState>(
+      bloc: Modular.get(),
+      builder: (context, state) {
+        return IconButton(
+          style: ButtonStyle(
+            backgroundColor: state.isAdmin
+                ? WidgetStateProperty.all<Color>(
+                    Colors.red.withOpacity(0.7),
+                  )
+                : null,
+            shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(0),
+              ),
             ),
-            boxDecoration: BoxDecoration(
-              color: theme.canvasColor,
-              boxShadow: [
-                BoxShadow(
-                  color: theme.shadowColor.withOpacity(0.3),
-                  blurRadius: 4,
-                  offset: const Offset(0, 4),
+          ),
+          icon: Icon(
+            state.isAdmin
+                ? HugeIcons.strokeRoundedShield02
+                : HugeIcons.strokeRoundedMenu04,
+            color: state.isAdmin ? Colors.white : theme.iconTheme.color,
+          ),
+          hoverColor: Colors.grey.withOpacity(0.5),
+          alignment: Alignment.center,
+          padding: EdgeInsets.zero,
+          onPressed: () {
+            showContextMenu<void>(
+              context,
+              contextMenu: ContextMenu(
+                entries: entries,
+                position: const Offset(0, 36),
+                borderRadius: const BorderRadius.only(
+                  bottomLeft: Radius.circular(8),
+                  bottomRight: Radius.circular(8),
                 ),
-              ],
-            ),
-          ),
-          maintainState: true,
+                boxDecoration: BoxDecoration(
+                  color: theme.canvasColor,
+                  boxShadow: [
+                    BoxShadow(
+                      color: theme.shadowColor.withOpacity(0.3),
+                      blurRadius: 4,
+                      offset: const Offset(0, 4),
+                    ),
+                  ],
+                ),
+              ),
+              maintainState: true,
+            );
+          },
         );
       },
     );

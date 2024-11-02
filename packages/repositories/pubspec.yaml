@@ -19,3 +19,6 @@ dependencies:
 
   lotus_api_client:
     path: ../lotus_api_client
+
+  auth_api:
+    path: ../auth_api

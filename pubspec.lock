@@ -61,6 +61,13 @@ packages:
       relative: true
     source: path
     version: "0.1.0+1"
+  auth_api:
+    dependency: "direct main"
+    description:
+      path: "packages/auth_api"
+      relative: true
+    source: path
+    version: "0.1.0+1"
   auto_injector:
     dependency: transitive
     description:

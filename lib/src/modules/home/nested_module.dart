@@ -1,5 +1,6 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:lotus/src/env/env.dart';
+import 'package:lotus/src/modules/auth/auth_module.dart';
 import 'package:lotus/src/modules/home/controllers/menu_bar_controller.dart';
 import 'package:lotus/src/modules/home/modules/computador/computador_module.dart';
 import 'package:lotus/src/modules/home/modules/dashboard/dashboard_module.dart';
@@ -15,6 +16,11 @@ import 'package:sidebarx/sidebarx.dart';
 
 /// The Home module of the application.
 class NestedModule extends Module {
+  @override
+  List<Module> imports = [
+    AuthModule(),
+  ];
+
   @override
   void binds(Injector i) {
     i

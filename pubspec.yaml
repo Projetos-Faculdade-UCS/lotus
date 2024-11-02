@@ -65,6 +65,9 @@ dependencies:
   soft_edge_blur: ^0.1.3
   flutter_inset_box_shadow: ^1.0.8
   flutter_context_menu: ^0.2.0
+  
+  auth_api:
+    path: packages/auth_api
 
 dev_dependencies:
   flutter_test:
@@ -77,6 +80,7 @@ dev_dependencies:
   flutter_to_debian: ^2.0.2
   envied_generator: ^0.5.4
   build_runner: ^2.4.13
+
 
 flutter:
   uses-material-design: true
