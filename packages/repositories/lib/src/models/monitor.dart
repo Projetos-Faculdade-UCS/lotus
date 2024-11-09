@@ -22,12 +22,15 @@ class Monitor extends Ativo {
     required super.relacionamentos,
     required super.responsavel,
     required super.ultimaAtualizacao,
+    this.resolucao = '',
     super.numeroSerie,
   });
 
   /// Converts a JSON object to a [Monitor].
   factory Monitor.fromJson(Map<String, dynamic> json) =>
       _$MonitorFromJson(json);
+
+  final String resolucao;
 
   /// Converts this [Monitor] to a JSON object.
   @override

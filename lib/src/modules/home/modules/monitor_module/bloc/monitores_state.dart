@@ -36,7 +36,7 @@ final class MonitorSuccess extends MonitoresState {
   const MonitorSuccess(this.monitor);
 
   /// Monitor carregado.
-  final Ativo monitor;
+  final Monitor monitor;
 
   @override
   List<Object> get props => [monitor];

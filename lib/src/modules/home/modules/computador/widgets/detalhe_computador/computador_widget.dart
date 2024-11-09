@@ -1,7 +1,8 @@
+import 'package:ativos_ui/src/widgets/cabecalho_ativo.dart';
 import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
 import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
 import 'package:hugeicons/hugeicons.dart';
-import 'package:lotus/src/modules/home/modules/computador/widgets/detalhe_computador/cabecalho_computador.dart';
+import 'package:lotus/src/modules/home/modules/computador/widgets/computador_badges.dart';
 import 'package:lotus/src/modules/home/modules/computador/widgets/detalhe_computador/card_local.dart';
 import 'package:lotus/src/modules/home/modules/computador/widgets/detalhe_computador/ficha_tecnica_tabs.dart';
 import 'package:repositories/repositories.dart';
@@ -41,12 +42,15 @@ class ComputadorWidget extends StatelessWidget {
                 ),
               ],
             ),
-            child: CabecalhoComputador(
+            child: CabecalhoAtivo(
               computadorNome: computador.nome,
-              computadorAutomatico: computador.automatico,
-              computadorCriticidade: computador.criticidade,
               computadorRelacionamentos: computador.relacionamentos,
               computadorResponsavel: computador.responsavel,
+              tipoAtivo: computador.tipo,
+              subtitle: ComputadorBadges(
+                isAutomatico: computador.automatico,
+                criticidade: computador.criticidade,
+              ),
             ),
           ),
           Expanded(

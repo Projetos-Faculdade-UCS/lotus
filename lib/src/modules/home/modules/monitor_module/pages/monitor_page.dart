@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lotus/src/modules/home/modules/monitor_module/bloc/monitores_bloc.dart';
+import 'package:lotus/src/modules/home/modules/monitor_module/widgets/monitor_widget.dart';
 import 'package:lotus/src/modules/home/widgets/breadcrumb/miolo_with_breadcrumb.dart';
 
 /// {@template monitor_page}
@@ -30,9 +31,7 @@ class MonitorPage extends StatelessWidget {
             if (state is MonitoresInitial || state is MonitoresLoading) {
               return const Center(child: CircularProgressIndicator());
             } else if (state is MonitorSuccess) {
-              return Center(
-                child: Text('Monitor2 $id'),
-              );
+              return MonitorWidget(monitor: state.monitor);
             } else {
               return const Center(
                 child: Text('Erro ao carregar monitor.'),

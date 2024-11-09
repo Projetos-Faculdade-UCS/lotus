@@ -1,7 +1,7 @@
+import 'package:ativos_ui/src/widgets/info_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:intl/intl.dart';
-import 'package:lotus/src/modules/home/modules/computador/widgets/detalhe_computador/info_tile.dart';
 import 'package:repositories/repositories.dart';
 
 /// Widget que exibe as abas de informações de um computador.
