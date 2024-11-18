@@ -39,6 +39,11 @@ class ComputadoresPage extends StatelessWidget {
                     Modular.to.pushNamed('/computadores/cadastrar');
                   },
                   label: const Text('Cadastrar'),
+                  // filled
+                  style: TextButton.styleFrom(
+                    foregroundColor: Theme.of(context).colorScheme.secondary,
+                    visualDensity: VisualDensity.comfortable,
+                  ),
                 ),
               ),
             );
