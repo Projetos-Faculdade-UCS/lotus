@@ -6,13 +6,26 @@ import 'package:recase/recase.dart';
 /// A breadcrumb widget that provides navigation based on the current
 /// modular route.
 /// {@endtemplate}
-class ModularBreadcrumb extends StatelessWidget {
+class ModularBreadcrumb extends StatefulWidget {
   /// {@macro breadcrumb}
   const ModularBreadcrumb({super.key});
 
   @override
+  State<ModularBreadcrumb> createState() => _ModularBreadcrumbState();
+}
+
+class _ModularBreadcrumbState extends State<ModularBreadcrumb> {
+  late List<String> pathSegments;
+
+  @override
+  void initState() {
+    super.initState();
+
+    pathSegments = _getPathSegments(Modular.to.path);
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final pathSegments = _getPathSegments(Modular.to.path);
     final theme = Theme.of(context);
 
     return SizedBox(

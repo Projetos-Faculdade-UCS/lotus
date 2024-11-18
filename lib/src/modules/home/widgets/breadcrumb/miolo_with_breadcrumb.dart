@@ -10,6 +10,7 @@ class MioloWithBreadcrumb extends StatelessWidget {
   const MioloWithBreadcrumb({
     required this.child,
     this.title,
+    this.actions,
     super.key,
   });
 
@@ -19,6 +20,9 @@ class MioloWithBreadcrumb extends StatelessWidget {
   /// The title of the widget.
   final String? title;
 
+  /// {@macro flutter.material.appbar.actions}
+  final List<Widget>? actions;
+
   @override
   Widget build(BuildContext context) {
     return Miolo(
@@ -26,6 +30,7 @@ class MioloWithBreadcrumb extends StatelessWidget {
         title: const ModularBreadcrumb(),
         centerTitle: true,
         scrolledUnderElevation: 0,
+        actions: actions,
       ),
       child: child,
     );
