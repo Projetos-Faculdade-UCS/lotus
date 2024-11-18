@@ -30,7 +30,7 @@ class ComputadoresPage extends StatelessWidget {
             return AnimatedScale(
               scale: state.isAdmin ? 1 : 0,
               duration: const Duration(milliseconds: 300),
-              curve: Curves.bounceInOut,
+              curve: Curves.easeInOutCubicEmphasized,
               child: Padding(
                 padding: const EdgeInsets.all(8),
                 child: TextButton.icon(
