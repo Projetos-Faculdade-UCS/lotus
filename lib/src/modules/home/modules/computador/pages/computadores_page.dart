@@ -46,7 +46,7 @@ class ComputadoresPage extends StatelessWidget {
         ),
       ],
       child: Padding(
-        padding: const EdgeInsets.all(8),
+        padding: const EdgeInsets.symmetric(horizontal: 8),
         child: BlocProvider.value(
           value: computadorBloc.state is! FetchComputadoresSuccess
               ? (computadorBloc..add(FetchComputadores()))
