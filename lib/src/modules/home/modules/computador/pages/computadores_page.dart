@@ -30,7 +30,7 @@ class ComputadoresPage extends StatelessWidget {
             return AnimatedScale(
               scale: state.isAdmin ? 1 : 0,
               duration: const Duration(milliseconds: 300),
-              curve: Curves.easeInOutCubicEmphasized,
+              curve: Curves.bounceInOut,
               child: Padding(
                 padding: const EdgeInsets.all(8),
                 child: TextButton.icon(
@@ -39,11 +39,6 @@ class ComputadoresPage extends StatelessWidget {
                     Modular.to.pushNamed('/computadores/cadastrar');
                   },
                   label: const Text('Cadastrar'),
-                  // filled
-                  style: TextButton.styleFrom(
-                    foregroundColor: Theme.of(context).colorScheme.secondary,
-                    visualDensity: VisualDensity.comfortable,
-                  ),
                 ),
               ),
             );
