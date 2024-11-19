@@ -6,7 +6,6 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:lotus/src/lotus_icon.dart';
 import 'package:lotus/src/modules/auth/bloc/auth_bloc.dart';
-import 'package:lotus/src/modules/auth/widgets/admin_login_dialog.dart';
 
 /// {@template menu}
 /// A widget that represents a menu.
@@ -39,32 +38,33 @@ class _MenuState extends State<Menu> {
               return;
             }
 
-            Modular.to.push<void>(
-              PageRouteBuilder<void>(
-                fullscreenDialog: true,
-                opaque: false,
-                barrierColor: Colors.black38,
-                barrierDismissible: true,
-                barrierLabel: 'search-modal',
-                transitionsBuilder:
-                    (context, animation, secondaryAnimation, child) {
-                  return FadeTransition(
-                    opacity: animation,
-                    child: child,
-                  );
-                },
-                settings: const RouteSettings(
-                  name: 'search-modal',
-                ),
-                pageBuilder: (context, animation, secondaryAnimation) {
-                  return AdminLoginDialog(
-                    onConfirm: () {
-                      Modular.get<AuthBloc>().add(const Login());
-                    },
-                  );
-                },
-              ),
-            );
+            Modular.get<AuthBloc>().add(const Login());
+            // Modular.to.push<void>(
+            //   PageRouteBuilder<void>(
+            //     fullscreenDialog: true,
+            //     opaque: false,
+            //     barrierColor: Colors.black38,
+            //     barrierDismissible: true,
+            //     barrierLabel: 'search-modal',
+            //     transitionsBuilder:
+            //         (context, animation, secondaryAnimation, child) {
+            //       return FadeTransition(
+            //         opacity: animation,
+            //         child: child,
+            //       );
+            //     },
+            //     settings: const RouteSettings(
+            //       name: 'search-modal',
+            //     ),
+            //     pageBuilder: (context, animation, secondaryAnimation) {
+            //       return AdminLoginDialog(
+            //         onConfirm: () {
+            //           Modular.get<AuthBloc>().add(const Login());
+            //         },
+            //       );
+            //     },
+            //   ),
+            // );
           },
         ),
         MenuItem<void>(
