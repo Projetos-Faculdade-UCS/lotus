@@ -102,55 +102,146 @@ class _MenuState extends State<Menu> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    const red700 = Color(0xffc3362b);
+    const red300 = Color(0xfff6695e);
     return BlocBuilder<AuthBloc, AuthState>(
       bloc: Modular.get(),
       builder: (context, state) {
-        return IconButton(
-          style: ButtonStyle(
-            backgroundColor: state.isAdmin
-                ? WidgetStateProperty.all<Color>(
-                    Colors.red.withOpacity(0.7),
-                  )
-                : null,
-            shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(0),
+        return AnimatedCrossFade(
+          duration: const Duration(milliseconds: 200),
+          crossFadeState: state.isAdmin
+              ? CrossFadeState.showFirst
+              : CrossFadeState.showSecond,
+          firstChild: IconButton(
+            style: ButtonStyle(
+              backgroundColor: WidgetStateProperty.all<Color>(
+                red700,
+              ),
+              shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(0),
+                ),
               ),
             ),
-          ),
-          icon: Icon(
-            state.isAdmin
-                ? HugeIcons.strokeRoundedShield02
-                : HugeIcons.strokeRoundedMenu04,
-            color: state.isAdmin ? Colors.white : theme.iconTheme.color,
-          ),
-          hoverColor: Colors.grey.withOpacity(0.5),
-          alignment: Alignment.center,
-          padding: EdgeInsets.zero,
-          onPressed: () {
-            showContextMenu<void>(
-              context,
-              contextMenu: ContextMenu(
-                entries: entries,
-                position: const Offset(0, 36),
-                borderRadius: const BorderRadius.only(
-                  bottomLeft: Radius.circular(8),
-                  bottomRight: Radius.circular(8),
+            icon: const Icon(
+              HugeIcons.strokeRoundedShield02,
+              color: Colors.white,
+            ),
+            hoverColor: red300,
+            alignment: Alignment.center,
+            padding: EdgeInsets.zero,
+            onPressed: () {
+              showContextMenu<void>(
+                context,
+                contextMenu: ContextMenu(
+                  entries: entries,
+                  position: const Offset(0, 36),
+                  borderRadius: const BorderRadius.only(
+                    bottomLeft: Radius.circular(8),
+                    bottomRight: Radius.circular(8),
+                  ),
+                  boxDecoration: BoxDecoration(
+                    color: theme.canvasColor,
+                    boxShadow: [
+                      BoxShadow(
+                        color: theme.shadowColor.withOpacity(0.3),
+                        blurRadius: 4,
+                        offset: const Offset(0, 4),
+                      ),
+                    ],
+                  ),
                 ),
-                boxDecoration: BoxDecoration(
-                  color: theme.canvasColor,
-                  boxShadow: [
-                    BoxShadow(
-                      color: theme.shadowColor.withOpacity(0.3),
-                      blurRadius: 4,
-                      offset: const Offset(0, 4),
-                    ),
-                  ],
+                maintainState: true,
+              );
+            },
+          ),
+          secondChild: IconButton(
+            style: ButtonStyle(
+              shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(0),
                 ),
               ),
-              maintainState: true,
-            );
-          },
+            ),
+            icon: Icon(
+              HugeIcons.strokeRoundedMenu04,
+              color: theme.iconTheme.color,
+            ),
+            hoverColor: Colors.grey.withOpacity(0.5),
+            alignment: Alignment.center,
+            padding: EdgeInsets.zero,
+            onPressed: () {
+              showContextMenu<void>(
+                context,
+                contextMenu: ContextMenu(
+                  entries: entries,
+                  position: const Offset(0, 36),
+                  borderRadius: const BorderRadius.only(
+                    bottomLeft: Radius.circular(8),
+                    bottomRight: Radius.circular(8),
+                  ),
+                  boxDecoration: BoxDecoration(
+                    color: theme.canvasColor,
+                    boxShadow: [
+                      BoxShadow(
+                        color: theme.shadowColor.withOpacity(0.3),
+                        blurRadius: 4,
+                        offset: const Offset(0, 4),
+                      ),
+                    ],
+                  ),
+                ),
+                maintainState: true,
+              );
+            },
+          ),
+          // child: IconButton(
+          //   style: ButtonStyle(
+          //     backgroundColor: state.isAdmin
+          //         ? WidgetStateProperty.all<Color>(
+          //             Colors.red.withOpacity(0.7),
+          //           )
+          //         : null,
+          //     shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+          //       RoundedRectangleBorder(
+          //         borderRadius: BorderRadius.circular(0),
+          //       ),
+          //     ),
+          //   ),
+          //   icon: Icon(
+          //     state.isAdmin
+          //         ? HugeIcons.strokeRoundedShield02
+          //         : HugeIcons.strokeRoundedMenu04,
+          //     color: state.isAdmin ? Colors.white : theme.iconTheme.color,
+          //   ),
+          //   hoverColor: Colors.grey.withOpacity(0.5),
+          //   alignment: Alignment.center,
+          //   padding: EdgeInsets.zero,
+          //   onPressed: () {
+          //     showContextMenu<void>(
+          //       context,
+          //       contextMenu: ContextMenu(
+          //         entries: entries,
+          //         position: const Offset(0, 36),
+          //         borderRadius: const BorderRadius.only(
+          //           bottomLeft: Radius.circular(8),
+          //           bottomRight: Radius.circular(8),
+          //         ),
+          //         boxDecoration: BoxDecoration(
+          //           color: theme.canvasColor,
+          //           boxShadow: [
+          //             BoxShadow(
+          //               color: theme.shadowColor.withOpacity(0.3),
+          //               blurRadius: 4,
+          //               offset: const Offset(0, 4),
+          //             ),
+          //           ],
+          //         ),
+          //       ),
+          //       maintainState: true,
+          //     );
+          //   },
+          // ),
         );
       },
     );
