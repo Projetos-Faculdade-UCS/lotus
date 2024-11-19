@@ -1,7 +1,9 @@
 // lib/widgets/sidebar.dart
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:hugeicons/hugeicons.dart';
+import 'package:lotus/src/modules/auth/bloc/auth_bloc.dart';
 import 'package:lotus/src/modules/home/widgets/sidebar_header.dart';
 import 'package:lotus_ui/lotus_ui.dart';
 import 'package:sidebarx/sidebarx.dart';
@@ -64,27 +66,47 @@ class Sidebar extends StatelessWidget {
         Theme.of(context).extension<SidebarXThemeExtension>();
 
     return RepaintBoundary(
-      child: SidebarX(
-        controller: controller,
-        theme: sidebarXThemeExtension!.sidebarXTheme,
-        extendedTheme: sidebarXThemeExtension.extendedSidebarXTheme,
-        footerDivider: const Divider(
-          color: Colors.white,
-          thickness: 0.5,
-        ),
-        headerBuilder: (context, extended) {
-          return SidebarHeader(
-            controller: controller,
-            context: context,
-            extended: extended,
-          );
+      child: BlocConsumer<AuthBloc, AuthState>(
+        bloc: Modular.get(),
+        listener: (context, state) {
+          if (state.isAdmin) {
+            _footerItems.insert(
+              0,
+              _SidebarItem(
+                icon: HugeIcons.strokeRoundedValidationApproval,
+                label: 'Aprovações',
+                route: '/aprovacoes/',
+              ),
+            );
+          } else {
+            _footerItems
+                .removeWhere((element) => element.route == '/aprovacoes/');
+          }
         },
-        items: _items,
-        footerItems: _footerItems,
-        footerFitType: FooterFitType.fit,
-        toggleButtonBuilder: (context, extended) {
-          return const SizedBox(
-            height: 10,
+        builder: (context, state) {
+          return SidebarX(
+            controller: controller,
+            theme: sidebarXThemeExtension!.sidebarXTheme,
+            extendedTheme: sidebarXThemeExtension.extendedSidebarXTheme,
+            footerDivider: const Divider(
+              color: Colors.white,
+              thickness: 0.5,
+            ),
+            headerBuilder: (context, extended) {
+              return SidebarHeader(
+                controller: controller,
+                context: context,
+                extended: extended,
+              );
+            },
+            items: _items,
+            footerItems: _footerItems,
+            footerFitType: FooterFitType.fit,
+            toggleButtonBuilder: (context, extended) {
+              return const SizedBox(
+                height: 10,
+              );
+            },
           );
         },
       ),
