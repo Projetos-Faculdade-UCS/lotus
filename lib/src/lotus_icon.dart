@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:vector_graphics/vector_graphics_compat.dart';
 
 /// A widget that displays the Lotus icon.
 class LotusIcon extends StatelessWidget {
@@ -13,12 +11,19 @@ class LotusIcon extends StatelessWidget {
   /// The size of the icon.
   final double? size;
 
-  static const Widget _svg = SvgPicture(
-    AssetBytesLoader('assets/logo/ucs-logo.svg.vec'),
+  static final Widget _svg = Image.asset(
+    'assets/logo/lotus_icon.png',
+    cacheHeight: 512,
+    cacheWidth: 512,
+    isAntiAlias: true,
   );
 
   @override
   Widget build(BuildContext context) {
-    return _svg;
+    return SizedBox(
+      width: double.infinity,
+      height: size,
+      child: _svg,
+    );
   }
 }
