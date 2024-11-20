@@ -39,7 +39,7 @@ class SidebarHeader extends StatelessWidget {
     return InkWell(
       onTap: controller.toggleExtended,
       splashFactory: NoSplash.splashFactory,
-      hoverColor: _primaryColor.shade50,
+      hoverColor: _primaryColor.shade50.withOpacity(.5),
       borderRadius: const BorderRadius.only(
         topLeft: Radius.circular(20),
         topRight: Radius.circular(20),
