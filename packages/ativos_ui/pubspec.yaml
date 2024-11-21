@@ -11,7 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
     
-  flutter_svg: ^2.0.11
+  flutter_svg: ^2.0.15
   
   hugeicons: ^0.0.7
 
