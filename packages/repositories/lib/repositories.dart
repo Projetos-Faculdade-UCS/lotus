@@ -4,3 +4,4 @@ library;
 export 'src/computador_repository.dart';
 export 'src/impressora_repository.dart';
 export 'src/models/models.dart';
+export 'src/monitor_repository.dart';

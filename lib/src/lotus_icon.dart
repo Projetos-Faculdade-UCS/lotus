@@ -19,8 +19,6 @@ class LotusIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const RepaintBoundary(
-      child: _svg,
-    );
+    return _svg;
   }
 }

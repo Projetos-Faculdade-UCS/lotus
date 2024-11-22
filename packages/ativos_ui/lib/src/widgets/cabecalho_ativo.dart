@@ -1,27 +1,29 @@
 import 'package:ativos_ui/ativos_ui.dart';
+import 'package:ativos_ui/src/widgets/ativos_relacionados_dialog.dart';
+import 'package:ativos_ui/src/widgets/info_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
-import 'package:lotus/src/modules/home/modules/computador/widgets/computador_badges.dart';
-import 'package:lotus/src/modules/home/modules/computador/widgets/detalhe_computador/ativos_relacionados_dialog.dart';
-import 'package:lotus/src/modules/home/modules/computador/widgets/detalhe_computador/info_tile.dart';
 import 'package:repositories/repositories.dart';
 
 /// {@template cabecalho_computador}
 /// Cabeçalho de um computador.
 /// {@endtemplate}
-class CabecalhoComputador extends StatelessWidget {
+class CabecalhoAtivo extends StatelessWidget {
   /// {@macro cabecalho_computador}
-  const CabecalhoComputador({
+  const CabecalhoAtivo({
     required this.computadorNome,
     required this.computadorResponsavel,
     required this.computadorRelacionamentos,
-    required this.computadorAutomatico,
-    required this.computadorCriticidade,
+    required this.tipoAtivo,
+    this.subtitle,
     super.key,
   });
 
   /// O nome do computador.
   final String computadorNome;
+
+  /// O widget que fica no topo do cabeçalho.
+  final TipoAtivo tipoAtivo;
 
   /// O responsável pelo computador.
   final String computadorResponsavel;
@@ -29,11 +31,8 @@ class CabecalhoComputador extends StatelessWidget {
   /// A quantidade de ativos relacionados ao computador.
   final int computadorRelacionamentos;
 
-  /// Indica se o computador é automático.
-  final bool computadorAutomatico;
-
-  /// A criticidade dos dados do computador.
-  final CriticidadeDados computadorCriticidade;
+  /// O subtítulo do computador.
+  final Widget? subtitle;
 
   @override
   Widget build(BuildContext context) {
@@ -43,8 +42,8 @@ class CabecalhoComputador extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         ListTile(
-          leading: const TipoAtivoIcone(
-            tipo: TipoAtivo.computador,
+          leading: TipoAtivoIcone(
+            tipo: tipoAtivo,
           ),
           title: Text(
             computadorNome,
@@ -53,10 +52,7 @@ class CabecalhoComputador extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          subtitle: ComputadorBadges(
-            isAutomatico: computadorAutomatico,
-            criticidade: computadorCriticidade,
-          ),
+          subtitle: subtitle,
           //padding
           contentPadding: EdgeInsets.zero,
         ),

@@ -11,13 +11,14 @@ part 'computador_state.dart';
 class ComputadorBloc extends Bloc<ComputadorEvent, ComputadorState> {
   /// {@macro computadores_bloc}
   ComputadorBloc(this._repository) : super(ComputadorInitial()) {
-    on<ComputadorFetch>(_onFetch);
+    on<GetComputador>(_onGet);
+    on<FetchComputadores>(_onFetch);
   }
 
   final ComputadorRepository _repository;
 
-  Future<void> _onFetch(
-    ComputadorFetch event,
+  Future<void> _onGet(
+    GetComputador event,
     Emitter<ComputadorState> emit,
   ) async {
     emit(ComputadorLoading());
@@ -27,7 +28,20 @@ class ComputadorBloc extends Bloc<ComputadorEvent, ComputadorState> {
       if (computador == null) {
         throw Exception('Computador não encontrado.');
       }
-      emit(ComputadorSuccess(computador));
+      emit(GetComputadorSuccess(computador));
+    } catch (e) {
+      emit(ComputadorFailure());
+    }
+  }
+
+  Future<void> _onFetch(
+    FetchComputadores event,
+    Emitter<ComputadorState> emit,
+  ) async {
+    emit(ComputadorLoading());
+    try {
+      final computadores = await _repository.fetchAll();
+      emit(FetchComputadoresSuccess(computadores));
     } catch (e) {
       emit(ComputadorFailure());
     }
