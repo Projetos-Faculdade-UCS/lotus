@@ -1,4 +1,3 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 /// {@template info_tile}
@@ -38,7 +37,7 @@ class InfoTile extends StatelessWidget {
       child: ListTile(
         leading: leading,
         contentPadding: EdgeInsets.zero,
-        title: AutoSizeText(
+        title: Text(
           title,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
