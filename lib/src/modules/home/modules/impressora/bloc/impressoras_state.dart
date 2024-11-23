@@ -30,5 +30,17 @@ final class ImpressorasSuccess extends ImpressorasState {
   List<Object> get props => [impressoras];
 }
 
+/// Estado de sucesso ao carregar uma impressora.
+final class ImpressoraSuccess extends ImpressorasState {
+  /// {@macro impressora_success}
+  const ImpressoraSuccess(this.impressora);
+
+  /// Impressora carregada.
+  final Impressora impressora;
+
+  @override
+  List<Object> get props => [impressora];
+}
+
 /// Estado de erro ao carregar a lista de impressoras.
 final class ImpressorasError extends ImpressorasState {}
