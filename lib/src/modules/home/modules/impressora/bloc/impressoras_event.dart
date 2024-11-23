@@ -11,4 +11,13 @@ sealed class ImpressorasEvent extends Equatable {
 }
 
 /// Evento para buscar as impressoras.
-class ImpressorasFetch extends ImpressorasEvent {}
+class GetAllImpressoras extends ImpressorasEvent {}
+
+/// Evento para buscar uma impressora.
+class GetImpressora extends ImpressorasEvent {
+  /// {@macro impressoras_get}
+  const GetImpressora(this.id);
+
+  /// ID da impressora.
+  final int id;
+}

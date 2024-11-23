@@ -21,7 +21,7 @@ class ImpressorasPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MioloWithBreadcrumb(
       child: BlocProvider.value(
-        value: impressorasBloc..add(ImpressorasFetch()),
+        value: impressorasBloc..add(GetAllImpressoras()),
         child: BlocBuilder<ImpressorasBloc, ImpressorasState>(
           builder: (context, state) {
             if (state is ImpressorasInitial || state is ImpressorasLoading) {

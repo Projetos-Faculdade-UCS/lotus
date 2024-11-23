@@ -27,6 +27,7 @@ class ImpressoraModule extends Module {
       ..child(
         '/:id',
         child: (_) => ImpressoraPage(
+          impressorasBloc: Modular.get(),
           id: int.parse(r.args.params['id'] as String),
         ),
       );
