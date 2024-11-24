@@ -6,7 +6,7 @@ list(APPEND FLUTTER_PLUGIN_LIST
   hotkey_manager_windows
   irondash_engine_context
   menubar
-  screen_retriever
+  screen_retriever_windows
   super_native_extensions
   window_manager
 )
