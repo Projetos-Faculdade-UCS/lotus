@@ -74,8 +74,8 @@ class Sidebar extends StatelessWidget {
               0,
               _SidebarItem(
                 icon: HugeIcons.strokeRoundedValidationApproval,
-                label: 'Aprovações',
-                route: '/aprovacoes/',
+                label: 'Pendentes',
+                route: '/pendentes/',
               ),
             );
           } else {
