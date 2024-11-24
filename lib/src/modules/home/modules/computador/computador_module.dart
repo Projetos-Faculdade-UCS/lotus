@@ -1,8 +1,10 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:lotus/src/modules/home/modules/computador/bloc/computador/computador_bloc.dart';
+import 'package:lotus/src/modules/home/modules/computador/cubit/pendentes_cubit.dart';
 import 'package:lotus/src/modules/home/modules/computador/pages/computador_page.dart';
 import 'package:lotus/src/modules/home/modules/computador/pages/computadores_page.dart';
 import 'package:lotus/src/modules/home/modules/computador/pages/new_computador_page.dart';
+import 'package:lotus/src/modules/home/modules/computador/pages/pendentes_page.dart';
 import 'package:lotus/src/modules/home/nested_module.dart';
 import 'package:repositories/repositories.dart';
 
@@ -15,7 +17,8 @@ class ComputadorModule extends Module {
   void binds(Injector i) {
     i
       ..addLazySingleton<ComputadorRepository>(ComputadorRepository.new)
-      ..add<ComputadorBloc>(ComputadorBloc.new);
+      ..add<ComputadorBloc>(ComputadorBloc.new)
+      ..add<PendentesCubit>(PendentesCubit.new);
   }
 
   @override
@@ -37,6 +40,13 @@ class ComputadorModule extends Module {
       ..child(
         '/cadastrar',
         child: (_) => const NewComputadorPage(),
+      )
+      ..child(
+        '/pendentes',
+        child: (_) => PendentesPage(
+          bloc: Modular.get(),
+          cubit: Modular.get(),
+        ),
       );
   }
 }

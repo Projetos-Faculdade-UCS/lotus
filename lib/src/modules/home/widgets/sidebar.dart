@@ -75,13 +75,17 @@ class Sidebar extends StatelessWidget {
               _SidebarItem(
                 icon: HugeIcons.strokeRoundedValidationApproval,
                 label: 'Pendentes',
-                route: '/pendentes/',
+                route: '/computadores/pendentes',
               ),
             );
           } else {
-            _footerItems
-                .removeWhere((element) => element.route == '/aprovacoes/');
+            _footerItems.removeWhere(
+              (element) => element.route == '/computadores/pendentes',
+            );
           }
+        },
+        buildWhen: (previous, current) {
+          return previous.isAdmin != current.isAdmin;
         },
         builder: (context, state) {
           return SidebarX(
