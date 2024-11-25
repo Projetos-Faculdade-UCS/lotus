@@ -43,10 +43,7 @@ class ComputadorWidget extends StatelessWidget {
               ],
             ),
             child: CabecalhoAtivo(
-              computadorNome: computador.nome,
-              computadorRelacionamentos: computador.relacionamentos,
-              computadorResponsavel: computador.responsavel,
-              tipoAtivo: computador.tipo,
+              ativo: computador,
               subtitle: ComputadorBadges(
                 isAutomatico: computador.automatico,
                 criticidade: computador.criticidade,

@@ -41,10 +41,7 @@ class MonitorWidget extends StatelessWidget {
               ],
             ),
             child: CabecalhoAtivo(
-              computadorNome: monitor.nome,
-              computadorRelacionamentos: monitor.relacionamentos,
-              computadorResponsavel: monitor.responsavel,
-              tipoAtivo: monitor.tipo,
+              ativo: monitor,
             ),
           ),
           Expanded(

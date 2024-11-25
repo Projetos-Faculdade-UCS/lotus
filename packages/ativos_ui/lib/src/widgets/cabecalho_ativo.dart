@@ -11,25 +11,13 @@ import 'package:repositories/repositories.dart';
 class CabecalhoAtivo extends StatelessWidget {
   /// {@macro cabecalho_computador}
   const CabecalhoAtivo({
-    required this.computadorNome,
-    required this.computadorResponsavel,
-    required this.computadorRelacionamentos,
-    required this.tipoAtivo,
+    required this.ativo,
     this.subtitle,
     super.key,
   });
 
-  /// O nome do computador.
-  final String computadorNome;
-
-  /// O widget que fica no topo do cabeçalho.
-  final TipoAtivo tipoAtivo;
-
-  /// O responsável pelo computador.
-  final String computadorResponsavel;
-
-  /// A quantidade de ativos relacionados ao computador.
-  final int computadorRelacionamentos;
+  /// Objeto de ativo
+  final Ativo ativo;
 
   /// O subtítulo do computador.
   final Widget? subtitle;
@@ -43,10 +31,10 @@ class CabecalhoAtivo extends StatelessWidget {
       children: [
         ListTile(
           leading: TipoAtivoIcone(
-            tipo: tipoAtivo,
+            tipo: ativo.tipo,
           ),
           title: Text(
-            computadorNome,
+            ativo.nome,
             style: const TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
@@ -62,9 +50,25 @@ class CabecalhoAtivo extends StatelessWidget {
           children: [
             InfoTile(
               width: 200,
+              title: 'Patrimônio',
+              value: Text(
+                ativo.patrimonio.toString(),
+                style: TextStyle(
+                  fontSize: 16,
+                  color: colorScheme.onSurface,
+                ),
+              ),
+              leading: HugeIcon(
+                icon: HugeIcons.strokeRoundedTag01,
+                color: colorScheme.primary,
+                size: 25,
+              ),
+            ),
+            InfoTile(
+              width: 200,
               title: 'Responsável',
               value: Text(
-                computadorResponsavel,
+                ativo.responsavel,
                 style: TextStyle(
                   fontSize: 16,
                   color: colorScheme.onSurface,
@@ -76,7 +80,6 @@ class CabecalhoAtivo extends StatelessWidget {
                 size: 25,
               ),
             ),
-            const SizedBox(width: 32),
             InfoTile(
               width: 200,
               title: 'Ativos relacionados',
@@ -89,7 +92,7 @@ class CabecalhoAtivo extends StatelessWidget {
                 child: Row(
                   children: [
                     Text(
-                      computadorRelacionamentos.toString(),
+                      ativo.relacionamentos.toString(),
                       style: TextStyle(
                         fontSize: 16,
                         color: Theme.of(context).colorScheme.onSurface,

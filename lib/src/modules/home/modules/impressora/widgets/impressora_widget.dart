@@ -43,10 +43,7 @@ class ImpressoraWidget extends StatelessWidget {
               ],
             ),
             child: CabecalhoAtivo(
-              computadorNome: impressora.nome,
-              computadorRelacionamentos: impressora.relacionamentos,
-              computadorResponsavel: impressora.responsavel,
-              tipoAtivo: impressora.tipo,
+              ativo: impressora,
             ),
           ),
           Expanded(
@@ -85,6 +82,52 @@ class ImpressoraWidget extends StatelessWidget {
                         const SizedBox(height: 4),
                         CardLocal(
                           sala: impressora.sala,
+                        ),
+                        const SizedBox(height: 16),
+                        Row(
+                          children: [
+                            const SizedBox(
+                              width: 8,
+                            ),
+                            HugeIcon(
+                              icon: HugeIcons.strokeRoundedTextAlignJustifyLeft,
+                              color: colorScheme.onSurfaceVariant,
+                              size: 20,
+                            ),
+                            const SizedBox(width: 4),
+                            Text(
+                              'Descrição',
+                              style: TextStyle(
+                                fontSize: 18,
+                                color: colorScheme.onSurfaceVariant,
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 4),
+                        Expanded(
+                          flex: 2,
+                          child: Container(
+                            width: double.infinity,
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 8,
+                              vertical: 8,
+                            ),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              color: colorScheme.onSecondary,
+                              border: Border.all(
+                                color: colorScheme.onSurfaceVariant,
+                              ),
+                            ),
+                            child: Text(
+                              impressora.descricao,
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: colorScheme.onSurface,
+                              ),
+                            ),
+                          ),
                         ),
                       ],
                     ),
