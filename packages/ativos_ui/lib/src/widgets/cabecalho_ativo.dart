@@ -52,7 +52,7 @@ class CabecalhoAtivo extends StatelessWidget {
               width: 200,
               title: 'Patrimônio',
               value: Text(
-                ativo.patrimonio.toString(),
+                '#${ativo.patrimonio}',
                 style: TextStyle(
                   fontSize: 16,
                   color: colorScheme.onSurface,

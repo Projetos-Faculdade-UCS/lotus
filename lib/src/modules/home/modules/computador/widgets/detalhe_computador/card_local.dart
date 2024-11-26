@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:lotus/src/modules/home/modules/computador/widgets/detalhe_computador/mudar_local_dialog.dart';
 import 'package:repositories/repositories.dart';
 import 'package:soft_edge_blur/soft_edge_blur.dart';
 
@@ -15,51 +16,80 @@ class CardLocal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 220,
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(8),
-        child: Stack(
-          fit: StackFit.expand,
-          alignment: Alignment.bottomCenter,
-          children: [
-            const Positioned.fill(
-              child: _BlurredImage(),
+    return Column(
+      children: [
+        SizedBox(
+          height: 200,
+          child: ClipRRect(
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(16),
+              topRight: Radius.circular(16),
             ),
-            Positioned(
-              bottom: 0,
-              left: 0,
-              right: 0,
-              child: Container(
-                padding: const EdgeInsets.all(16),
-                // color: Theme.of(context).colorScheme.onSurface.withOpacity(0.4),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    _Tile(
-                      title: 'Sala',
-                      value: sala.nome,
+            child: Stack(
+              fit: StackFit.expand,
+              alignment: Alignment.bottomCenter,
+              children: [
+                const Positioned.fill(
+                  child: _BlurredImage(),
+                ),
+                Positioned(
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  child: Container(
+                    padding: const EdgeInsets.all(16),
+                    // color: Theme.of(context).colorScheme.onSurface.withOpacity(0.4),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        _Tile(
+                          title: 'Sala',
+                          value: sala.nome,
+                        ),
+                        _Tile(
+                          title: 'Bloco',
+                          value: sala.bloco.nome,
+                        ),
+                        _Tile(
+                          title: 'Campus',
+                          value: sala.bloco.campus,
+                        ),
+                        _Tile(
+                          title: 'Cidade',
+                          value: sala.bloco.cidade,
+                        ),
+                      ],
                     ),
-                    _Tile(
-                      title: 'Bloco',
-                      value: sala.bloco.nome,
-                    ),
-                    _Tile(
-                      title: 'Campus',
-                      value: sala.bloco.campus,
-                    ),
-                    _Tile(
-                      title: 'Cidade',
-                      value: sala.bloco.cidade,
-                    ),
-                  ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        SizedBox(
+          height: 35,
+          width: double.infinity,
+          child: TextButton(
+            //remove the border radius on the top of the button
+            style: TextButton.styleFrom(
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(16),
+                  bottomRight: Radius.circular(16),
                 ),
               ),
+              backgroundColor:
+                  Theme.of(context).colorScheme.primary.withOpacity(0.2),
             ),
-          ],
+            onPressed: () => showDialog<String>(
+              context: context,
+              builder: (BuildContext context) => const MudarLocalDialog(),
+            ),
+            child: const Text('Mudar local'),
+          ),
         ),
-      ),
+      ],
     );
   }
 }
