@@ -1,5 +1,6 @@
 import 'package:lotus_api_client/lotus_api_client.dart';
 import 'package:repositories/repositories.dart';
+import 'package:repositories/src/repository_exception.dart';
 
 /// {@template base_repository}
 /// A base ativo repository class.
@@ -65,18 +66,4 @@ abstract class BaseAtivoRepository<T extends Ativo> {
       data: ativo.toJson(),
     );
   }
-}
-
-/// {@template base_ativo_repository_exception}
-/// Exception thrown by the [ComputadorRepository].
-/// {@endtemplate}
-class RepositoryException implements Exception {
-  /// {@macro base_ativo_repository_exception}
-  RepositoryException(this.message);
-
-  /// Message describing the exception.
-  final String message;
-
-  @override
-  String toString() => 'RepositoryException: $message';
 }

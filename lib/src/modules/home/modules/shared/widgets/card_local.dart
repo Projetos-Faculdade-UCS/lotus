@@ -1,6 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:lotus/src/modules/home/modules/computador/widgets/detalhe_computador/mudar_local_dialog.dart';
+import 'package:lotus/src/modules/home/modules/shared/widgets/mudar_local_dialog.dart';
 import 'package:repositories/repositories.dart';
 import 'package:soft_edge_blur/soft_edge_blur.dart';
 

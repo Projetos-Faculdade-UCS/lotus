@@ -2,6 +2,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:lotus/src/modules/home/modules/impressora/bloc/impressoras_bloc.dart';
 import 'package:lotus/src/modules/home/modules/impressora/pages/impressora_page.dart';
 import 'package:lotus/src/modules/home/modules/impressora/pages/impressoras_page.dart';
+import 'package:lotus/src/modules/home/modules/shared/bloc/sala_bloc.dart';
 import 'package:lotus/src/modules/home/nested_module.dart';
 import 'package:repositories/repositories.dart';
 
@@ -14,7 +15,9 @@ class ImpressoraModule extends Module {
   void binds(Injector i) {
     i
       ..addLazySingleton<ImpressoraRepository>(ImpressoraRepository.new)
-      ..add<ImpressorasBloc>(ImpressorasBloc.new);
+      ..add<ImpressorasBloc>(ImpressorasBloc.new)
+      ..add<SalaRepository>(SalaRepository.new)
+      ..add<SalaBloc>(SalaBloc.new);
   }
 
   @override
