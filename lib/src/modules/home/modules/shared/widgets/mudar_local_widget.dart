@@ -22,50 +22,40 @@ class MudarLocalWidget extends StatelessWidget {
 
     return Container(
       padding: const EdgeInsets.all(16),
-      child: Row(
-        children: [
-          const Flexible(
-            flex: 2,
-            child: SizedBox(
-              width: double.infinity,
-              child: Text('Salas'),
+      width: 500,
+      child: Flexible(
+        flex: 2,
+        child: Column(
+          children: [
+            // dotted card weitten 'novo local' in the middle
+            TextField(
+              controller: searchController,
+              decoration: const InputDecoration(
+                labelText: 'Buscar Sala',
+                border: OutlineInputBorder(),
+                prefixIcon: Icon(Icons.search),
+              ),
+              onSubmitted: (text) {
+                // Dispatch the GetAllSalas event with the input text
+                context.read<SalaBloc>().add(GetAllSalas(nomeSala: text));
+              },
             ),
-          ),
-          Flexible(
-            flex: 2,
-            child: Column(
-              children: [
-                // TextField for filtering salas
-                TextField(
-                  controller: searchController,
-                  decoration: const InputDecoration(
-                    labelText: 'Buscar Sala',
-                    border: OutlineInputBorder(),
-                    prefixIcon: Icon(Icons.search),
-                  ),
-                  onSubmitted: (text) {
-                    // Dispatch the GetAllSalas event with the input text
-                    context.read<SalaBloc>().add(GetAllSalas(nomeSala: text));
-                  },
-                ),
-                const SizedBox(
-                  height: 8,
-                ), // Spacing between TextField and ListView
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: salas.length,
-                    itemBuilder: (context, index) {
-                      final sala = salas[index];
-                      return ItemSala(
-                        sala: sala,
-                      );
-                    },
-                  ),
-                ),
-              ],
+            const SizedBox(
+              height: 8,
+            ), // Spacing between TextField and ListView
+            Expanded(
+              child: ListView.builder(
+                itemCount: salas.length,
+                itemBuilder: (context, index) {
+                  final sala = salas[index];
+                  return ItemSala(
+                    sala: sala,
+                  );
+                },
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

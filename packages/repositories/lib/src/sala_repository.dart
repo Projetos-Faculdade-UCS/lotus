@@ -17,11 +17,9 @@ class SalaRepository {
   Future<List<Sala>> fetchAll(
     String? nomeSala,
   ) async {
-    final urlParams = '''
-      ${nomeSala != null ? 'nomeSala=$nomeSala' : ''}
-    ''';
+    final urlParams = nomeSala != null ? '?qs=$nomeSala' : '';
     final response = await lotusApiClient.get<List<dynamic>>(
-      '$baseUrl?$urlParams',
+      '$baseUrl$urlParams',
     );
 
     if (response.data == null || response.statusCode != 200) {
