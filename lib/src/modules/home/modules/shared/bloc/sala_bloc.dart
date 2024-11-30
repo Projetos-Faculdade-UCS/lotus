@@ -19,7 +19,7 @@ class SalaBloc extends Bloc<GenericEvent, GenericState> {
     emit(GenericLoading());
     try {
       final salas = await _salaRepository.fetchAll(event.nomeSala);
-      emit(SalasSuccess(salas));
+      emit(SalasSuccess(salas: salas));
     } catch (e) {
       emit(GenericError());
     }

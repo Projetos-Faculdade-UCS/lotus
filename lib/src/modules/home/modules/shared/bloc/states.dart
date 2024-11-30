@@ -23,7 +23,9 @@ final class GenericError extends GenericState {}
 /// Estado de listagem de locais com sucesso.
 final class SalasSuccess extends GenericState {
   /// {@macro locais_success}
-  const SalasSuccess(this.salas);
+  const SalasSuccess({
+    required this.salas,
+  });
 
   /// Lista de locais.
   final List<Sala> salas;

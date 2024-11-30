@@ -1,5 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:lotus/src/modules/home/modules/shared/bloc/sala_bloc.dart';
 import 'package:lotus/src/modules/home/modules/shared/widgets/mudar_local_dialog.dart';
 import 'package:repositories/repositories.dart';
 import 'package:soft_edge_blur/soft_edge_blur.dart';
@@ -82,10 +84,10 @@ class CardLocal extends StatelessWidget {
               backgroundColor:
                   Theme.of(context).colorScheme.primary.withOpacity(0.2),
             ),
-            onPressed: () => showDialog<String>(
-              context: context,
-              builder: (BuildContext context) => const MudarLocalDialog(),
-            ),
+            onPressed: () async {
+              final sala = await MudarLocalDialog.show(Modular.get<SalaBloc>());
+              print('minha sala: $sala');
+            },
             child: const Text('Mudar local'),
           ),
         ),
