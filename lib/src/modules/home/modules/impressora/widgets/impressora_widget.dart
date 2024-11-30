@@ -82,6 +82,7 @@ class ImpressoraWidget extends StatelessWidget {
                         const SizedBox(height: 4),
                         CardLocal(
                           sala: impressora.sala,
+                          onUpdateSala: print,
                         ),
                         const SizedBox(height: 16),
                         Row(

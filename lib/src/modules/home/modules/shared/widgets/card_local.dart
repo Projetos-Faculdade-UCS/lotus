@@ -11,10 +11,17 @@ import 'package:soft_edge_blur/soft_edge_blur.dart';
 /// {@endtemplate}
 class CardLocal extends StatelessWidget {
   /// {@macro card_local}
-  const CardLocal({required this.sala, super.key});
+  const CardLocal({
+    required this.sala,
+    required this.onUpdateSala,
+    super.key,
+  });
 
   /// A sala do ativo.
   final Sala sala;
+
+  /// Função chamada quando a sala é atualizada.
+  final void Function(Sala) onUpdateSala;
 
   @override
   Widget build(BuildContext context) {
@@ -86,7 +93,9 @@ class CardLocal extends StatelessWidget {
             ),
             onPressed: () async {
               final sala = await MudarLocalDialog.show(Modular.get<SalaBloc>());
-              print('minha sala: $sala');
+              if (sala != null) {
+                onUpdateSala(sala);
+              }
             },
             child: const Text('Mudar local'),
           ),

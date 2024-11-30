@@ -2,6 +2,7 @@ import 'package:ativos_ui/src/widgets/cabecalho_ativo.dart';
 import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
 import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
 import 'package:hugeicons/hugeicons.dart';
+import 'package:lotus/src/modules/home/modules/computador/bloc/computador/computador_bloc.dart';
 import 'package:lotus/src/modules/home/modules/computador/widgets/computador_badges.dart';
 import 'package:lotus/src/modules/home/modules/computador/widgets/detalhe_computador/ficha_tecnica_tabs.dart';
 import 'package:lotus/src/modules/home/modules/shared/widgets/card_local.dart';
@@ -10,10 +11,16 @@ import 'package:repositories/repositories.dart';
 /// Componente que exibe detalhes de um [Computador].
 class ComputadorWidget extends StatelessWidget {
   /// Cria uma instância de [ComputadorWidget].
-  const ComputadorWidget({required this.computador, super.key});
+  const ComputadorWidget({
+    required this.computador,
+    required this.computadorBloc,
+    super.key,
+  });
 
   /// Computador a ser exibido.
   final Computador computador;
+
+  final ComputadorBloc computadorBloc;
 
   @override
   Widget build(BuildContext context) {
@@ -86,6 +93,14 @@ class ComputadorWidget extends StatelessWidget {
                         const SizedBox(height: 4),
                         CardLocal(
                           sala: computador.sala,
+                          onUpdateSala: (sala) {
+                            computadorBloc.add(
+                              UpdateSala(
+                                id: computador.id,
+                                sala: sala,
+                              ),
+                            );
+                          },
                         ),
                         const SizedBox(height: 16),
                         Row(

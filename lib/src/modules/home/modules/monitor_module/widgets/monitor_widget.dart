@@ -80,6 +80,7 @@ class MonitorWidget extends StatelessWidget {
                         const SizedBox(height: 4),
                         CardLocal(
                           sala: monitor.sala,
+                          onUpdateSala: print,
                         ),
                       ],
                     ),
