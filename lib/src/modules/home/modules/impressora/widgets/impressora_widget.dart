@@ -2,7 +2,7 @@ import 'package:ativos_ui/src/widgets/cabecalho_ativo.dart';
 import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
 import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
 import 'package:hugeicons/hugeicons.dart';
-import 'package:lotus/src/modules/home/modules/computador/widgets/detalhe_computador/card_local.dart';
+import 'package:lotus/src/modules/home/modules/shared/widgets/card_local.dart';
 import 'package:repositories/repositories.dart';
 
 class ImpressoraWidget extends StatelessWidget {
@@ -43,10 +43,7 @@ class ImpressoraWidget extends StatelessWidget {
               ],
             ),
             child: CabecalhoAtivo(
-              computadorNome: impressora.nome,
-              computadorRelacionamentos: impressora.relacionamentos,
-              computadorResponsavel: impressora.responsavel,
-              tipoAtivo: impressora.tipo,
+              ativo: impressora,
             ),
           ),
           Expanded(
@@ -85,6 +82,53 @@ class ImpressoraWidget extends StatelessWidget {
                         const SizedBox(height: 4),
                         CardLocal(
                           sala: impressora.sala,
+                          onUpdateSala: print,
+                        ),
+                        const SizedBox(height: 16),
+                        Row(
+                          children: [
+                            const SizedBox(
+                              width: 8,
+                            ),
+                            HugeIcon(
+                              icon: HugeIcons.strokeRoundedTextAlignJustifyLeft,
+                              color: colorScheme.onSurfaceVariant,
+                              size: 20,
+                            ),
+                            const SizedBox(width: 4),
+                            Text(
+                              'Descrição',
+                              style: TextStyle(
+                                fontSize: 18,
+                                color: colorScheme.onSurfaceVariant,
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 4),
+                        Expanded(
+                          flex: 2,
+                          child: Container(
+                            width: double.infinity,
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 8,
+                              vertical: 8,
+                            ),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              color: colorScheme.onSecondary,
+                              border: Border.all(
+                                color: colorScheme.onSurfaceVariant,
+                              ),
+                            ),
+                            child: Text(
+                              impressora.descricao,
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: colorScheme.onSurface,
+                              ),
+                            ),
+                          ),
                         ),
                       ],
                     ),

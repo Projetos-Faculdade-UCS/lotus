@@ -3,6 +3,7 @@ import 'package:lotus/src/modules/home/modules/computador/bloc/computador/comput
 import 'package:lotus/src/modules/home/modules/computador/pages/computador_page.dart';
 import 'package:lotus/src/modules/home/modules/computador/pages/computadores_page.dart';
 import 'package:lotus/src/modules/home/modules/computador/pages/new_computador_page.dart';
+import 'package:lotus/src/modules/home/modules/shared/bloc/sala_bloc.dart';
 import 'package:lotus/src/modules/home/nested_module.dart';
 import 'package:repositories/repositories.dart';
 
@@ -15,7 +16,9 @@ class ComputadorModule extends Module {
   void binds(Injector i) {
     i
       ..addLazySingleton<ComputadorRepository>(ComputadorRepository.new)
-      ..add<ComputadorBloc>(ComputadorBloc.new);
+      ..add<ComputadorBloc>(ComputadorBloc.new)
+      ..add<SalaRepository>(SalaRepository.new)
+      ..add<SalaBloc>(SalaBloc.new);
   }
 
   @override
