@@ -21,6 +21,7 @@ Monitor _$MonitorFromJson(Map<String, dynamic> json) => Monitor(
       ultimaAtualizacao: json['ultimaAtualizacao'] == null
           ? null
           : DateTime.parse(json['ultimaAtualizacao'] as String),
+      resolucao: json['resolucao'] as String? ?? '',
       numeroSerie: json['numeroSerie'] as String?,
     );
 
@@ -38,6 +39,7 @@ Map<String, dynamic> _$MonitorToJson(Monitor instance) => <String, dynamic>{
       'relacionamentos': instance.relacionamentos,
       'responsavel': instance.responsavel,
       'ultimaAtualizacao': instance.ultimaAtualizacao?.toIso8601String(),
+      'resolucao': instance.resolucao,
     };
 
 const _$TipoAtivoEnumMap = {

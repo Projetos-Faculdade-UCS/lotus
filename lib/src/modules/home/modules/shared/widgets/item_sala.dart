@@ -8,7 +8,6 @@ class ItemSala extends StatelessWidget {
   const ItemSala({
     required this.sala,
     required this.onTap,
-    this.selected = false,
     super.key,
   });
 
@@ -16,20 +15,18 @@ class ItemSala extends StatelessWidget {
   final Sala sala;
 
   /// Se a sala está selecionada.
-  final bool selected;
 
   final void Function(Sala) onTap;
 
   @override
   Widget build(BuildContext context) {
-    final blue = Theme.of(context).colorScheme.primary;
+    final colorScheme = Theme.of(context).colorScheme;
     return ListTile(
       onTap: () => onTap(sala),
       title: Text(
         '${sala.nome} - ${sala.bloco.nome}',
         style: TextStyle(
-          color: selected ? blue : Colors.black,
-          fontWeight: selected ? FontWeight.bold : FontWeight.normal,
+          color: colorScheme.onSurface,
         ),
       ),
       subtitle: Row(

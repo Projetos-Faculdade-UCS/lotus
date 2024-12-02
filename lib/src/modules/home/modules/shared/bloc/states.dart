@@ -33,3 +33,17 @@ final class SalasSuccess extends GenericState {
   @override
   List<Object> get props => [salas];
 }
+
+/// Estado de listagem de movimentações com sucesso.
+final class MovimentacoesSuccess extends GenericState {
+  /// {@macro movimentacoes_success}
+  const MovimentacoesSuccess({
+    required this.movimentacoes,
+  });
+
+  /// Lista de movimentações.
+  final List<Movimentacao> movimentacoes;
+
+  @override
+  List<Object> get props => [movimentacoes];
+}
