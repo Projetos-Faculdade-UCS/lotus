@@ -17,3 +17,14 @@ class GetAllSalas extends GenericEvent {
   /// atributo que ser
   final String? nomeSala;
 }
+
+/// Evento para buscar todas as movimentações de um computador.
+class GetAllMovimentacoes extends GenericEvent {
+  /// {@macro movimentacoes_get}
+  const GetAllMovimentacoes(
+    this.idComputador,
+  );
+
+  /// atributo que será utilizado para buscar as movimentações.
+  final int idComputador;
+}
