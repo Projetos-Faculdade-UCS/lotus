@@ -15,6 +15,7 @@ class ImpressorasBloc extends Bloc<ImpressorasEvent, ImpressorasState> {
   ImpressorasBloc(this._impressoraRepository) : super(ImpressorasInitial()) {
     on<GetAllImpressoras>(_onGetAllImpressoras);
     on<GetImpressora>(_onGetImpressora);
+    on<UpdateSala>(_onUpdateSala);
   }
 
   final ImpressoraRepository _impressoraRepository;
@@ -41,6 +42,23 @@ class ImpressorasBloc extends Bloc<ImpressorasEvent, ImpressorasState> {
       final impressora = await _impressoraRepository.getById(event.id);
       if (impressora == null) {
         throw Exception('Impressora não encontrada.');
+      }
+      emit(ImpressoraSuccess(impressora));
+    } catch (e) {
+      emit(ImpressorasError());
+    }
+  }
+
+  FutureOr<void> _onUpdateSala(
+    UpdateSala event,
+    Emitter<ImpressorasState> emit,
+  ) async {
+    emit(ImpressorasLoading());
+    try {
+      final impressora =
+          await _impressoraRepository.updateSala(event.id, event.sala?.id);
+      if (impressora == null) {
+        throw Exception('Falha ao atualizar a sala do impressora.');
       }
       emit(ImpressoraSuccess(impressora));
     } catch (e) {

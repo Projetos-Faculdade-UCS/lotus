@@ -39,6 +39,12 @@ class ComputadorWidget extends StatelessWidget {
               horizontal: 24,
             ),
             decoration: BoxDecoration(
+              border: Border(
+                bottom: BorderSide(
+                  color: colorScheme.onSurfaceVariant,
+                  width: 0.5,
+                ),
+              ),
               color: theme.scaffoldBackgroundColor,
               boxShadow: [
                 BoxShadow(

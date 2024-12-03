@@ -36,6 +36,9 @@ const tertiary = Color(0xFFF5F5F5);
 /// Material Color for Branco
 const branco = Color(0xFFFFFFFF);
 
+/// Material Color for Preto
+const preto = Color(0xFF000000);
+
 /// Material Color for Vermelho Institucional
 const vermelhoInstitucional = Color(0xFFEE3244);
 

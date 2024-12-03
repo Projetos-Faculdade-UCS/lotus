@@ -34,7 +34,7 @@ class CabecalhoAtivo extends StatelessWidget {
             tipo: ativo.tipo,
           ),
           title: Text(
-            ativo.nome,
+            ativo.nome == '' ? 'Sem nome' : ativo.nome,
             style: const TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
@@ -68,7 +68,7 @@ class CabecalhoAtivo extends StatelessWidget {
               width: 200,
               title: 'Responsável',
               value: Text(
-                ativo.responsavel,
+                ativo.responsavel == '' ? 'Nenhum' : ativo.responsavel,
                 style: TextStyle(
                   fontSize: 16,
                   color: colorScheme.onSurface,

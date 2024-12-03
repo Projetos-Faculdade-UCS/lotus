@@ -15,6 +15,7 @@ class MonitoresBloc extends Bloc<MonitoresEvent, MonitoresState> {
   MonitoresBloc(this._monitorRepository) : super(MonitoresInitial()) {
     on<GetAllMonitores>(_onGetAllMonitores);
     on<GetMonitor>(_onGetMonitor);
+    on<UpdateSala>(_onUpdateSala);
   }
 
   final MonitorRepository _monitorRepository;
@@ -42,6 +43,24 @@ class MonitoresBloc extends Bloc<MonitoresEvent, MonitoresState> {
       final monitor = await _monitorRepository.getById(id);
       if (monitor == null) {
         throw Exception('Monitor não encontrado.');
+      }
+      emit(MonitorSuccess(monitor));
+    } catch (e) {
+      emit(MonitoresError());
+    }
+  }
+
+  FutureOr<void> _onUpdateSala(
+    UpdateSala event,
+    Emitter<MonitoresState> emit,
+  ) async {
+    emit(MonitoresLoading());
+    final id = event.id;
+    final sala = event.sala;
+    try {
+      final monitor = await _monitorRepository.updateSala(id, sala?.id);
+      if (monitor == null) {
+        throw Exception('Não foi possível atualizar o monitor.');
       }
       emit(MonitorSuccess(monitor));
     } catch (e) {

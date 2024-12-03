@@ -21,3 +21,18 @@ class GetMonitor extends MonitoresEvent {
   /// ID do monitor.
   final int id;
 }
+
+/// Evento para atualizar a sala de um ativo.
+class UpdateSala extends MonitoresEvent {
+  /// {@macro update_local}
+  const UpdateSala({
+    required this.id,
+    required this.sala,
+  });
+
+  /// Id do ativo.
+  final int id;
+
+  /// Sala do ativo.
+  final Sala? sala;
+}

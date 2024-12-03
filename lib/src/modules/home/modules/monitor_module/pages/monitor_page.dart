@@ -31,7 +31,10 @@ class MonitorPage extends StatelessWidget {
             if (state is MonitoresInitial || state is MonitoresLoading) {
               return const Center(child: CircularProgressIndicator());
             } else if (state is MonitorSuccess) {
-              return MonitorWidget(monitor: state.monitor);
+              return MonitorWidget(
+                monitor: state.monitor,
+                monitoresBloc: monitoresBloc,
+              );
             } else {
               return const Center(
                 child: Text('Erro ao carregar monitor.'),

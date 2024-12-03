@@ -58,7 +58,7 @@ class ComputadorBloc extends Bloc<ComputadorEvent, ComputadorState> {
     final id = event.id;
     final sala = event.sala;
     try {
-      final computador = await _repository.updateSala(id, sala.id);
+      final computador = await _repository.updateSala(id, sala?.id);
       if (computador == null) {
         throw Exception('Falha ao atualizar a sala do computador.');
       }

@@ -8,7 +8,9 @@ part of 'movimentacao.dart';
 
 Movimentacao _$MovimentacaoFromJson(Map<String, dynamic> json) => Movimentacao(
       id: (json['id'] as num).toInt(),
-      salaAtual: Sala.fromJson(json['salaAtual'] as Map<String, dynamic>),
+      salaAtual: json['salaAtual'] == null
+          ? null
+          : Sala.fromJson(json['salaAtual'] as Map<String, dynamic>),
       data: DateTime.parse(json['data'] as String),
       motivo: json['motivo'] as String,
     );
