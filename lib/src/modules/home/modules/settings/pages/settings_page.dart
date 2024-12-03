@@ -47,9 +47,13 @@ class SettingsPage extends StatelessWidget {
                   focusColor: Colors.transparent,
                   value: AdaptiveTheme.of(context).mode,
                   onChanged: (value) {
-                    AdaptiveTheme.of(context).setThemeMode(
-                      value ?? AdaptiveThemeMode.system,
-                    );
+                    Future.microtask(() {
+                      if (context.mounted) {
+                        AdaptiveTheme.of(context).setThemeMode(
+                          value ?? AdaptiveThemeMode.system,
+                        );
+                      }
+                    });
                   },
                   items: const [
                     DropdownMenuItem(
