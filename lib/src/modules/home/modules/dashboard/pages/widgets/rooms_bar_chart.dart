@@ -84,30 +84,54 @@ class RoomsBarChart extends StatelessWidget {
                           sideTitles: SideTitles(
                             showTitles: true,
                             getTitlesWidget: (double value, TitleMeta meta) {
-                              const style = TextStyle(
+                              const baseStyle = TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.bold,
                               );
+                              final isSmall = constraints.maxWidth < 300;
+                              final style = baseStyle.copyWith(
+                                fontSize: isSmall ? 10 : 14,
+                              );
+
                               Widget text;
                               switch (value.toInt()) {
                                 case 0:
-                                  text = const Text('Total de Salas',
-                                      style: style);
+                                  text = Text(
+                                    'Total de\nSalas',
+                                    style: style,
+                                    textAlign: TextAlign.center,
+                                    maxLines: 2,
+                                    softWrap: true,
+                                  );
                                 case 1:
-                                  text = const Text('Salas com Ativos',
-                                      style: style);
+                                  text = Text(
+                                    'Salas com\nAtivos',
+                                    style: style,
+                                    textAlign: TextAlign.center,
+                                    maxLines: 2,
+                                    softWrap: true,
+                                  );
                                 case 2:
-                                  text =
-                                      const Text('Salas Vazias', style: style);
+                                  text = Text(
+                                    'Salas\nVazias',
+                                    style: style,
+                                    textAlign: TextAlign.center,
+                                    maxLines: 2,
+                                    softWrap: true,
+                                  );
                                 default:
-                                  text = const Text('', style: style);
+                                  text = Text('', style: style);
                               }
                               return SideTitleWidget(
                                 axisSide: meta.axisSide,
-                                child: text,
+                                child: Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(horizontal: 4),
+                                  child: text,
+                                ),
                               );
                             },
-                            reservedSize: 50,
+                            reservedSize: 60,
                           ),
                         ),
                         rightTitles: const AxisTitles(),
