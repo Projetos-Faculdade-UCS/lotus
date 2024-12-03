@@ -5,6 +5,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:lotus/src/modules/auth/bloc/auth_bloc.dart';
 import 'package:lotus/src/modules/home/modules/computador/bloc/computador/computador_bloc.dart';
 import 'package:lotus/src/modules/home/widgets/breadcrumb/miolo_with_breadcrumb.dart';
+import 'package:repositories/repositories.dart';
 
 /// {@template computadores_page}
 /// Página de computadores.
@@ -65,6 +66,7 @@ class ComputadoresPage extends StatelessWidget {
               } else if (state is FetchComputadoresSuccess) {
                 return AtivosList(
                   ativos: state.computadores,
+                  tipoAtivo: TipoAtivo.computador,
                 );
               } else {
                 return const Center(

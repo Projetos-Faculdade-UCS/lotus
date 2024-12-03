@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lotus/src/modules/home/modules/impressora/bloc/impressoras_bloc.dart';
 import 'package:lotus/src/modules/home/widgets/breadcrumb/miolo_with_breadcrumb.dart';
+import 'package:repositories/repositories.dart';
 
 /// {@template impressoras_page}
 /// A impressoras page.
@@ -31,6 +32,7 @@ class ImpressorasPage extends StatelessWidget {
             } else if (state is ImpressorasSuccess) {
               return AtivosList(
                 ativos: state.impressoras,
+                tipoAtivo: TipoAtivo.impressora,
               );
             } else {
               return const Center(

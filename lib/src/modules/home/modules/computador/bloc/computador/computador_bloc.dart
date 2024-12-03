@@ -14,6 +14,8 @@ class ComputadorBloc extends Bloc<ComputadorEvent, ComputadorState> {
     on<GetComputador>(_onGet);
     on<FetchComputadores>(_onFetch);
     on<UpdateSala>(_onUpdateSala);
+    on<FetchPendentes>(_onFetchPendentes);
+    on<ValidateComputadores>(_onValidate);
   }
 
   final ComputadorRepository _repository;
@@ -61,6 +63,32 @@ class ComputadorBloc extends Bloc<ComputadorEvent, ComputadorState> {
         throw Exception('Falha ao atualizar a sala do computador.');
       }
       emit(GetComputadorSuccess(computador));
+    } catch (e) {
+      emit(ComputadorFailure());
+    }
+  }
+
+  Future<void> _onFetchPendentes(
+    FetchPendentes event,
+    Emitter<ComputadorState> emit,
+  ) async {
+    emit(ComputadorLoading());
+    try {
+      final computadores = await _repository.fetchPendentes();
+      emit(FetchPendentesSuccess(computadores));
+    } catch (e) {
+      emit(ComputadorFailure());
+    }
+  }
+
+  Future<void> _onValidate(
+    ValidateComputadores event,
+    Emitter<ComputadorState> emit,
+  ) async {
+    emit(ComputadorLoading());
+    try {
+      await _repository.validate(event.ids);
+      emit(const ValidatedComputadoresSuccess());
     } catch (e) {
       emit(ComputadorFailure());
     }

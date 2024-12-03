@@ -36,3 +36,15 @@ class UpdateSala extends ComputadorEvent {
   /// Sala do ativo.
   final Sala sala;
 }
+
+/// Evento para listar os computadores pendentes de validar.
+final class FetchPendentes extends ComputadorEvent {}
+
+/// Evento para selecionar um computador.
+final class ValidateComputadores extends ComputadorEvent {
+  /// {@macro validate_computadores}
+  const ValidateComputadores(this.ids);
+
+  /// Lista de IDs dos computadores.
+  final List<int> ids;
+}

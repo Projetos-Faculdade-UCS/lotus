@@ -42,3 +42,25 @@ final class FetchComputadoresSuccess extends ComputadorState {
 
 /// Estado de falha ao carregar a lista de computadores.
 final class ComputadorFailure extends ComputadorState {}
+
+/// {@template pendentes_state}
+/// Estado de sucesso ao carregar a lista de computadores pendentes.
+/// {@endtemplate}
+final class FetchPendentesSuccess extends ComputadorState {
+  /// {@macro pendentes_state}
+  const FetchPendentesSuccess(this.computadores);
+
+  /// Lista de computadores pendentes.
+  final List<Ativo> computadores;
+
+  @override
+  List<Object> get props => [computadores];
+}
+
+/// {@template validated_computadores}
+/// Estado de sucesso ao validar a lista de computadores.
+/// {@endtemplate}
+final class ValidatedComputadoresSuccess extends ComputadorState {
+  /// {@macro validated_computadores}
+  const ValidatedComputadoresSuccess();
+}

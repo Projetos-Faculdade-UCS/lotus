@@ -57,7 +57,7 @@ class Ativo extends Equatable {
   final int patrimonio;
 
   /// The room where the IT asset is located.
-  final Sala sala;
+  final Sala? sala;
 
   /// The number of relationships of the IT asset.
   final int relacionamentos;

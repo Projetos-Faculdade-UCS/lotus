@@ -18,7 +18,7 @@ class CardLocal extends StatelessWidget {
   });
 
   /// A sala do ativo.
-  final Sala sala;
+  final Sala? sala;
 
   /// Função chamada quando a sala é atualizada.
   final void Function(Sala) onUpdateSala;
@@ -27,55 +27,70 @@ class CardLocal extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(
-          height: 200,
-          child: ClipRRect(
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(16),
-              topRight: Radius.circular(16),
+        if (sala == null)
+          Container(
+            height: 220,
+            decoration: BoxDecoration(
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(16),
+                topRight: Radius.circular(16),
+              ),
+              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.1),
             ),
-            child: Stack(
-              fit: StackFit.expand,
-              alignment: Alignment.bottomCenter,
-              children: [
-                const Positioned.fill(
-                  child: _BlurredImage(),
-                ),
-                Positioned(
-                  bottom: 0,
-                  left: 0,
-                  right: 0,
-                  child: Container(
-                    padding: const EdgeInsets.all(16),
-                    // color: Theme.of(context).colorScheme.onSurface.withOpacity(0.4),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        _Tile(
-                          title: 'Sala',
-                          value: sala.nome,
-                        ),
-                        _Tile(
-                          title: 'Bloco',
-                          value: sala.bloco.nome,
-                        ),
-                        _Tile(
-                          title: 'Campus',
-                          value: sala.bloco.campus,
-                        ),
-                        _Tile(
-                          title: 'Cidade',
-                          value: sala.bloco.cidade,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
+            child: const Center(
+              child: Text('Sem informações de localização.'),
             ),
           ),
-        ),
+        if (sala != null)
+          SizedBox(
+            height: 200,
+            child: ClipRRect(
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(16),
+                topRight: Radius.circular(16),
+              ),
+              child: Stack(
+                fit: StackFit.expand,
+                alignment: Alignment.bottomCenter,
+                children: [
+                  const Positioned.fill(
+                    child: _BlurredImage(),
+                  ),
+                  Positioned(
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    child: Container(
+                      padding: const EdgeInsets.all(16),
+                      // color: Theme.of(context).colorScheme.onSurface.withOpacity(0.4),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          _Tile(
+                            title: 'Sala',
+                            value: sala!.nome,
+                          ),
+                          _Tile(
+                            title: 'Bloco',
+                            value: sala!.bloco.nome,
+                          ),
+                          _Tile(
+                            title: 'Campus',
+                            value: sala!.bloco.campus,
+                          ),
+                          _Tile(
+                            title: 'Cidade',
+                            value: sala!.bloco.cidade,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
         SizedBox(
           height: 35,
           width: double.infinity,
