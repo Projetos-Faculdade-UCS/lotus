@@ -22,6 +22,21 @@ final class GetComputador extends ComputadorEvent {
 /// Evento para buscar a lista de computadores.
 final class FetchComputadores extends ComputadorEvent {}
 
+/// Evento para atualizar a sala de um ativo.
+class UpdateSala extends ComputadorEvent {
+  /// {@macro update_local}
+  const UpdateSala({
+    required this.id,
+    required this.sala,
+  });
+
+  /// Id do ativo.
+  final int id;
+
+  /// Sala do ativo.
+  final Sala sala;
+}
+
 /// Evento para listar os computadores pendentes de validar.
 final class FetchPendentes extends ComputadorEvent {}
 

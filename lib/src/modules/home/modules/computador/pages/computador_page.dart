@@ -36,7 +36,10 @@ class ComputadorPage extends StatelessWidget {
                 child: CircularProgressIndicator(),
               );
             } else if (state is GetComputadorSuccess) {
-              return ComputadorWidget(computador: state.computador);
+              return ComputadorWidget(
+                computador: state.computador,
+                computadorBloc: computadorBloc,
+              );
             } else {
               return const Center(
                 child: Text('Erro ao carregar computador.'),

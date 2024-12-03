@@ -2,7 +2,7 @@ import 'package:ativos_ui/src/widgets/cabecalho_ativo.dart';
 import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
 import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
 import 'package:hugeicons/hugeicons.dart';
-import 'package:lotus/src/modules/home/modules/computador/widgets/detalhe_computador/card_local.dart';
+import 'package:lotus/src/modules/home/modules/shared/widgets/card_local.dart';
 import 'package:repositories/repositories.dart';
 
 class MonitorWidget extends StatelessWidget {
@@ -41,10 +41,7 @@ class MonitorWidget extends StatelessWidget {
               ],
             ),
             child: CabecalhoAtivo(
-              computadorNome: monitor.nome,
-              computadorRelacionamentos: monitor.relacionamentos,
-              computadorResponsavel: monitor.responsavel,
-              tipoAtivo: monitor.tipo,
+              ativo: monitor,
             ),
           ),
           Expanded(
@@ -83,6 +80,7 @@ class MonitorWidget extends StatelessWidget {
                         const SizedBox(height: 4),
                         CardLocal(
                           sala: monitor.sala,
+                          onUpdateSala: print,
                         ),
                       ],
                     ),

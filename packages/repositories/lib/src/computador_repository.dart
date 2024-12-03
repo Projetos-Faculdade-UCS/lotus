@@ -1,5 +1,4 @@
 import 'package:repositories/repositories.dart';
-import 'package:repositories/src/base_repository.dart';
 
 /// {@template computador_repository}
 /// Repository which manages [Computador]s.
@@ -16,6 +15,24 @@ class ComputadorRepository extends BaseAtivoRepository<Computador> {
 
   @override
   Computador fromJson(Map<String, dynamic> json) => Computador.fromJson(json);
+
+  /// Atualiza a sala de um [Computador].
+  Future<Computador?> updateSala(int computadorId, int salaId) async {
+    final computadorResponse = await lotusApiClient.patch<Map<String, dynamic>>(
+      '$baseUrl/$computadorId/',
+      data: {
+        'local': salaId,
+      },
+    );
+    if (computadorResponse.data == null ||
+        computadorResponse.statusCode != 200) {
+      return null;
+    }
+
+    final computadorMap = computadorResponse.data!;
+
+    return fromJson(computadorMap);
+  }
 
   /// Fetches the list of pending [Computador]s.
   Future<List<Ativo>> fetchPendentes() async {
