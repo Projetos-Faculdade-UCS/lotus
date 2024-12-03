@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lotus/src/modules/home/modules/monitor_module/bloc/monitores_bloc.dart';
 import 'package:lotus/src/modules/home/widgets/breadcrumb/miolo_with_breadcrumb.dart';
+import 'package:repositories/repositories.dart';
 
 /// {@template monitores_page}
 /// A monitores page.
@@ -31,6 +32,7 @@ class MonitoresPage extends StatelessWidget {
             } else if (state is MonitoresSuccess) {
               return AtivosList(
                 ativos: state.monitores,
+                tipoAtivo: TipoAtivo.monitor,
               );
             } else {
               return const Center(

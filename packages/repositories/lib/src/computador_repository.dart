@@ -7,7 +7,7 @@ import 'package:repositories/src/repository_exception.dart';
 /// {@endtemplate}
 class ComputadorRepository extends BaseAtivoRepository<Computador> {
   /// {@macro computador_repository}
-  const ComputadorRepository(super._lotusApiClient);
+  const ComputadorRepository(super.lotusApiClient);
 
   @override
   String get baseUrl => '/computadores';
@@ -36,7 +36,44 @@ class ComputadorRepository extends BaseAtivoRepository<Computador> {
     return fromJson(computadorMap);
   }
 
-  /// Busca o histórico de movimentações de um [Computador].
+    /// Fetches the list of pending [Computador]s.
+  Future<List<Ativo>> fetchPendentes() async {
+    final path = lotusApiClient.baseUrl.contains('mockaroo')
+        ? '/all-pendentes'
+        : '/pendentes-validacao';
+    final response = await lotusApiClient.get<List<dynamic>>('$baseUrl/$path');
+
+    if (response.data == null || response.statusCode != 200) {
+      throw RepositoryException(
+        'Failed to fetch computadores pendentes',
+      );
+    }
+
+    if (!response.data!.every((element) => element is Map)) {
+      throw RepositoryException('Not all ${tipo.pluralName} are maps');
+    }
+
+    final ativosMap = response.data!.cast<Map<String, dynamic>>();
+
+    final ativos = ativosMap.map((ativoMap) {
+      return Ativo.fromJson(ativoMap);
+    }).toList();
+
+    return ativos;
+  }
+
+  /// Validates the [Computador]s with the given [ids].
+  Future<void> validate(List<int> ids) async {
+    final response = await lotusApiClient.post<void>(
+      '$baseUrl/validar/',
+      data: {'ids': ids},
+    );
+
+    if (response.statusCode != 200) {
+      throw RepositoryException('Failed to validate computadores');
+    }
+  }
+    /// Busca o histórico de movimentações de um [Computador].
   Future<List<Movimentacao>> getHistoricoMovimentacoes(int computadorId) async {
     final response = await lotusApiClient.get<List<dynamic>>(
       '$baseUrl/$computadorId/movimentacoes/',

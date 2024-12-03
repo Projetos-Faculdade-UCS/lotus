@@ -1,6 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:lotus/src/modules/auth/bloc/auth_bloc.dart';
 import 'package:lotus/src/modules/home/modules/shared/bloc/sala_bloc.dart';
 import 'package:lotus/src/modules/home/modules/shared/widgets/mudar_local_dialog.dart';
 import 'package:repositories/repositories.dart';
@@ -18,89 +20,121 @@ class CardLocal extends StatelessWidget {
   });
 
   /// A sala do ativo.
-  final Sala sala;
+  final Sala? sala;
 
   /// Função chamada quando a sala é atualizada.
   final void Function(Sala) onUpdateSala;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SizedBox(
-          height: 200,
-          child: ClipRRect(
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(16),
-              topRight: Radius.circular(16),
-            ),
-            child: Stack(
-              fit: StackFit.expand,
-              alignment: Alignment.bottomCenter,
-              children: [
-                const Positioned.fill(
-                  child: _BlurredImage(),
-                ),
-                Positioned(
-                  bottom: 0,
-                  left: 0,
-                  right: 0,
-                  child: Container(
-                    padding: const EdgeInsets.all(16),
-                    // color: Theme.of(context).colorScheme.onSurface.withOpacity(0.4),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        _Tile(
-                          title: 'Sala',
-                          value: sala.nome,
-                        ),
-                        _Tile(
-                          title: 'Bloco',
-                          value: sala.bloco.nome,
-                        ),
-                        _Tile(
-                          title: 'Campus',
-                          value: sala.bloco.campus,
-                        ),
-                        _Tile(
-                          title: 'Cidade',
-                          value: sala.bloco.cidade,
-                        ),
-                      ],
-                    ),
+    final theme = Theme.of(context);
+
+    return BlocBuilder<AuthBloc, AuthState>(
+      bloc: Modular.get<AuthBloc>(),
+      builder: (context, state) {
+        return Column(
+          children: [
+            if (sala == null)
+              AnimatedContainer(
+                height: 220,
+                duration: const Duration(milliseconds: 300),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    topLeft: const Radius.circular(16),
+                    topRight: const Radius.circular(16),
+                    bottomLeft:
+                        state.isAdmin ? Radius.zero : const Radius.circular(16),
+                    bottomRight:
+                        state.isAdmin ? Radius.zero : const Radius.circular(16),
                   ),
+                  color: theme.colorScheme.onSurface.withOpacity(0.1),
                 ),
-              ],
-            ),
-          ),
-        ),
-        SizedBox(
-          height: 35,
-          width: double.infinity,
-          child: TextButton(
-            //remove the border radius on the top of the button
-            style: TextButton.styleFrom(
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(16),
-                  bottomRight: Radius.circular(16),
+                child: const Center(
+                  child: Text('Sem informações de localização.'),
                 ),
               ),
-              backgroundColor:
-                  Theme.of(context).colorScheme.primary.withOpacity(0.2),
-            ),
-            onPressed: () async {
-              final sala = await MudarLocalDialog.show(Modular.get<SalaBloc>());
-              if (sala != null) {
-                onUpdateSala(sala);
-              }
-            },
-            child: const Text('Mudar local'),
-          ),
-        ),
-      ],
+            if (sala != null)
+              SizedBox(
+                height: 200,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.only(
+                    topLeft: const Radius.circular(16),
+                    topRight: const Radius.circular(16),
+                    bottomLeft:
+                        state.isAdmin ? Radius.zero : const Radius.circular(16),
+                    bottomRight:
+                        state.isAdmin ? Radius.zero : const Radius.circular(16),
+                  ),
+                  child: Stack(
+                    fit: StackFit.expand,
+                    alignment: Alignment.bottomCenter,
+                    children: [
+                      const Positioned.fill(
+                        child: _BlurredImage(),
+                      ),
+                      Positioned(
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                        child: Container(
+                          padding: const EdgeInsets.all(16),
+                          // color: theme.colorScheme.onSurface.withOpacity(0.4),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              _Tile(
+                                title: 'Sala',
+                                value: sala!.nome,
+                              ),
+                              _Tile(
+                                title: 'Bloco',
+                                value: sala!.bloco.nome,
+                              ),
+                              _Tile(
+                                title: 'Campus',
+                                value: sala!.bloco.campus,
+                              ),
+                              _Tile(
+                                title: 'Cidade',
+                                value: sala!.bloco.cidade,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            if (state.isAdmin)
+              SizedBox(
+                height: 35,
+                width: double.infinity,
+                child: TextButton(
+                  //remove the border radius on the top of the button
+                  style: TextButton.styleFrom(
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(16),
+                        bottomRight: Radius.circular(16),
+                      ),
+                    ),
+                    backgroundColor: theme.colorScheme.primary.withOpacity(0.2),
+                  ),
+                  onPressed: () async {
+                    final sala =
+                        await MudarLocalDialog.show(Modular.get<SalaBloc>());
+                    if (sala != null) {
+                      onUpdateSala(sala);
+                    }
+                  },
+                  child: const Text('Mudar local'),
+                ),
+              ),
+          ],
+        );
+      },
     );
   }
 }
