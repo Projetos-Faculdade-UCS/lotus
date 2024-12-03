@@ -1,3 +1,4 @@
+import 'package:drop_shadow/drop_shadow.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:repositories/repositories.dart';
@@ -21,6 +22,16 @@ class ComputersPieChart extends StatefulWidget {
 
 class _ComputersPieChartState extends State<ComputersPieChart> {
   int touchedIndex = -1;
+
+  @override
+  void didUpdateWidget(ComputersPieChart oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.computadores != widget.computadores) {
+      setState(() {
+        touchedIndex = -1;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,36 +58,53 @@ class _ComputersPieChartState extends State<ComputersPieChart> {
                   ),
                 ),
                 Expanded(
-                  child: PieChart(
-                    PieChartData(
-                      pieTouchData: PieTouchData(
-                        touchCallback: (touchEvent, touchResponse) {
-                          setState(() {
-                            if (touchResponse?.touchedSection == null) {
-                              touchedIndex = -1;
-                            } else {
-                              touchedIndex = touchResponse!
-                                  .touchedSection!.touchedSectionIndex;
-                            }
-                          });
-                        },
+                  child: DropShadow(
+                    offset: const Offset(0, 2),
+                    blurRadius: 6,
+                    spread: .5,
+                    child: PieChart(
+                      PieChartData(
+                        pieTouchData: PieTouchData(
+                          touchCallback: (touchEvent, touchResponse) {
+                            setState(() {
+                              if (touchResponse?.touchedSection == null) {
+                                touchedIndex = -1;
+                              } else {
+                                touchedIndex = touchResponse!
+                                    .touchedSection!.touchedSectionIndex;
+                              }
+                            });
+                          },
+                        ),
+                        sections: [
+                          PieChartSectionData(
+                            value: widget.computadores.automaticos.toDouble(),
+                            title:
+                                'Automáticos:\n${widget.computadores.automaticos}',
+                            color: Colors.blue,
+                            radius: getRadius(0),
+                            gradient: const RadialGradient(
+                              colors: [
+                                Colors.blueGrey,
+                                Colors.blue,
+                              ],
+                            ),
+                          ),
+                          PieChartSectionData(
+                            value: widget.computadores.manuais.toDouble(),
+                            title: 'Manuais:\n${widget.computadores.manuais}',
+                            color: Colors.red,
+                            radius: getRadius(1),
+                            gradient: const RadialGradient(
+                              colors: [
+                                Colors.deepOrange,
+                                Colors.red,
+                              ],
+                            ),
+                          ),
+                        ],
+                        sectionsSpace: 2,
                       ),
-                      sections: [
-                        PieChartSectionData(
-                          value: widget.computadores.automaticos.toDouble(),
-                          title:
-                              'Automáticos:\n${widget.computadores.automaticos}',
-                          color: Colors.blue,
-                          radius: getRadius(0),
-                        ),
-                        PieChartSectionData(
-                          value: widget.computadores.manuais.toDouble(),
-                          title: 'Manuais:\n${widget.computadores.manuais}',
-                          color: Colors.red,
-                          radius: getRadius(1),
-                        ),
-                      ],
-                      sectionsSpace: 2,
                     ),
                   ),
                 ),

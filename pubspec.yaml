@@ -69,6 +69,7 @@ dependencies:
   auth_api:
     path: packages/auth_api
   fl_chart: ^0.69.2
+  drop_shadow: ^0.1.0
 
 dev_dependencies:
   flutter_test:
