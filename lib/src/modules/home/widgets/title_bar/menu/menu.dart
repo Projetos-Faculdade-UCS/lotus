@@ -71,7 +71,11 @@ class _MenuState extends State<Menu> {
           label: 'Mudar Tema',
           icon: HugeIcons.strokeRoundedMoon,
           onSelected: () {
-            AdaptiveTheme.of(context).toggleThemeMode(useSystem: false);
+            Future.microtask(() {
+              if (mounted) {
+                AdaptiveTheme.of(context).toggleThemeMode(useSystem: false);
+              }
+            });
           },
         ),
         MenuDivider(
