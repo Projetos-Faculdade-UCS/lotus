@@ -1,4 +1,5 @@
 import 'package:repositories/repositories.dart';
+import 'package:repositories/src/repository_exception.dart';
 
 /// {@template computador_repository}
 /// Repository which manages [Computador]s.
@@ -62,7 +63,6 @@ class ComputadorRepository extends BaseAtivoRepository<Computador> {
 
   /// Validates the [Computador]s with the given [ids].
   Future<void> validate(List<int> ids) async {
-    print(ids);
     final response = await lotusApiClient.post<void>(
       '$baseUrl/validar/',
       data: {'ids': ids},
