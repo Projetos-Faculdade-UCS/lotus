@@ -1,13 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:lotus/src/modules/home/modules/dashboard/pages/widgets/test_area.dart';
-import 'package:lotus/src/modules/home/widgets/example_card.dart';
-import 'package:lotus/src/modules/home/widgets/example_context_menu.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lotus/src/modules/home/modules/dashboard/bloc/dashboard_bloc.dart';
+import 'package:lotus/src/modules/home/modules/dashboard/pages/widgets/dashboard_chart.dart';
 import 'package:lotus_ui/lotus_ui.dart';
 
 /// The Dashboard page of the application.
-class DashboardPage extends StatelessWidget {
+class DashboardPage extends StatefulWidget {
   /// Creates the Dashboard page.
-  const DashboardPage({super.key});
+  const DashboardPage({
+    required this.bloc,
+    super.key,
+  });
+
+  /// The [DashboardBloc] of the page.
+  final DashboardBloc bloc;
+
+  @override
+  State<DashboardPage> createState() => _DashboardPageState();
+}
+
+class _DashboardPageState extends State<DashboardPage> {
+  @override
+  void initState() {
+    super.initState();
+    widget.bloc.add(FetchDashboard());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,33 +33,17 @@ class DashboardPage extends StatelessWidget {
         centerTitle: true,
         title: const Text('Dashboard'),
       ),
-      child: Column(
-        children: [
-          const Expanded(
-            child: SizedBox.expand(
-              child: Wrap(
-                children: [
-                  ExampleContextMenu(
-                    child: ExampleCard(
-                      title: Text('Detalhe computador'),
-                      subtitle: Text('Right-click me!'),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Text(
-            'Área de Testes',
-            style: Theme.of(context).textTheme.titleLarge,
-          ),
-          const Expanded(
-            child: Padding(
-              padding: EdgeInsets.all(8),
-              child: TestArea(),
-            ),
-          ),
-        ],
+      child: BlocBuilder<DashboardBloc, DashboardState>(
+        bloc: widget.bloc,
+        builder: (context, state) {
+          if (state is DashboardLoading) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (state is DashboardLoaded) {
+            return DashboardChart(dashboard: state.dashboard);
+          } else {
+            return const Center(child: Text('Erro ao carregar dashboard'));
+          }
+        },
       ),
     );
   }

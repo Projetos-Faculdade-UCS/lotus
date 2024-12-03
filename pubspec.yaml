@@ -68,6 +68,7 @@ dependencies:
   
   auth_api:
     path: packages/auth_api
+  fl_chart: ^0.69.2
 
 dev_dependencies:
   flutter_test:

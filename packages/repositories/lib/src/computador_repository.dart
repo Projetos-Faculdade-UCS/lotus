@@ -1,5 +1,4 @@
 import 'package:repositories/repositories.dart';
-import 'package:repositories/src/models/movimentacao.dart';
 import 'package:repositories/src/repository_exception.dart';
 
 /// {@template computador_repository}
@@ -36,7 +35,7 @@ class ComputadorRepository extends BaseAtivoRepository<Computador> {
     return fromJson(computadorMap);
   }
 
-    /// Fetches the list of pending [Computador]s.
+  /// Fetches the list of pending [Computador]s.
   Future<List<Ativo>> fetchPendentes() async {
     final path = lotusApiClient.baseUrl.contains('mockaroo')
         ? '/all-pendentes'
@@ -73,7 +72,8 @@ class ComputadorRepository extends BaseAtivoRepository<Computador> {
       throw RepositoryException('Failed to validate computadores');
     }
   }
-    /// Busca o histórico de movimentações de um [Computador].
+
+  /// Busca o histórico de movimentações de um [Computador].
   Future<List<Movimentacao>> getHistoricoMovimentacoes(int computadorId) async {
     final response = await lotusApiClient.get<List<dynamic>>(
       '$baseUrl/$computadorId/movimentacoes/',
