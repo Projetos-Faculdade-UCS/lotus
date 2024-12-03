@@ -45,19 +45,14 @@ class ComputadorRepository extends BaseAtivoRepository<Computador> {
 
   /// Validates the [Computador]s with the given [ids].
   Future<void> validate(List<int> ids) async {
-    final futures = ids.map((id) {
-      return lotusApiClient.patch<void>(
-        '$baseUrl/$id/',
-        data: {'valido': true},
-      );
-    });
+    print(ids);
+    final response = await lotusApiClient.post<void>(
+      '$baseUrl/validar/',
+      data: {'ids': ids},
+    );
 
-    final responses = await Future.wait(futures);
-
-    if (responses.any((response) => response.statusCode != 200)) {
+    if (response.statusCode != 200) {
       throw RepositoryException('Failed to validate computadores');
     }
-
-    return;
   }
 }

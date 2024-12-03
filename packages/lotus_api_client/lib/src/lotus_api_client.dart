@@ -16,6 +16,7 @@ class LotusApiClient with DioMixin implements Dio {
     options = BaseOptions(
       baseUrl: baseUrl,
       headers: <String, dynamic>{},
+      contentType: Headers.jsonContentType,
     );
     options.headers[authTokenHeader] = '$authTokenPrefix $authToken';
   }
