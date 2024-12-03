@@ -11,10 +11,23 @@ class CardLocal extends StatelessWidget {
   const CardLocal({required this.sala, super.key});
 
   /// A sala do ativo.
-  final Sala sala;
+  final Sala? sala;
 
   @override
   Widget build(BuildContext context) {
+    if (sala == null) {
+      return Container(
+        height: 220,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
+          color: Theme.of(context).colorScheme.onSurface.withOpacity(0.1),
+        ),
+        child: const Center(
+          child: Text('Sem informações de localização.'),
+        ),
+      );
+    }
+
     return SizedBox(
       height: 220,
       child: ClipRRect(
@@ -32,26 +45,25 @@ class CardLocal extends StatelessWidget {
               right: 0,
               child: Container(
                 padding: const EdgeInsets.all(16),
-                // color: Theme.of(context).colorScheme.onSurface.withOpacity(0.4),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     _Tile(
                       title: 'Sala',
-                      value: sala.nome,
+                      value: sala!.nome,
                     ),
                     _Tile(
                       title: 'Bloco',
-                      value: sala.bloco.nome,
+                      value: sala!.bloco.nome,
                     ),
                     _Tile(
                       title: 'Campus',
-                      value: sala.bloco.campus,
+                      value: sala!.bloco.campus,
                     ),
                     _Tile(
                       title: 'Cidade',
-                      value: sala.bloco.cidade,
+                      value: sala!.bloco.cidade,
                     ),
                   ],
                 ),

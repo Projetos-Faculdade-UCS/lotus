@@ -26,4 +26,9 @@ class PendentesCubit extends Cubit<PendentesState> {
   void clear() {
     emit(PendentesInitial());
   }
+
+  /// Selects all items.
+  void selectAll(List<int> ids) {
+    emit(SelectedIds(selectedIds: ids));
+  }
 }

@@ -154,9 +154,20 @@ class _Info extends StatelessWidget {
               Row(
                 children: [
                   Expanded(
-                    child: InfoItem(
-                      icon: HugeIcons.strokeRoundedBuilding03,
-                      text: '${ativo.sala.bloco.nome} - ${ativo.sala.nome}',
+                    child: Builder(
+                      builder: (context) {
+                        final sala = ativo.sala;
+                        if (sala == null) {
+                          return const InfoItem(
+                            icon: HugeIcons.strokeRoundedBuilding03,
+                            text: 'Sem sala',
+                          );
+                        }
+                        return InfoItem(
+                          icon: HugeIcons.strokeRoundedBuilding03,
+                          text: '${sala.bloco.nome} - ${sala.nome}',
+                        );
+                      },
                     ),
                   ),
                   const SizedBox(width: 20),

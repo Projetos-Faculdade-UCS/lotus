@@ -69,7 +69,7 @@ class ComputadorBloc extends Bloc<ComputadorEvent, ComputadorState> {
     emit(ComputadorLoading());
     try {
       await _repository.validate(event.ids);
-      emit(ComputadorInitial());
+      emit(const ValidatedComputadoresSuccess());
     } catch (e) {
       emit(ComputadorFailure());
     }

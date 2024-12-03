@@ -19,6 +19,10 @@ class ListPendentes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (pendentes.isEmpty) {
+      return const _EmptyList();
+    }
+
     return ListView.builder(
       itemCount: pendentes.length,
       itemBuilder: (context, index) {
@@ -53,6 +57,20 @@ class ListPendentes extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+}
+
+class _EmptyList extends StatelessWidget {
+  const _EmptyList();
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Text(
+        'Nenhum computador pendente.',
+        style: Theme.of(context).textTheme.titleMedium,
+      ),
     );
   }
 }

@@ -28,6 +28,8 @@ class PendentesPage extends StatelessWidget {
       value: cubit,
       child: Miolo(
         appBar: AppBar(
+          title: const Text('Computadores pendentes'),
+          scrolledUnderElevation: 0,
           actions: [
             BlocBuilder<PendentesCubit, PendentesState>(
               builder: (context, state) {
@@ -39,6 +41,37 @@ class PendentesPage extends StatelessWidget {
                 return IconButton(
                   icon: const Icon(Icons.check),
                   onPressed: state.selectedIds.isNotEmpty ? callback : null,
+                );
+              },
+            ),
+            // select all
+
+            BlocBuilder<PendentesCubit, PendentesState>(
+              builder: (context, state) {
+                final ids = cubit.state.selectedIds;
+                if (bloc.state is! FetchPendentesSuccess) {
+                  return const SizedBox.shrink();
+                }
+                final blocState = bloc.state as FetchPendentesSuccess;
+                final isAllSelected =
+                    ids.length == blocState.computadores.length;
+                void callback() {
+                  if (isAllSelected) {
+                    cubit.clear();
+                  } else {
+                    cubit.selectAll(
+                      blocState.computadores.map((e) => e.id).toList(),
+                    );
+                  }
+                }
+
+                return IconButton(
+                  icon: Icon(
+                    isAllSelected
+                        ? Icons.check_box
+                        : Icons.check_box_outline_blank,
+                  ),
+                  onPressed: callback,
                 );
               },
             ),

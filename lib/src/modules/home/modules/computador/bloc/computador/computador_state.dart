@@ -62,11 +62,5 @@ final class FetchPendentesSuccess extends ComputadorState {
 /// {@endtemplate}
 final class ValidatedComputadoresSuccess extends ComputadorState {
   /// {@macro validated_computadores}
-  const ValidatedComputadoresSuccess(this.ids);
-
-  /// Lista de IDs dos computadores.
-  final List<int> ids;
-
-  @override
-  List<Object> get props => [ids];
+  const ValidatedComputadoresSuccess();
 }
