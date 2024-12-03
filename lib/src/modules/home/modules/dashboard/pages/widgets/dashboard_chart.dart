@@ -39,13 +39,22 @@ class DashboardChart extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 24),
-          Expanded(child: _buildAdditionalDetails()),
+          Expanded(child: _AdditionalDetails(dashboard: dashboard)),
         ],
       ),
     );
   }
+}
 
-  Widget _buildAdditionalDetails() {
+class _AdditionalDetails extends StatelessWidget {
+  const _AdditionalDetails({
+    required this.dashboard,
+  });
+
+  final Dashboard dashboard;
+
+  @override
+  Widget build(BuildContext context) {
     return Card(
       elevation: 4,
       child: Padding(
@@ -54,28 +63,45 @@ class DashboardChart extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              'Additional Details',
+              'Detalhes Adicionais',
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
             ),
             const SizedBox(height: 16),
-            _buildDetailRow(
-              'Total Computers',
-              dashboard.computadores.total.toString(),
+            _DetailRow(
+              label: 'Total de Computadores',
+              value: dashboard.computadores.total.toString(),
             ),
             const SizedBox(height: 12),
-            _buildDetailRow('Printers', dashboard.impressoras.toString()),
+            _DetailRow(
+              label: 'Impressoras',
+              value: dashboard.impressoras.toString(),
+            ),
             const SizedBox(height: 12),
-            _buildDetailRow('Monitors', dashboard.monitores.toString()),
+            _DetailRow(
+              label: 'Monitores',
+              value: dashboard.monitores.toString(),
+            ),
           ],
         ),
       ),
     );
   }
+}
 
-  Widget _buildDetailRow(String label, String value) {
+class _DetailRow extends StatelessWidget {
+  const _DetailRow({
+    required this.label,
+    required this.value,
+  });
+
+  final String label;
+  final String value;
+
+  @override
+  Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [

@@ -31,7 +31,7 @@ class _DashboardPageState extends State<DashboardPage> {
     return Miolo(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('Dashboard'),
+        title: const Text('Bem vindo ao Lotus!'),
       ),
       child: BlocBuilder<DashboardBloc, DashboardState>(
         bloc: widget.bloc,
