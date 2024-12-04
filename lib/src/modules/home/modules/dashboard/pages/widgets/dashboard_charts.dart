@@ -6,9 +6,9 @@ import 'package:repositories/repositories.dart';
 /// {@template dashboard_chart}
 /// A widget that displays the dashboard chart.
 /// {@endtemplate}
-class DashboardChart extends StatelessWidget {
+class DashboardCharts extends StatelessWidget {
   /// {@macro dashboard_chart}
-  const DashboardChart({required this.dashboard, super.key});
+  const DashboardCharts({required this.dashboard, super.key});
 
   /// The dashboard to display.
   final Dashboard dashboard;

@@ -10,6 +10,7 @@ part 'dashboard.g.dart';
 class Dashboard extends Equatable {
   /// {@macro dashboard}
   const Dashboard({
+    required this.ativos,
     required this.computadores,
     required this.impressoras,
     required this.monitores,
@@ -19,6 +20,9 @@ class Dashboard extends Equatable {
   /// Converts a JSON object to a [Dashboard].
   factory Dashboard.fromJson(Map<String, dynamic> json) =>
       _$DashboardFromJson(json);
+
+  /// The number of TI assets.
+  final int ativos;
 
   /// The number of computers.
   final DashboardComputadores computadores;

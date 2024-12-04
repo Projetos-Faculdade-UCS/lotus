@@ -7,6 +7,7 @@ part of 'dashboard.dart';
 // **************************************************************************
 
 Dashboard _$DashboardFromJson(Map<String, dynamic> json) => Dashboard(
+      ativos: (json['ativos'] as num).toInt(),
       computadores: DashboardComputadores.fromJson(
           json['computadores'] as Map<String, dynamic>),
       impressoras: (json['impressoras'] as num).toInt(),
@@ -15,6 +16,7 @@ Dashboard _$DashboardFromJson(Map<String, dynamic> json) => Dashboard(
     );
 
 Map<String, dynamic> _$DashboardToJson(Dashboard instance) => <String, dynamic>{
+      'ativos': instance.ativos,
       'computadores': instance.computadores,
       'impressoras': instance.impressoras,
       'monitores': instance.monitores,

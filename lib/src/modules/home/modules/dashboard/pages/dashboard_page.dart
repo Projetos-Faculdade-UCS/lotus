@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lotus/src/modules/home/modules/dashboard/bloc/dashboard_bloc.dart';
-import 'package:lotus/src/modules/home/modules/dashboard/pages/widgets/dashboard_chart.dart';
+import 'package:lotus/src/modules/home/modules/dashboard/pages/widgets/dashboard_charts.dart';
 import 'package:lotus_ui/lotus_ui.dart';
 
 /// The Dashboard page of the application.
@@ -32,6 +32,12 @@ class _DashboardPageState extends State<DashboardPage> {
       appBar: AppBar(
         centerTitle: true,
         title: const Text('Bem vindo ao Lotus!'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.refresh),
+            onPressed: () => widget.bloc.add(FetchDashboard()),
+          ),
+        ],
       ),
       child: BlocBuilder<DashboardBloc, DashboardState>(
         bloc: widget.bloc,
@@ -39,7 +45,7 @@ class _DashboardPageState extends State<DashboardPage> {
           if (state is DashboardLoading) {
             return const Center(child: CircularProgressIndicator());
           } else if (state is DashboardLoaded) {
-            return DashboardChart(dashboard: state.dashboard);
+            return DashboardCharts(dashboard: state.dashboard);
           } else {
             return const Center(child: Text('Erro ao carregar dashboard'));
           }
