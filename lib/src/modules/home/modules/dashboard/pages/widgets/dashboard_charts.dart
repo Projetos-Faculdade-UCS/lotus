@@ -21,6 +21,8 @@ class DashboardCharts extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Expanded(child: AdditionalDetailsChart(dashboard: dashboard)),
+          const SizedBox(width: 24),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -39,8 +41,6 @@ class DashboardCharts extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(width: 24),
-          Expanded(child: AdditionalDetailsChart(dashboard: dashboard)),
         ],
       ),
     );
