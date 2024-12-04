@@ -35,7 +35,7 @@ void main() async {
 
 Future<void> _initSearchHotkey() async {
   final hotKey = HotKey(
-    key: PhysicalKeyboardKey.keyP,
+    key: PhysicalKeyboardKey.keyF,
     modifiers: [HotKeyModifier.control],
     scope: HotKeyScope.inapp,
   );
@@ -44,6 +44,8 @@ Future<void> _initSearchHotkey() async {
     hotKey,
     keyDownHandler: (hotKey) async {
       if (isModalOpened) {
+        await SystemChannels.textInput.invokeMethod('TextInput.hide');
+        Modular.to.pop();
         return;
       }
       isModalOpened = true;

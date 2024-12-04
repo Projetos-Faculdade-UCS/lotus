@@ -86,27 +86,35 @@ class SearchModal extends StatelessWidget {
                   height: size.height,
                 );
               },
-              child: SearchBar(
-                autoFocus: true,
-                elevation: const WidgetStatePropertyAll(0),
-                hintText: 'Buscar em todos os tipos de ativos',
-                hintStyle: const WidgetStatePropertyAll(
-                  TextStyle(
-                    color: Colors.grey,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ),
-                shape: WidgetStatePropertyAll(
-                  RoundedRectangleBorder(
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(10),
-                      topRight: Radius.circular(10),
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  return SearchBar(
+                    autoFocus: true,
+                    constraints: BoxConstraints(
+                      maxWidth: constraints.maxWidth,
+                      minHeight: 40,
                     ),
-                    side: BorderSide(
-                      color: Colors.grey.withOpacity(.5),
+                    elevation: const WidgetStatePropertyAll(0),
+                    hintText: 'Buscar em todos os tipos de ativos',
+                    hintStyle: const WidgetStatePropertyAll(
+                      TextStyle(
+                        color: Colors.grey,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
-                  ),
-                ),
+                    shape: WidgetStatePropertyAll(
+                      RoundedRectangleBorder(
+                        borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(10),
+                          topRight: Radius.circular(10),
+                        ),
+                        side: BorderSide(
+                          color: Colors.grey.withOpacity(.5),
+                        ),
+                      ),
+                    ),
+                  );
+                },
               ),
             ),
             Flexible(
