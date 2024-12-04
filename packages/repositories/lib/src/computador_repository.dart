@@ -18,6 +18,7 @@ class ComputadorRepository extends BaseAtivoRepository<Computador> {
   Computador fromJson(Map<String, dynamic> json) => Computador.fromJson(json);
 
   /// Atualiza a sala de um [Computador].
+  @override
   Future<Computador?> updateSala(int computadorId, int salaId) async {
     final computadorResponse = await lotusApiClient.patch<Map<String, dynamic>>(
       '$baseUrl/$computadorId/',
@@ -74,6 +75,7 @@ class ComputadorRepository extends BaseAtivoRepository<Computador> {
   }
 
   /// Busca o histórico de movimentações de um [Computador].
+  @override
   Future<List<Movimentacao>> getHistoricoMovimentacoes(int computadorId) async {
     final response = await lotusApiClient.get<List<dynamic>>(
       '$baseUrl/$computadorId/movimentacoes/',

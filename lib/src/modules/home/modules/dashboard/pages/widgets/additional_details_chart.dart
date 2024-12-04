@@ -108,7 +108,7 @@ class _AdditionalDetailsChartState extends State<AdditionalDetailsChart> {
                                         gradient: const RadialGradient(
                                           colors: [
                                             Colors.blueGrey,
-                                            Colors.blue
+                                            Colors.blue,
                                           ],
                                         ),
                                       ),
@@ -121,7 +121,7 @@ class _AdditionalDetailsChartState extends State<AdditionalDetailsChart> {
                                         gradient: const LinearGradient(
                                           colors: [
                                             Colors.lightGreen,
-                                            Colors.green
+                                            Colors.green,
                                           ],
                                         ),
                                       ),

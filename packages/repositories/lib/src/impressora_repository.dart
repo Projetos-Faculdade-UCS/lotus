@@ -1,5 +1,4 @@
 import 'package:repositories/repositories.dart';
-import 'package:repositories/src/base_repository.dart';
 
 /// {@template impressora_repository}
 /// A Very Good Project created by Very Good CLI.

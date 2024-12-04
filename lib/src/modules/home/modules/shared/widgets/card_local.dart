@@ -203,9 +203,7 @@ class CardLocal extends StatelessWidget {
 }
 
 class _BlurredImage extends StatelessWidget {
-  const _BlurredImage({
-    super.key,
-  });
+  const _BlurredImage();
 
   @override
   Widget build(BuildContext context) {
