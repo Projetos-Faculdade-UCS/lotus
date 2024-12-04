@@ -68,22 +68,28 @@ class SearchModal extends StatelessWidget {
                 fromHeroContext,
                 toHeroContext,
               ) {
+                final borderRadiusFrom = BorderRadius.circular(10);
+
+                const borderRadiusTo = BorderRadius.only(
+                  topLeft: Radius.circular(10),
+                  topRight: Radius.circular(10),
+                );
+
+                final borderRadiusTween = BorderRadiusTween(
+                  begin: borderRadiusFrom,
+                  end: borderRadiusTo,
+                );
+
                 return Container(
                   height: 40,
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.grey.withOpacity(.9)),
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: borderRadiusTween.evaluate(animation),
                     color: theme.scaffoldBackgroundColor,
                   ),
                   child: const _Content(
                     key: _contentKey,
                   ),
-                );
-              },
-              placeholderBuilder: (context, size, widget) {
-                return SizedBox(
-                  width: size.width,
-                  height: size.height,
                 );
               },
               child: LayoutBuilder(

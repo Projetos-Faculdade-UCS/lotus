@@ -29,11 +29,23 @@ class CustomSearchBar extends StatelessWidget {
         fromHeroContext,
         toHeroContext,
       ) {
+        final borderRadiusTo = BorderRadius.circular(10);
+
+        const borderRadiusFrom = BorderRadius.only(
+          topLeft: Radius.circular(10),
+          topRight: Radius.circular(10),
+        );
+
+        final borderRadiusTween = BorderRadiusTween(
+          begin: borderRadiusFrom,
+          end: borderRadiusTo,
+        );
+
         return Container(
           height: 40,
           decoration: BoxDecoration(
             border: Border.all(color: Colors.grey.withOpacity(.9)),
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: borderRadiusTween.evaluate(animation),
             color: scaffoldBackgroundColor,
           ),
           child: const _Content(
