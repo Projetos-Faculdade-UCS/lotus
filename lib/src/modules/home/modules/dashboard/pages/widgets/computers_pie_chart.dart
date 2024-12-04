@@ -59,77 +59,89 @@ class _ComputersPieChartState extends State<ComputersPieChart> {
                 ),
                 const SizedBox(height: 8),
                 Expanded(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Flexible(
-                        child: DropShadow(
-                          offset: Offset.zero,
-                          blurRadius: 4,
-                          spread: .5,
-                          child: PieChart(
-                            PieChartData(
-                              pieTouchData: PieTouchData(
-                                touchCallback: (touchEvent, touchResponse) {
-                                  setState(() {
-                                    if (touchResponse?.touchedSection == null) {
-                                      touchedIndex = -1;
-                                    } else {
-                                      touchedIndex = touchResponse!
-                                          .touchedSection!.touchedSectionIndex;
-                                    }
-                                  });
-                                },
+                  child: Builder(
+                    builder: (context) {
+                      if (widget.computadores.total == 0) {
+                        return const Center(
+                          child: Text('Sem dados para exibir'),
+                        );
+                      }
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Flexible(
+                            child: DropShadow(
+                              offset: Offset.zero,
+                              blurRadius: 4,
+                              spread: .5,
+                              child: PieChart(
+                                PieChartData(
+                                  pieTouchData: PieTouchData(
+                                    touchCallback: (touchEvent, touchResponse) {
+                                      setState(() {
+                                        if (touchResponse?.touchedSection ==
+                                            null) {
+                                          touchedIndex = -1;
+                                        } else {
+                                          touchedIndex = touchResponse!
+                                              .touchedSection!
+                                              .touchedSectionIndex;
+                                        }
+                                      });
+                                    },
+                                  ),
+                                  sections: [
+                                    PieChartSectionData(
+                                      value: widget.computadores.automaticos
+                                          .toDouble(),
+                                      title: '',
+                                      color: Colors.blue,
+                                      radius: getRadius(0),
+                                      gradient: const RadialGradient(
+                                        colors: [
+                                          Colors.blueGrey,
+                                          Colors.blue,
+                                        ],
+                                      ),
+                                    ),
+                                    PieChartSectionData(
+                                      value: widget.computadores.manuais
+                                          .toDouble(),
+                                      title: '',
+                                      color: Colors.red,
+                                      radius: getRadius(1),
+                                      gradient: const RadialGradient(
+                                        colors: [
+                                          Colors.deepOrange,
+                                          Colors.red,
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                  sectionsSpace: 2,
+                                ),
                               ),
-                              sections: [
-                                PieChartSectionData(
-                                  value: widget.computadores.automaticos
-                                      .toDouble(),
-                                  title: '',
-                                  color: Colors.blue,
-                                  radius: getRadius(0),
-                                  gradient: const RadialGradient(
-                                    colors: [
-                                      Colors.blueGrey,
-                                      Colors.blue,
-                                    ],
-                                  ),
-                                ),
-                                PieChartSectionData(
-                                  value: widget.computadores.manuais.toDouble(),
-                                  title: '',
-                                  color: Colors.red,
-                                  radius: getRadius(1),
-                                  gradient: const RadialGradient(
-                                    colors: [
-                                      Colors.deepOrange,
-                                      Colors.red,
-                                    ],
-                                  ),
-                                ),
-                              ],
-                              sectionsSpace: 2,
                             ),
                           ),
-                        ),
-                      ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          _LegendItem(
-                            color: Colors.blue,
-                            text:
-                                'Automáticos: ${widget.computadores.automaticos}',
-                          ),
-                          const SizedBox(height: 8),
-                          _LegendItem(
-                            color: Colors.red,
-                            text: 'Manuais: ${widget.computadores.manuais}',
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              _LegendItem(
+                                color: Colors.blue,
+                                text:
+                                    'Automáticos: ${widget.computadores.automaticos}',
+                              ),
+                              const SizedBox(height: 8),
+                              _LegendItem(
+                                color: Colors.red,
+                                text: 'Manuais: ${widget.computadores.manuais}',
+                              ),
+                            ],
                           ),
                         ],
-                      ),
-                    ],
+                      );
+                    },
                   ),
                 ),
               ],

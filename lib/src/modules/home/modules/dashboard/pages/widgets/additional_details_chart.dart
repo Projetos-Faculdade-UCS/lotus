@@ -72,59 +72,78 @@ class _AdditionalDetailsChartState extends State<AdditionalDetailsChart> {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Flexible(
-                          child: DropShadow(
-                            offset: Offset.zero,
-                            blurRadius: 4,
-                            child: PieChart(
-                              PieChartData(
-                                pieTouchData: PieTouchData(
-                                  touchCallback: (touchEvent, touchResponse) {
-                                    setState(() {
-                                      touchedIndex = touchResponse
-                                              ?.touchedSection
-                                              ?.touchedSectionIndex ??
-                                          -1;
-                                    });
-                                  },
+                          child: Builder(
+                            builder: (context) {
+                              if (widget.dashboard.computadores.total == 0 &&
+                                  widget.dashboard.impressoras == 0 &&
+                                  widget.dashboard.monitores == 0) {
+                                return const Center(
+                                  child: Text('Sem dados para exibir'),
+                                );
+                              }
+                              return DropShadow(
+                                offset: Offset.zero,
+                                blurRadius: 4,
+                                child: PieChart(
+                                  PieChartData(
+                                    pieTouchData: PieTouchData(
+                                      touchCallback:
+                                          (touchEvent, touchResponse) {
+                                        setState(() {
+                                          touchedIndex = touchResponse
+                                                  ?.touchedSection
+                                                  ?.touchedSectionIndex ??
+                                              -1;
+                                        });
+                                      },
+                                    ),
+                                    sections: [
+                                      PieChartSectionData(
+                                        value: widget
+                                            .dashboard.computadores.total
+                                            .toDouble(),
+                                        title: '',
+                                        color: Colors.blue,
+                                        radius: getRadius(0),
+                                        gradient: const RadialGradient(
+                                          colors: [
+                                            Colors.blueGrey,
+                                            Colors.blue
+                                          ],
+                                        ),
+                                      ),
+                                      PieChartSectionData(
+                                        value: widget.dashboard.impressoras
+                                            .toDouble(),
+                                        title: '',
+                                        color: Colors.green,
+                                        radius: getRadius(1),
+                                        gradient: const LinearGradient(
+                                          colors: [
+                                            Colors.lightGreen,
+                                            Colors.green
+                                          ],
+                                        ),
+                                      ),
+                                      PieChartSectionData(
+                                        value: widget.dashboard.monitores
+                                            .toDouble(),
+                                        title: '',
+                                        color: Colors.orange,
+                                        radius: getRadius(2),
+                                        gradient: const LinearGradient(
+                                          colors: [
+                                            Colors.orangeAccent,
+                                            Colors.orange,
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                    // sectionsSpace: 2,
+                                  ),
                                 ),
-                                sections: [
-                                  PieChartSectionData(
-                                    value: widget.dashboard.computadores.total
-                                        .toDouble(),
-                                    title: '',
-                                    color: Colors.blue,
-                                    radius: getRadius(0),
-                                    gradient: const RadialGradient(
-                                      colors: [Colors.blueGrey, Colors.blue],
-                                    ),
-                                  ),
-                                  PieChartSectionData(
-                                    value:
-                                        widget.dashboard.impressoras.toDouble(),
-                                    title: '',
-                                    color: Colors.green,
-                                    radius: getRadius(1),
-                                    gradient: const LinearGradient(
-                                      colors: [Colors.lightGreen, Colors.green],
-                                    ),
-                                  ),
-                                  PieChartSectionData(
-                                    value:
-                                        widget.dashboard.monitores.toDouble(),
-                                    title: '',
-                                    color: Colors.orange,
-                                    radius: getRadius(2),
-                                    gradient: const LinearGradient(
-                                      colors: [
-                                        Colors.orangeAccent,
-                                        Colors.orange,
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                                // sectionsSpace: 2,
-                              ),
-                            ),
+                              );
+                            },
                           ),
                         ),
                         Column(
