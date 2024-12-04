@@ -2,6 +2,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:lotus/src/modules/home/modules/monitor_module/bloc/monitores_bloc.dart';
 import 'package:lotus/src/modules/home/modules/monitor_module/pages/monitor_page.dart';
 import 'package:lotus/src/modules/home/modules/monitor_module/pages/monitores_page.dart';
+import 'package:lotus/src/modules/home/modules/shared/bloc/movimentacao_bloc.dart';
 import 'package:lotus/src/modules/home/modules/shared/bloc/sala_bloc.dart';
 import 'package:lotus/src/modules/home/nested_module.dart';
 import 'package:repositories/repositories.dart';
@@ -17,7 +18,12 @@ class MonitorModule extends Module {
       ..addLazySingleton<MonitorRepository>(MonitorRepository.new)
       ..add<MonitoresBloc>(MonitoresBloc.new)
       ..add<SalaRepository>(SalaRepository.new)
-      ..add<SalaBloc>(SalaBloc.new);
+      ..add<SalaBloc>(SalaBloc.new)
+      ..addLazySingleton<MovimentacaoBloc<BaseAtivoRepository>>(
+        () => MovimentacaoBloc<MonitorRepository>(
+          i.get<MonitorRepository>(),
+        ),
+      );
   }
 
   @override

@@ -103,7 +103,7 @@ class _Header extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                ativo.nome,
+                ativo.nome == '' ? 'Sem nome' : ativo.nome,
                 style: titleTextStyle,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,

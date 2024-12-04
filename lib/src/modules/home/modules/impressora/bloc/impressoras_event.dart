@@ -21,3 +21,18 @@ class GetImpressora extends ImpressorasEvent {
   /// ID da impressora.
   final int id;
 }
+
+/// Evento para atualizar a sala de um ativo.
+class UpdateSala extends ImpressorasEvent {
+  /// {@macro update_local}
+  const UpdateSala({
+    required this.id,
+    required this.sala,
+  });
+
+  /// Id do ativo.
+  final int id;
+
+  /// Sala do ativo.
+  final Sala? sala;
+}

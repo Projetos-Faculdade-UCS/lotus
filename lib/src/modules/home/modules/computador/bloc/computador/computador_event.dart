@@ -34,7 +34,7 @@ class UpdateSala extends ComputadorEvent {
   final int id;
 
   /// Sala do ativo.
-  final Sala sala;
+  final Sala? sala;
 }
 
 /// Evento para listar os computadores pendentes de validar.

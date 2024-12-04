@@ -66,4 +66,46 @@ abstract class BaseAtivoRepository<T extends Ativo> {
       data: ativo.toJson(),
     );
   }
+
+  /// Atualiza a sala de um [T].
+  Future<T?> updateSala(int ativoId, int? salaId) async {
+    final ativoResponse = await lotusApiClient.patch<Map<String, dynamic>>(
+      '$baseUrl/$ativoId/',
+      data: {
+        'local': salaId,
+      },
+    );
+    if (ativoResponse.data == null || ativoResponse.statusCode != 200) {
+      return null;
+    }
+
+    final ativoMap = ativoResponse.data!;
+
+    return fromJson(ativoMap);
+  }
+
+  /// Busca o histórico de movimentações de um [T].
+  Future<List<Movimentacao>> getHistoricoMovimentacoes(int ativoId) async {
+    final response = await lotusApiClient.get<List<dynamic>>(
+      '$baseUrl/$ativoId/movimentacoes/',
+    );
+
+    if (response.data == null || response.statusCode != 200) {
+      throw RepositoryException(
+        'Failed to fetch movimentacoes',
+      );
+    }
+
+    if (!response.data!.every((element) => element is Map)) {
+      throw RepositoryException('Not all movimentacoes are maps');
+    }
+
+    final movimentacoesMap = response.data!.cast<Map<String, dynamic>>();
+
+    final movimentacoes = movimentacoesMap.map((movimentacaoMap) {
+      return Movimentacao.fromJson(movimentacaoMap);
+    }).toList();
+
+    return movimentacoes;
+  }
 }

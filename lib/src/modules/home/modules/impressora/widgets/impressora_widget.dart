@@ -1,19 +1,28 @@
 import 'package:ativos_ui/src/widgets/cabecalho_ativo.dart';
 import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
 import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:hugeicons/hugeicons.dart';
+import 'package:lotus/src/modules/home/modules/impressora/bloc/impressoras_bloc.dart';
+import 'package:lotus/src/modules/home/modules/shared/bloc/movimentacao_bloc.dart';
 import 'package:lotus/src/modules/home/modules/shared/widgets/card_local.dart';
+import 'package:lotus/src/modules/home/modules/shared/widgets/lista_movimentacoes.dart';
 import 'package:repositories/repositories.dart';
 
+/// Tela de detalhes de uma impressora.
 class ImpressoraWidget extends StatelessWidget {
   /// {@macro impressora_widget}
   const ImpressoraWidget({
     required this.impressora,
+    required this.impressorasBloc,
     super.key,
   });
 
   /// Impressora.
   final Impressora impressora;
+
+  /// Bloc da impressora.
+  final ImpressorasBloc impressorasBloc;
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +39,12 @@ class ImpressoraWidget extends StatelessWidget {
             ),
             decoration: BoxDecoration(
               color: theme.scaffoldBackgroundColor,
+              border: Border(
+                bottom: BorderSide(
+                  color: colorScheme.onSurfaceVariant,
+                  width: 0.5,
+                ),
+              ),
               boxShadow: [
                 BoxShadow(
                   color: colorScheme.shadow,
@@ -82,7 +97,14 @@ class ImpressoraWidget extends StatelessWidget {
                         const SizedBox(height: 4),
                         CardLocal(
                           sala: impressora.sala,
-                          onUpdateSala: print,
+                          onUpdateSala: (sala) {
+                            impressorasBloc.add(
+                              UpdateSala(
+                                id: impressora.id,
+                                sala: sala,
+                              ),
+                            );
+                          },
                         ),
                         const SizedBox(height: 16),
                         Row(
@@ -91,43 +113,29 @@ class ImpressoraWidget extends StatelessWidget {
                               width: 8,
                             ),
                             HugeIcon(
-                              icon: HugeIcons.strokeRoundedTextAlignJustifyLeft,
+                              icon: HugeIcons.strokeRoundedClock04,
                               color: colorScheme.onSurfaceVariant,
                               size: 20,
                             ),
                             const SizedBox(width: 4),
-                            Text(
-                              'Descrição',
-                              style: TextStyle(
-                                fontSize: 18,
-                                color: colorScheme.onSurfaceVariant,
+                            Flexible(
+                              fit: FlexFit.tight,
+                              child: Text(
+                                'Histórico de movimentações',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  color: colorScheme.onSurfaceVariant,
+                                ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
                               ),
                             ),
                           ],
                         ),
-                        const SizedBox(height: 4),
                         Expanded(
-                          flex: 2,
-                          child: Container(
-                            width: double.infinity,
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 8,
-                              vertical: 8,
-                            ),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              color: colorScheme.onSecondary,
-                              border: Border.all(
-                                color: colorScheme.onSurfaceVariant,
-                              ),
-                            ),
-                            child: Text(
-                              impressora.descricao,
-                              style: TextStyle(
-                                fontSize: 16,
-                                color: colorScheme.onSurface,
-                              ),
-                            ),
+                          child: ListaMovimentacoes(
+                            idAtivo: impressora.id,
+                            bloc: Modular.get<MovimentacaoBloc>(),
                           ),
                         ),
                       ],

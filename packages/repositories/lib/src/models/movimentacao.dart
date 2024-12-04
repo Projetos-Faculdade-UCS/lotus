@@ -25,7 +25,7 @@ class Movimentacao extends Equatable {
   final int id;
 
   /// The room where the asset is located.
-  final Sala salaAtual;
+  final Sala? salaAtual;
 
   /// The date of the movimentacao.
   final DateTime data;

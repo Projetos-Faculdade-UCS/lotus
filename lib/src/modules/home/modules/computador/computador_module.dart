@@ -4,8 +4,8 @@ import 'package:lotus/src/modules/home/modules/computador/cubit/pendentes_cubit.
 import 'package:lotus/src/modules/home/modules/computador/pages/computador_page.dart';
 import 'package:lotus/src/modules/home/modules/computador/pages/computadores_page.dart';
 import 'package:lotus/src/modules/home/modules/computador/pages/new_computador_page.dart';
-import 'package:lotus/src/modules/home/modules/shared/bloc/movimentacao_bloc.dart';
 import 'package:lotus/src/modules/home/modules/computador/pages/pendentes_page.dart';
+import 'package:lotus/src/modules/home/modules/shared/bloc/movimentacao_bloc.dart';
 import 'package:lotus/src/modules/home/modules/shared/bloc/sala_bloc.dart';
 import 'package:lotus/src/modules/home/nested_module.dart';
 import 'package:repositories/repositories.dart';
@@ -22,7 +22,11 @@ class ComputadorModule extends Module {
       ..add<ComputadorBloc>(ComputadorBloc.new)
       ..add<SalaRepository>(SalaRepository.new)
       ..add<SalaBloc>(SalaBloc.new)
-      ..add<MovimentacaoBloc>(MovimentacaoBloc.new)
+      ..addLazySingleton<MovimentacaoBloc<BaseAtivoRepository>>(
+        () => MovimentacaoBloc<ComputadorRepository>(
+          i.get<ComputadorRepository>(),
+        ),
+      )
       ..add<PendentesCubit>(PendentesCubit.new);
   }
 

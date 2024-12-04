@@ -31,7 +31,10 @@ class ImpressoraPage extends StatelessWidget {
             if (state is ImpressorasInitial || state is ImpressorasLoading) {
               return const Center(child: CircularProgressIndicator());
             } else if (state is ImpressoraSuccess) {
-              return ImpressoraWidget(impressora: state.impressora);
+              return ImpressoraWidget(
+                impressora: state.impressora,
+                impressorasBloc: impressorasBloc,
+              );
             } else {
               return const Center(
                 child: Text('Erro ao carregar impressora.'),

@@ -18,6 +18,10 @@ class FichaTecnicaTabs extends StatelessWidget {
       decoration: BoxDecoration(
         color: Theme.of(context).scaffoldBackgroundColor,
         borderRadius: BorderRadius.circular(8),
+        border: Border.all(
+          color: Theme.of(context).colorScheme.onSurfaceVariant,
+          width: 0.5,
+        ),
         boxShadow: [
           BoxShadow(
             color: Theme.of(context).colorScheme.shadow,
