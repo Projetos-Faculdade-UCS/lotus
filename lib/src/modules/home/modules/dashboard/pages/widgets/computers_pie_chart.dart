@@ -48,7 +48,7 @@ class _ComputersPieChartState extends State<ComputersPieChart> {
             }
 
             return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 const Text(
                   'Visão Geral dos Computadores',
@@ -57,55 +57,79 @@ class _ComputersPieChartState extends State<ComputersPieChart> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
+                const SizedBox(height: 8),
                 Expanded(
-                  child: DropShadow(
-                    offset: const Offset(0, 2),
-                    blurRadius: 6,
-                    spread: .5,
-                    child: PieChart(
-                      PieChartData(
-                        pieTouchData: PieTouchData(
-                          touchCallback: (touchEvent, touchResponse) {
-                            setState(() {
-                              if (touchResponse?.touchedSection == null) {
-                                touchedIndex = -1;
-                              } else {
-                                touchedIndex = touchResponse!
-                                    .touchedSection!.touchedSectionIndex;
-                              }
-                            });
-                          },
-                        ),
-                        sections: [
-                          PieChartSectionData(
-                            value: widget.computadores.automaticos.toDouble(),
-                            title:
-                                'Automáticos:\n${widget.computadores.automaticos}',
-                            color: Colors.blue,
-                            radius: getRadius(0),
-                            gradient: const RadialGradient(
-                              colors: [
-                                Colors.blueGrey,
-                                Colors.blue,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Flexible(
+                        child: DropShadow(
+                          offset: const Offset(0, 2),
+                          blurRadius: 6,
+                          spread: .5,
+                          child: PieChart(
+                            PieChartData(
+                              pieTouchData: PieTouchData(
+                                touchCallback: (touchEvent, touchResponse) {
+                                  setState(() {
+                                    if (touchResponse?.touchedSection == null) {
+                                      touchedIndex = -1;
+                                    } else {
+                                      touchedIndex = touchResponse!
+                                          .touchedSection!.touchedSectionIndex;
+                                    }
+                                  });
+                                },
+                              ),
+                              sections: [
+                                PieChartSectionData(
+                                  value: widget.computadores.automaticos
+                                      .toDouble(),
+                                  title: '',
+                                  color: Colors.blue,
+                                  radius: getRadius(0),
+                                  gradient: const RadialGradient(
+                                    colors: [
+                                      Colors.blueGrey,
+                                      Colors.blue,
+                                    ],
+                                  ),
+                                ),
+                                PieChartSectionData(
+                                  value: widget.computadores.manuais.toDouble(),
+                                  title: '',
+                                  color: Colors.red,
+                                  radius: getRadius(1),
+                                  gradient: const RadialGradient(
+                                    colors: [
+                                      Colors.deepOrange,
+                                      Colors.red,
+                                    ],
+                                  ),
+                                ),
                               ],
+                              sectionsSpace: 2,
                             ),
                           ),
-                          PieChartSectionData(
-                            value: widget.computadores.manuais.toDouble(),
-                            title: 'Manuais:\n${widget.computadores.manuais}',
+                        ),
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          _LegendItem(
+                            color: Colors.blue,
+                            text:
+                                'Automáticos: ${widget.computadores.automaticos}',
+                          ),
+                          const SizedBox(height: 8),
+                          _LegendItem(
                             color: Colors.red,
-                            radius: getRadius(1),
-                            gradient: const RadialGradient(
-                              colors: [
-                                Colors.deepOrange,
-                                Colors.red,
-                              ],
-                            ),
+                            text: 'Manuais: ${widget.computadores.manuais}',
                           ),
                         ],
-                        sectionsSpace: 2,
                       ),
-                    ),
+                    ],
                   ),
                 ),
               ],
@@ -113,6 +137,41 @@ class _ComputersPieChartState extends State<ComputersPieChart> {
           },
         ),
       ),
+    );
+  }
+}
+
+/// Widget for a single legend item
+class _LegendItem extends StatelessWidget {
+  const _LegendItem({
+    required this.color,
+    required this.text,
+  });
+
+  final Color color;
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Container(
+          width: 16,
+          height: 16,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: color,
+          ),
+        ),
+        const SizedBox(width: 8),
+        Text(
+          text,
+          style: const TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ],
     );
   }
 }
