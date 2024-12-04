@@ -64,8 +64,8 @@ class _ComputersPieChartState extends State<ComputersPieChart> {
                     children: [
                       Flexible(
                         child: DropShadow(
-                          offset: const Offset(0, 2),
-                          blurRadius: 6,
+                          offset: Offset.zero,
+                          blurRadius: 4,
                           spread: .5,
                           child: PieChart(
                             PieChartData(
