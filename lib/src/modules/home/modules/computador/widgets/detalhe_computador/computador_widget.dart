@@ -1,4 +1,4 @@
-import 'package:ativos_ui/src/widgets/cabecalho_ativo.dart';
+import 'package:ativos_ui/ativos_ui.dart';
 import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
 import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
 import 'package:flutter_modular/flutter_modular.dart';

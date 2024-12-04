@@ -19,7 +19,7 @@ class ComputadorRepository extends BaseAtivoRepository<Computador> {
 
   /// Atualiza a sala de um [Computador].
   @override
-  Future<Computador?> updateSala(int computadorId, int salaId) async {
+  Future<Computador?> updateSala(int computadorId, int? salaId) async {
     final computadorResponse = await lotusApiClient.patch<Map<String, dynamic>>(
       '$baseUrl/$computadorId/',
       data: {
