@@ -37,41 +37,47 @@ class CardLocal extends StatelessWidget {
           children: [
             if (sala == null)
               AnimatedContainer(
-                height: 220,
+                height: 200,
                 duration: const Duration(milliseconds: 300),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
-                    topLeft: const Radius.circular(16),
-                    topRight: const Radius.circular(16),
+                    topLeft: const Radius.circular(8),
+                    topRight: const Radius.circular(8),
                     bottomLeft:
-                        state.isAdmin ? Radius.zero : const Radius.circular(16),
+                        state.isAdmin ? Radius.zero : const Radius.circular(8),
                     bottomRight:
-                        state.isAdmin ? Radius.zero : const Radius.circular(16),
+                        state.isAdmin ? Radius.zero : const Radius.circular(8),
                   ),
                   color: theme.colorScheme.onSurface.withOpacity(0.1),
+                  border: Border.all(
+                    color: theme.colorScheme.onSurfaceVariant,
+                    width: 0.5,
+                  ),
                 ),
                 child: const Center(
                   child: Text('Sem informações de localização.'),
                 ),
               ),
             if (sala != null)
-              SizedBox(
-                height: 200,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.only(
-                    topLeft: const Radius.circular(16),
-                    topRight: const Radius.circular(16),
-                    bottomLeft:
-                        state.isAdmin ? Radius.zero : const Radius.circular(16),
-                    bottomRight:
-                        state.isAdmin ? Radius.zero : const Radius.circular(16),
-                  ),
+              ClipRRect(
+                borderRadius: BorderRadius.only(
+                  topLeft: const Radius.circular(8),
+                  topRight: const Radius.circular(8),
+                  bottomLeft:
+                      state.isAdmin ? Radius.zero : const Radius.circular(8),
+                  bottomRight:
+                      state.isAdmin ? Radius.zero : const Radius.circular(8),
+                ),
+                child: SizedBox(
+                  height: 200,
                   child: Stack(
                     fit: StackFit.expand,
                     alignment: Alignment.bottomCenter,
                     children: [
-                      const Positioned.fill(
-                        child: _BlurredImage(),
+                      Positioned.fill(
+                        child: _BlurredImage(
+                          imagem: sala?.imagem ?? '',
+                        ),
                       ),
                       Positioned(
                         bottom: 0,
@@ -109,91 +115,149 @@ class CardLocal extends StatelessWidget {
                 ),
               ),
             if (state.isAdmin)
-              Row(
-                children: [
-                  Expanded(
-                    child: SizedBox(
-                      height: 35,
-                      child: TextButton(
-                        //remove the border radius on the top of the button
-                        style: TextButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.only(
-                              bottomLeft: const Radius.circular(16),
-                              bottomRight: sala == null
-                                  ? const Radius.circular(16)
-                                  : Radius.zero,
-                            ),
-                          ),
-                          backgroundColor:
-                              theme.colorScheme.primary.withOpacity(0.2),
-                        ),
-                        onPressed: () async {
-                          final sala = await MudarLocalDialog.show(
-                            Modular.get<SalaBloc>(),
-                          );
-                          if (sala != null) {
-                            onUpdateSala(sala);
-                          }
-                        },
-                        child: const Text('Mudar local'),
-                      ),
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.only(
+                    bottomLeft: Radius.circular(8),
+                    bottomRight: Radius.circular(8),
+                  ),
+                  //only border on the bottom and the left and the right
+                  border: Border(
+                    bottom: BorderSide(
+                      color: theme.colorScheme.onSurfaceVariant,
+                      width: 0.5,
+                    ),
+                    left: BorderSide(
+                      color: theme.colorScheme.onSurfaceVariant,
+                      width: 0.5,
+                    ),
+                    right: BorderSide(
+                      color: theme.colorScheme.onSurfaceVariant,
+                      width: 0.5,
                     ),
                   ),
-                  if (sala != null)
-                    SizedBox(
-                      width: 50,
-                      height: 35,
-                      child: TextButton(
-                        style: TextButton.styleFrom(
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.only(
-                              bottomRight: Radius.circular(16),
+                ),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: SizedBox(
+                        height: 35,
+                        child: TextButton(
+                          //remove the border radius on the top of the button
+                          style: TextButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.only(
+                                bottomLeft: const Radius.circular(8),
+                                bottomRight: sala == null
+                                    ? const Radius.circular(8)
+                                    : Radius.zero,
+                              ),
                             ),
+                            backgroundColor:
+                                theme.colorScheme.primary.withOpacity(0.2),
                           ),
-                          shadowColor: theme.colorScheme.error,
-                          backgroundColor:
-                              theme.colorScheme.error.withOpacity(0.2),
-                        ),
-                        onPressed: () async {
-                          final confirmed = await showDialog<bool>(
-                            barrierDismissible: false,
-                            context: context,
-                            builder: (context) {
-                              return AlertDialog(
-                                title: const Text('Remover Local'),
-                                content: Text(
-                                  'Deseja remover o local ${sala!.nome}?',
+                          onPressed: () async {
+                            final sala = await MudarLocalDialog.show(
+                              Modular.get<SalaBloc>(),
+                            );
+                            if (sala != null) {
+                              onUpdateSala(sala);
+                            }
+                          },
+                          child: sala != null
+                              ? const Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      HugeIcons.strokeRoundedExchange01,
+                                      size: 20,
+                                    ),
+                                    SizedBox(width: 8),
+                                    Text('Mudar Local'),
+                                  ],
+                                )
+                              : const Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      HugeIcons.strokeRoundedAdd01,
+                                      size: 20,
+                                    ),
+                                    SizedBox(width: 8),
+                                    Text('Adicionar Local'),
+                                  ],
                                 ),
-                                actions: [
-                                  TextButton(
-                                    onPressed: () {
-                                      Modular.to.pop(false);
-                                    },
-                                    child: const Text('Cancelar'),
-                                  ),
-                                  TextButton(
-                                    onPressed: () {
-                                      Modular.to.pop(true);
-                                    },
-                                    child: const Text('Confirmar'),
-                                  ),
-                                ],
-                              );
-                            },
-                          );
-                          if (confirmed ?? false) {
-                            onUpdateSala(null);
-                          }
-                        },
-                        child: Icon(
-                          HugeIcons.strokeRoundedDelete02,
-                          color: theme.colorScheme.error,
-                          size: 20,
                         ),
                       ),
                     ),
-                ],
+                    if (sala != null)
+                      Container(
+                        width: 50,
+                        height: 35,
+                        decoration: BoxDecoration(
+                          borderRadius: const BorderRadius.only(
+                            bottomRight: Radius.circular(8),
+                          ),
+                          //make border on the right only
+                          border: Border(
+                            left: BorderSide(
+                              color: theme.colorScheme.onSurfaceVariant,
+                            ),
+                          ),
+                        ),
+                        child: TextButton(
+                          style: TextButton.styleFrom(
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.only(
+                                bottomRight: Radius.circular(8),
+                              ),
+                            ),
+                            //make border on the right only
+
+                            shadowColor: theme.colorScheme.error,
+                            backgroundColor:
+                                theme.colorScheme.error.withOpacity(0.2),
+                          ),
+                          onPressed: () async {
+                            final confirmed = await showDialog<bool>(
+                              barrierDismissible: false,
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  title: const Text('Remover Local'),
+                                  content: Text(
+                                    'Deseja remover o local ${sala!.nome}?',
+                                  ),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Modular.to.pop(false);
+                                      },
+                                      child: const Text('Cancelar'),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        Modular.to.pop(true);
+                                      },
+                                      child: const Text('Confirmar'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                            if (confirmed ?? false) {
+                              onUpdateSala(null);
+                            }
+                          },
+                          child: Icon(
+                            HugeIcons.strokeRoundedDelete02,
+                            color: theme.colorScheme.error,
+                            size: 20,
+                          ),
+                        ),
+                      ),
+                  ],
+                ),
               ),
           ],
         );
@@ -203,7 +267,11 @@ class CardLocal extends StatelessWidget {
 }
 
 class _BlurredImage extends StatelessWidget {
-  const _BlurredImage();
+  const _BlurredImage({
+    required this.imagem,
+  });
+
+  final String imagem;
 
   @override
   Widget build(BuildContext context) {
@@ -229,7 +297,7 @@ class _BlurredImage extends StatelessWidget {
           ),
         ],
         child: Image.asset(
-          'assets/ativos/local-fallback.png',
+          imagem,
           fit: BoxFit.cover,
         ),
       ),

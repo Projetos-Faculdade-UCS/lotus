@@ -38,7 +38,7 @@ class ListaSalas extends StatelessWidget {
                     context: context,
                     builder: (context) {
                       return AlertDialog(
-                        title: const Text('Mudar Local'),
+                        title: const Text('Tem certeza?'),
                         content:
                             Text('Deseja mudar o local para ${sala.nome}?'),
                         actions: [

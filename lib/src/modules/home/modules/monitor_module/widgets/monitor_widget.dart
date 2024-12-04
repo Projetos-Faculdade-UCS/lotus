@@ -7,6 +7,7 @@ import 'package:lotus/src/modules/home/modules/monitor_module/bloc/monitores_blo
 import 'package:lotus/src/modules/home/modules/shared/bloc/movimentacao_bloc.dart';
 import 'package:lotus/src/modules/home/modules/shared/widgets/card_local.dart';
 import 'package:lotus/src/modules/home/modules/shared/widgets/lista_movimentacoes.dart';
+import 'package:lotus/src/modules/home/modules/shared/widgets/no_content.dart';
 import 'package:repositories/repositories.dart';
 
 /// Widget que exibe as informações de um monitor.
@@ -153,7 +154,7 @@ class MonitorWidget extends StatelessWidget {
                               width: 8,
                             ),
                             HugeIcon(
-                              icon: HugeIcons.strokeRoundedClock04,
+                              icon: HugeIcons.strokeRoundedTask01,
                               color: colorScheme.onSurfaceVariant,
                               size: 20,
                             ),
@@ -161,7 +162,7 @@ class MonitorWidget extends StatelessWidget {
                             Flexible(
                               fit: FlexFit.tight,
                               child: Text(
-                                'Histórico de movimentações',
+                                'Ficha técnica',
                                 style: TextStyle(
                                   fontSize: 18,
                                   color: colorScheme.onSurfaceVariant,
@@ -172,8 +173,119 @@ class MonitorWidget extends StatelessWidget {
                             ),
                           ],
                         ),
-                        const Expanded(
-                          child: Placeholder(),
+                        Flexible(
+                          child: SizedBox(
+                            width: double.infinity,
+                            child: Card(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                side: BorderSide(
+                                  color: colorScheme.onSurfaceVariant,
+                                  width: 0.5,
+                                ),
+                              ),
+                              color: Theme.of(context).scaffoldBackgroundColor,
+                              child: Padding(
+                                padding: const EdgeInsets.all(16),
+                                child: ListView(
+                                  children: [
+                                    if (monitor.descricao.isNotEmpty)
+                                      ListTile(
+                                        contentPadding: EdgeInsets.zero,
+                                        title: Text(
+                                          'Descrição',
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            color: colorScheme.onSurfaceVariant,
+                                          ),
+                                        ),
+                                        subtitle: Text(
+                                          monitor.descricao,
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                            color: colorScheme.onSurface,
+                                          ),
+                                        ),
+                                      )
+                                    else
+                                      const NoContent(text: 'Sem descrição'),
+                                    if (monitor.resolucao.isNotEmpty)
+                                      ListTile(
+                                        contentPadding: EdgeInsets.zero,
+                                        leading: const Icon(
+                                          HugeIcons.strokeRoundedArrowDiagonal,
+                                        ),
+                                        title: Text(
+                                          'Resolução',
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            color: colorScheme.onSurfaceVariant,
+                                          ),
+                                        ),
+                                        subtitle: Text(
+                                          monitor.descricao,
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                            color: colorScheme.onSurface,
+                                          ),
+                                        ),
+                                      )
+                                    else
+                                      const NoContent(text: 'Sem resolução'),
+                                    if (monitor.fabricante.isNotEmpty)
+                                      ListTile(
+                                        contentPadding: EdgeInsets.zero,
+                                        leading: const Icon(
+                                          HugeIcons.strokeRoundedFactory02,
+                                        ),
+                                        title: Text(
+                                          'Fabricante',
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            color: colorScheme.onSurfaceVariant,
+                                          ),
+                                        ),
+                                        subtitle: Text(
+                                          monitor.fabricante,
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                            color: colorScheme.onSurface,
+                                          ),
+                                        ),
+                                      )
+                                    else
+                                      const NoContent(text: 'Sem fabricante'),
+                                    if (monitor.numeroSerie?.isNotEmpty ??
+                                        false)
+                                      ListTile(
+                                        contentPadding: EdgeInsets.zero,
+                                        leading: const Icon(
+                                          HugeIcons.strokeRoundedGrid,
+                                        ),
+                                        title: Text(
+                                          'Número de série',
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            color: colorScheme.onSurfaceVariant,
+                                          ),
+                                        ),
+                                        subtitle: Text(
+                                          monitor.numeroSerie!,
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                            color: colorScheme.onSurface,
+                                          ),
+                                        ),
+                                      )
+                                    else
+                                      const NoContent(
+                                        text: 'Sem número de série',
+                                      ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
                         ),
                       ],
                     ),

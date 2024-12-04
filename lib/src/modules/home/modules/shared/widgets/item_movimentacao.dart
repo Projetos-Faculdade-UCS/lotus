@@ -19,7 +19,7 @@ class ItemMovimentacao extends StatelessWidget {
     return Card(
       //custom style with border
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(8),
         side: BorderSide(
           color: theme.colorScheme.onSurfaceVariant,
           width: 0.5,

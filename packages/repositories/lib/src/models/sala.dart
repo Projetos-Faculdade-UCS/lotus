@@ -49,4 +49,14 @@ class Sala extends Equatable {
       bloco: bloco ?? this.bloco,
     );
   }
+
+  ///A function that returns the path of the image of the room in the assets.
+  String get imagem {
+    final imagensPossiveis = [
+      'assets/ativos/campus-sede.png',
+      'assets/ativos/bloco-57.jpg',
+      'assets/ativos/local-fallback.png',
+    ];
+    return imagensPossiveis[id % imagensPossiveis.length];
+  }
 }
