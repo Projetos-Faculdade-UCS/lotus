@@ -1,5 +1,6 @@
 import 'package:ativos_ui/ativos_ui.dart';
 import 'package:flutter/material.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:repositories/repositories.dart';
 
 /// Lista de ativos relacionados a um ativo pai.
@@ -63,6 +64,28 @@ class ListaAtivosRelacionados extends StatelessWidget {
             ),
             for (final impressora in impressoras) AtivoCard(ativo: impressora),
           ],
+          if (ativos.isEmpty)
+            SizedBox(
+              height: 500,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    HugeIcons.strokeRoundedNodeRemove,
+                    size: 48,
+                    color: theme.colorScheme.onSurfaceVariant,
+                  ),
+                  const SizedBox(height: 16),
+                  Text(
+                    'Nenhum ativo relacionado encontrado.',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: theme.colorScheme.onSurfaceVariant,
+                    ),
+                  ),
+                ],
+              ),
+            ),
         ],
       ),
     );
