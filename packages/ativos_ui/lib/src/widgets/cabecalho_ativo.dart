@@ -1,5 +1,4 @@
 import 'package:ativos_ui/ativos_ui.dart';
-import 'package:ativos_ui/src/widgets/ativos_relacionados_dialog.dart';
 import 'package:ativos_ui/src/widgets/info_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
@@ -12,6 +11,7 @@ class CabecalhoAtivo extends StatelessWidget {
   /// {@macro cabecalho_computador}
   const CabecalhoAtivo({
     required this.ativo,
+    required this.onPressed,
     this.subtitle,
     super.key,
   });
@@ -21,6 +21,9 @@ class CabecalhoAtivo extends StatelessWidget {
 
   /// O subtítulo do computador.
   final Widget? subtitle;
+
+  /// Função chamada quando o botão de ativos relacionados é pressionado.
+  final void Function(Ativo ativo) onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -84,11 +87,7 @@ class CabecalhoAtivo extends StatelessWidget {
               width: 200,
               title: 'Ativos relacionados',
               value: TextButton(
-                onPressed: () => showDialog<String>(
-                  context: context,
-                  builder: (BuildContext context) =>
-                      const AtivosRelacionadosDialog(),
-                ),
+                onPressed: () => onPressed(ativo),
                 child: Row(
                   children: [
                     Text(

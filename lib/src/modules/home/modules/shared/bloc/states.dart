@@ -47,3 +47,17 @@ final class MovimentacoesSuccess extends GenericState {
   @override
   List<Object> get props => [movimentacoes];
 }
+
+/// Estado de listagem de ativos relacionados com sucesso.
+final class AtivosRelacionadosSuccess extends GenericState {
+  /// {@macro ativos_relacionados_success}
+  const AtivosRelacionadosSuccess({
+    required this.ativos,
+  });
+
+  /// Lista de ativos relacionados.
+  final List<Ativo> ativos;
+
+  @override
+  List<Object> get props => [ativos];
+}

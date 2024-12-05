@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:lotus/src/modules/home/modules/shared/bloc/events.dart';
 import 'package:lotus/src/modules/home/modules/shared/bloc/sala_bloc.dart';
 import 'package:lotus/src/modules/home/modules/shared/widgets/lista_salas.dart';
@@ -39,12 +40,26 @@ class MudarLocalDialog extends StatelessWidget {
           children: [
             AppBar(
               centerTitle: true,
-              title: Text(
-                'Mudar Local',
-                style: TextStyle(
-                  fontSize: 24,
-                  color: theme.colorScheme.primary,
-                  fontWeight: FontWeight.bold,
+              title: SizedBox(
+                child: IntrinsicWidth(
+                  child: Row(
+                    children: [
+                      Icon(
+                        HugeIcons.strokeRoundedExchange01,
+                        color: theme.colorScheme.primary,
+                        size: 28,
+                      ),
+                      const SizedBox(width: 12),
+                      Text(
+                        'Mudar local',
+                        style: TextStyle(
+                          fontSize: 24,
+                          color: theme.colorScheme.primary,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               automaticallyImplyLeading: false,

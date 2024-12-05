@@ -28,3 +28,14 @@ class GetAllMovimentacoes extends GenericEvent {
   /// atributo que será utilizado para buscar as movimentações.
   final int idComputador;
 }
+
+/// Evento para buscar todos os ativos relacionados a um ativo.
+class GetAtivosRelacionados extends GenericEvent {
+  /// {@macro ativos_relacionados_get}
+  const GetAtivosRelacionados(
+    this.idAtivo,
+  );
+
+  /// atributo que será utilizado para buscar os ativos relacionados.
+  final int idAtivo;
+}
