@@ -1,14 +1,21 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
-import 'package:hugeicons/hugeicons.dart';
-import 'package:super_sliver_list/super_sliver_list.dart';
+import 'dart:async';
 
-/// Search modal.
-class SearchModal extends StatelessWidget {
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:lotus/src/modules/home/bloc/search_bloc.dart';
+import 'package:lotus/src/modules/home/widgets/title_bar/search_bar/search_result.dart';
+
+/// Search modal with debounced search functionality.
+class SearchModal extends StatefulWidget {
   /// Default constructor.
   const SearchModal({
+    required this.searchBloc,
     super.key,
   });
+
+  /// The search bloc.
+  final SearchBloc searchBloc;
 
   static const int _itemCount = 2000000;
 
@@ -36,12 +43,49 @@ class SearchModal extends StatelessWidget {
           name: 'search-modal',
         ),
         pageBuilder: (context, animation, secondaryAnimation) {
-          return const SearchModal(
+          return SearchModal(
+            searchBloc: Modular.get(),
             key: _modalKey,
           );
         },
       ),
     );
+  }
+
+  @override
+  State<SearchModal> createState() => _SearchModalState();
+}
+
+class _SearchModalState extends State<SearchModal> {
+  /// Debounce duration in milliseconds
+  static const _debounceDuration = Duration(milliseconds: 300);
+
+  /// Timer to manage debounce
+  Timer? _debounceTimer;
+
+  @override
+  void initState() {
+    super.initState();
+    widget.searchBloc.add(const Search(''));
+  }
+
+  @override
+  void dispose() {
+    // Cancel the timer to prevent memory leaks
+    _debounceTimer?.cancel();
+    super.dispose();
+  }
+
+  /// Handles debounced search requests
+  void _onSearchChanged(String value) {
+    // Cancel any existing timer
+    _debounceTimer?.cancel();
+
+    // Create a new timer
+    _debounceTimer = Timer(_debounceDuration, () {
+      // Trigger search after the debounce duration
+      widget.searchBloc.add(Search(value));
+    });
   }
 
   @override
@@ -53,7 +97,8 @@ class SearchModal extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           color: theme.scaffoldBackgroundColor,
-          borderRadius: const BorderRadius.all(Radius.circular(10)),
+          borderRadius: const BorderRadius.all(Radius.circular(12)),
+          border: Border.all(color: Colors.grey.withOpacity(.4)),
         ),
         width: size.width * .5,
         height: size.height * .7,
@@ -88,7 +133,7 @@ class SearchModal extends StatelessWidget {
                     color: theme.scaffoldBackgroundColor,
                   ),
                   child: const _Content(
-                    key: _contentKey,
+                    key: SearchModal._contentKey,
                   ),
                 );
               },
@@ -119,6 +164,7 @@ class SearchModal extends StatelessWidget {
                         ),
                       ),
                     ),
+                    onChanged: _onSearchChanged,
                   );
                 },
               ),
@@ -126,15 +172,34 @@ class SearchModal extends StatelessWidget {
             Flexible(
               child: Material(
                 color: Colors.transparent,
-                child: SuperListView.builder(
-                  padding: const EdgeInsets.all(8),
-                  restorationId: 'search-list',
-                  itemCount: _itemCount,
-                  itemBuilder: (context, index) => ListTile(
-                    key: ValueKey('search-list-item-$index'),
-                    title: Text('Ativo ${index + 1}'),
-                    leading: const Icon(HugeIcons.strokeRoundedComputer),
-                  ),
+                child: BlocBuilder<SearchBloc, SearchState>(
+                  bloc: widget.searchBloc,
+                  builder: (context, state) {
+                    if (state is SearchInProgress) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+
+                    if (state is SearchFailure) {
+                      return const Center(
+                        child: Text('Erro ao buscar ativos'),
+                      );
+                    }
+
+                    if (state is! SearchSuccess) {
+                      return const Center(
+                        child: Text('Nenhum ativo encontrado'),
+                      );
+                    }
+
+                    return SearchResult(
+                      exactPatrimonio: state.exactPatrimonio,
+                      computadores: state.computadores,
+                      impressoras: state.impressoras,
+                      monitores: state.monitores,
+                    );
+                  },
                 ),
               ),
             ),

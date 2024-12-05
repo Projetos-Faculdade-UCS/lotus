@@ -133,4 +133,38 @@ abstract class BaseAtivoRepository<T extends Ativo> {
 
     return relacionados;
   }
+  
+  /// Search for [Ativo]s by [query] or [patrimonio].
+  Future<List<Ativo>> search({
+    required CancelToken cancelToken,
+    String? query,
+    String? patrimonio,
+  }) async {
+    final response = await lotusApiClient.get<List<dynamic>>(
+      '$baseUrl/',
+      queryParameters: {
+        if (patrimonio != null) 'patrimonio': patrimonio,
+        if (query != null) 'q': query,
+      },
+      cancelToken: CancelToken(),
+    );
+
+    if (response.data == null || response.statusCode != 200) {
+      throw RepositoryException(
+        'Failed to search ${tipo.pluralName}',
+      );
+    }
+
+    if (!response.data!.every((element) => element is Map)) {
+      throw RepositoryException('Not all ${tipo.pluralName} are maps');
+    }
+
+    final ativosMap = response.data!.cast<Map<String, dynamic>>();
+
+    final ativos = ativosMap.map((ativoMap) {
+      return Ativo.fromJson(ativoMap);
+    }).toList();
+
+    return ativos;
+  }
 }

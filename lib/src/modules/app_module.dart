@@ -4,9 +4,6 @@ import 'package:lotus/src/modules/home/nested_module.dart';
 /// The main module of the application.
 class AppModule extends Module {
   @override
-  void binds(Injector i) {}
-
-  @override
   void routes(RouteManager r) {
     r.module('/', module: NestedModule());
   }
