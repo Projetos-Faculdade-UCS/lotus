@@ -109,6 +109,31 @@ abstract class BaseAtivoRepository<T extends Ativo> {
     return movimentacoes;
   }
 
+  /// Lista todos os tipos de ativos relacionados a um [T].
+  Future<List<Ativo>> getRelacionados(int ativoId) async {
+    final response = await lotusApiClient.get<List<dynamic>>(
+      '$baseUrl/$ativoId/relacionados/',
+    );
+
+    if (response.data == null || response.statusCode != 200) {
+      throw RepositoryException(
+        'Failed to fetch relacionados',
+      );
+    }
+
+    if (!response.data!.every((element) => element is Map)) {
+      throw RepositoryException('Not all relacionados are maps');
+    }
+
+    final relacionadosMap = response.data!.cast<Map<String, dynamic>>();
+
+    final relacionados = relacionadosMap.map((relacionadoMap) {
+      return Ativo.fromJson(relacionadoMap);
+    }).toList();
+
+    return relacionados;
+  }
+  
   /// Search for [Ativo]s by [query] or [patrimonio].
   Future<List<Ativo>> search({
     required CancelToken cancelToken,

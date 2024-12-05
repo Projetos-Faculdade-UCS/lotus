@@ -4,9 +4,12 @@ import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:lotus/src/modules/home/modules/impressora/bloc/impressoras_bloc.dart';
+import 'package:lotus/src/modules/home/modules/shared/bloc/ativos_relacionados_bloc.dart';
 import 'package:lotus/src/modules/home/modules/shared/bloc/movimentacao_bloc.dart';
+import 'package:lotus/src/modules/home/modules/shared/widgets/ativos_relacionados_dialog.dart';
 import 'package:lotus/src/modules/home/modules/shared/widgets/card_local.dart';
 import 'package:lotus/src/modules/home/modules/shared/widgets/lista_movimentacoes.dart';
+import 'package:lotus/src/modules/home/modules/shared/widgets/no_content.dart';
 import 'package:repositories/repositories.dart';
 
 /// Tela de detalhes de uma impressora.
@@ -59,6 +62,12 @@ class ImpressoraWidget extends StatelessWidget {
             ),
             child: CabecalhoAtivo(
               ativo: impressora,
+              onPressed: (ativo) {
+                AtivosRelacionadosDialog.show(
+                  Modular.get<AtivosRelacionadosBloc>(),
+                  ativo,
+                );
+              },
             ),
           ),
           Expanded(
@@ -153,7 +162,7 @@ class ImpressoraWidget extends StatelessWidget {
                               width: 8,
                             ),
                             HugeIcon(
-                              icon: HugeIcons.strokeRoundedClock04,
+                              icon: HugeIcons.strokeRoundedTask01,
                               color: colorScheme.onSurfaceVariant,
                               size: 20,
                             ),
@@ -161,7 +170,7 @@ class ImpressoraWidget extends StatelessWidget {
                             Flexible(
                               fit: FlexFit.tight,
                               child: Text(
-                                'Histórico de movimentações',
+                                'Ficha técnica',
                                 style: TextStyle(
                                   fontSize: 18,
                                   color: colorScheme.onSurfaceVariant,
@@ -172,8 +181,96 @@ class ImpressoraWidget extends StatelessWidget {
                             ),
                           ],
                         ),
-                        const Expanded(
-                          child: Placeholder(),
+                        Flexible(
+                          child: SizedBox(
+                            width: double.infinity,
+                            child: Card(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                side: BorderSide(
+                                  color: colorScheme.onSurfaceVariant,
+                                  width: 0.5,
+                                ),
+                              ),
+                              color: Theme.of(context).scaffoldBackgroundColor,
+                              child: Padding(
+                                padding: const EdgeInsets.all(16),
+                                child: ListView(
+                                  children: [
+                                    if (impressora.descricao.isNotEmpty)
+                                      ListTile(
+                                        contentPadding: EdgeInsets.zero,
+                                        title: Text(
+                                          'Descrição',
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            color: colorScheme.onSurfaceVariant,
+                                          ),
+                                        ),
+                                        subtitle: Text(
+                                          impressora.descricao,
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                            color: colorScheme.onSurface,
+                                          ),
+                                        ),
+                                      )
+                                    else
+                                      const NoContent(text: 'Sem descrição'),
+                                    if (impressora.fabricante.isNotEmpty)
+                                      ListTile(
+                                        contentPadding: EdgeInsets.zero,
+                                        leading: const Icon(
+                                          HugeIcons.strokeRoundedFactory02,
+                                        ),
+                                        title: Text(
+                                          'Fabricante',
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            color: colorScheme.onSurfaceVariant,
+                                          ),
+                                        ),
+                                        subtitle: Text(
+                                          impressora.fabricante,
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                            color: colorScheme.onSurface,
+                                          ),
+                                        ),
+                                      )
+                                    else
+                                      const NoContent(text: 'Sem fabricante'),
+                                    if (impressora.numeroSerie?.isNotEmpty ??
+                                        false)
+                                      ListTile(
+                                        contentPadding: EdgeInsets.zero,
+                                        leading: const Icon(
+                                          HugeIcons.strokeRoundedGrid,
+                                        ),
+                                        title: Text(
+                                          'Número de série',
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            color: colorScheme.onSurfaceVariant,
+                                          ),
+                                        ),
+                                        subtitle: Text(
+                                          impressora.numeroSerie!,
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                            color: colorScheme.onSurface,
+                                          ),
+                                        ),
+                                      )
+                                    else
+                                      const NoContent(
+                                        text: 'Sem número de série',
+                                      ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
                         ),
                       ],
                     ),

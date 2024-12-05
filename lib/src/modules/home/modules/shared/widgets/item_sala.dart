@@ -24,7 +24,7 @@ class ItemSala extends StatelessWidget {
     return ListTile(
       onTap: () => onTap(sala),
       title: Text(
-        '${sala.nome} - ${sala.bloco.nome}',
+        'Bloco ${sala.bloco.nome} - ${sala.nome}',
         style: TextStyle(
           color: colorScheme.onSurface,
         ),

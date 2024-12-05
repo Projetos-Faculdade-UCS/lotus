@@ -17,7 +17,8 @@ class SalaRepository {
   Future<List<Sala>> fetchAll(
     String? nomeSala,
   ) async {
-    final urlParams = nomeSala != null ? '?qs=$nomeSala' : '';
+    final urlParams = nomeSala != null ? '?qs=${_cleanInput(nomeSala)}' : '';
+
     final response = await lotusApiClient.get<List<dynamic>>(
       '$baseUrl$urlParams',
     );
@@ -39,5 +40,14 @@ class SalaRepository {
     }).toList();
 
     return salas;
+  }
+
+  ///Limpa a entrada do usuário.
+  String _cleanInput(String input) {
+    return input
+        .toLowerCase()
+        .replaceAll('bloco', '')
+        .replaceAll('-', '')
+        .trim();
   }
 }
