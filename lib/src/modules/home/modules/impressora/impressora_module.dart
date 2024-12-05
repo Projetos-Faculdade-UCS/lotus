@@ -2,6 +2,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:lotus/src/modules/home/modules/impressora/bloc/impressoras_bloc.dart';
 import 'package:lotus/src/modules/home/modules/impressora/pages/impressora_page.dart';
 import 'package:lotus/src/modules/home/modules/impressora/pages/impressoras_page.dart';
+import 'package:lotus/src/modules/home/modules/shared/bloc/ativos_relacionados_bloc.dart';
 import 'package:lotus/src/modules/home/modules/shared/bloc/movimentacao_bloc.dart';
 import 'package:lotus/src/modules/home/modules/shared/bloc/sala_bloc.dart';
 import 'package:lotus/src/modules/home/nested_module.dart';
@@ -21,6 +22,11 @@ class ImpressoraModule extends Module {
       ..add<SalaBloc>(SalaBloc.new)
       ..addLazySingleton<MovimentacaoBloc<BaseAtivoRepository>>(
         () => MovimentacaoBloc<ImpressoraRepository>(
+          i.get<ImpressoraRepository>(),
+        ),
+      )
+      ..add<AtivosRelacionadosBloc<BaseAtivoRepository>>(
+        () => AtivosRelacionadosBloc<ImpressoraRepository>(
           i.get<ImpressoraRepository>(),
         ),
       );

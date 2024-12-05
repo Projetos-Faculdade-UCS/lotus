@@ -6,7 +6,9 @@ import 'package:hugeicons/hugeicons.dart';
 import 'package:lotus/src/modules/home/modules/computador/bloc/computador/computador_bloc.dart';
 import 'package:lotus/src/modules/home/modules/computador/widgets/computador_badges.dart';
 import 'package:lotus/src/modules/home/modules/computador/widgets/detalhe_computador/ficha_tecnica_tabs.dart';
+import 'package:lotus/src/modules/home/modules/shared/bloc/ativos_relacionados_bloc.dart';
 import 'package:lotus/src/modules/home/modules/shared/bloc/movimentacao_bloc.dart';
+import 'package:lotus/src/modules/home/modules/shared/widgets/ativos_relacionados_dialog.dart';
 import 'package:lotus/src/modules/home/modules/shared/widgets/card_local.dart';
 import 'package:lotus/src/modules/home/modules/shared/widgets/lista_movimentacoes.dart';
 import 'package:repositories/repositories.dart';
@@ -64,6 +66,12 @@ class ComputadorWidget extends StatelessWidget {
                 isAutomatico: computador.automatico,
                 criticidade: computador.criticidade,
               ),
+              onPressed: (ativo) {
+                AtivosRelacionadosDialog.show(
+                  Modular.get<AtivosRelacionadosBloc>(),
+                  ativo,
+                );
+              },
             ),
           ),
           Expanded(

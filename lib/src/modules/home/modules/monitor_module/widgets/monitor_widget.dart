@@ -4,7 +4,9 @@ import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:lotus/src/modules/home/modules/monitor_module/bloc/monitores_bloc.dart';
+import 'package:lotus/src/modules/home/modules/shared/bloc/ativos_relacionados_bloc.dart';
 import 'package:lotus/src/modules/home/modules/shared/bloc/movimentacao_bloc.dart';
+import 'package:lotus/src/modules/home/modules/shared/widgets/ativos_relacionados_dialog.dart';
 import 'package:lotus/src/modules/home/modules/shared/widgets/card_local.dart';
 import 'package:lotus/src/modules/home/modules/shared/widgets/lista_movimentacoes.dart';
 import 'package:lotus/src/modules/home/modules/shared/widgets/no_content.dart';
@@ -60,6 +62,12 @@ class MonitorWidget extends StatelessWidget {
             ),
             child: CabecalhoAtivo(
               ativo: monitor,
+              onPressed: (ativo) {
+                AtivosRelacionadosDialog.show(
+                  Modular.get<AtivosRelacionadosBloc>(),
+                  ativo,
+                );
+              },
             ),
           ),
           Expanded(
@@ -223,7 +231,7 @@ class MonitorWidget extends StatelessWidget {
                                           ),
                                         ),
                                         subtitle: Text(
-                                          monitor.descricao,
+                                          monitor.resolucao,
                                           style: TextStyle(
                                             fontSize: 16,
                                             color: colorScheme.onSurface,
