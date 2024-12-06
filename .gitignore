@@ -50,3 +50,4 @@ app.*.map.json
 
 **/env.g.dart
 /windows/wix/installer
+/windows/nsis/Lotus-Setup.exe
