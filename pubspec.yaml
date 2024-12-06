@@ -27,15 +27,10 @@ dependencies:
       url: https://github.com/google/flutter-desktop-embedding.git
       path: plugins/menubar
       ref: 12decbe0f592e14e03223f6f2c0c7e0e2dbd70a1
-  file_picker: ^8.1.4
-  super_context_menu: ^0.8.24
   adaptive_theme: ^3.6.0
   window_manager: ^0.4.3
   super_sliver_list: ^0.4.1
   hotkey_manager: ^0.2.3
-  keymap: ^0.0.92
-  flutter_svg: ^2.0.16
-  vector_graphics: ^1.1.11
   hugeicons: ^0.0.7
   flutter_localizations:
     sdk: flutter

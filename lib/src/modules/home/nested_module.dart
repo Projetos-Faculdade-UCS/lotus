@@ -2,7 +2,6 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:lotus/src/env/env.dart';
 import 'package:lotus/src/modules/auth/auth_module.dart';
 import 'package:lotus/src/modules/home/bloc/search_bloc.dart';
-import 'package:lotus/src/modules/home/controllers/menu_bar_controller.dart';
 import 'package:lotus/src/modules/home/modules/computador/computador_module.dart';
 import 'package:lotus/src/modules/home/modules/dashboard/dashboard_module.dart';
 import 'package:lotus/src/modules/home/modules/impressora/impressora_module.dart';
@@ -25,7 +24,6 @@ class NestedModule extends Module {
   void binds(Injector i) {
     i
       ..add<SidebarXController>(MySideBarController.new)
-      ..addSingleton<MenuBarController>(MenuBarController.new)
       ..addLazySingleton<ComputadorRepository>(
         ComputadorRepository.new,
       )

@@ -17,8 +17,6 @@ class SearchModal extends StatefulWidget {
   /// The search bloc.
   final SearchBloc searchBloc;
 
-  static const int _itemCount = 2000000;
-
   static const _modalKey = ValueKey('search-modal');
 
   static const _contentKey = ValueKey('search-content');
