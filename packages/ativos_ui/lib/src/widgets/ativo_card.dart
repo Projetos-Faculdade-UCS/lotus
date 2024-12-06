@@ -11,6 +11,7 @@ class AtivoCard extends StatelessWidget {
   const AtivoCard({
     required this.ativo,
     this.onTap,
+    this.trailing,
     super.key,
   });
 
@@ -19,6 +20,9 @@ class AtivoCard extends StatelessWidget {
 
   /// Função chamada quando o card é pressionado.
   final VoidCallback? onTap;
+
+  /// Trailing widget.
+  final Widget? trailing;
 
   // Define text styles as static constants for reuse.
   static const TextStyle _titleTextStyle = TextStyle(
@@ -44,16 +48,23 @@ class AtivoCard extends StatelessWidget {
         onTap: onTap,
         child: Padding(
           padding: const EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: Row(
             children: [
-              _Header(
-                ativo: ativo,
-                titleTextStyle: _titleTextStyle,
-                subtitleTextStyle: _subtitleTextStyle,
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _Header(
+                      ativo: ativo,
+                      titleTextStyle: _titleTextStyle,
+                      subtitleTextStyle: _subtitleTextStyle,
+                    ),
+                    const SizedBox(height: 16),
+                    _Info(ativo: ativo),
+                  ],
+                ),
               ),
-              const SizedBox(height: 16),
-              _Info(ativo: ativo),
+              if (trailing != null) trailing!,
             ],
           ),
         ),
@@ -92,14 +103,15 @@ class _Header extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                ativo.nome,
+                ativo.nome == '' ? 'Sem nome' : ativo.nome,
                 style: titleTextStyle,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
               const SizedBox(height: 6),
               Text(
-                '#${ativo.patrimonio} • Atualizado ${ativo.ultimaAtualizacao?.timeAgo}',
+                '#${ativo.patrimonio} • '
+                'Atualizado ${ativo.ultimaAtualizacao?.timeAgo}',
                 style: subtitleTextStyle,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
@@ -142,9 +154,20 @@ class _Info extends StatelessWidget {
               Row(
                 children: [
                   Expanded(
-                    child: InfoItem(
-                      icon: HugeIcons.strokeRoundedBuilding03,
-                      text: '${ativo.sala.bloco.nome} - ${ativo.sala.nome}',
+                    child: Builder(
+                      builder: (context) {
+                        final sala = ativo.sala;
+                        if (sala == null) {
+                          return const InfoItem(
+                            icon: HugeIcons.strokeRoundedBuilding03,
+                            text: 'Sem sala',
+                          );
+                        }
+                        return InfoItem(
+                          icon: HugeIcons.strokeRoundedBuilding03,
+                          text: '${sala.bloco.nome} - ${sala.nome}',
+                        );
+                      },
                     ),
                   ),
                   const SizedBox(width: 20),

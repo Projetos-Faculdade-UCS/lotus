@@ -1,12 +1,13 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:lotus/src/env/env.dart';
+import 'package:lotus/src/modules/auth/auth_module.dart';
+import 'package:lotus/src/modules/home/bloc/search_bloc.dart';
 import 'package:lotus/src/modules/home/controllers/menu_bar_controller.dart';
 import 'package:lotus/src/modules/home/modules/computador/computador_module.dart';
 import 'package:lotus/src/modules/home/modules/dashboard/dashboard_module.dart';
-import 'package:lotus/src/modules/home/modules/ice_cream/ice_cream_module.dart';
-import 'package:lotus/src/modules/home/modules/search/search_module.dart';
+import 'package:lotus/src/modules/home/modules/impressora/impressora_module.dart';
+import 'package:lotus/src/modules/home/modules/monitor_module/monitor_module.dart';
 import 'package:lotus/src/modules/home/modules/settings/settings_module.dart';
-import 'package:lotus/src/modules/home/modules/shop/shop_module.dart';
 import 'package:lotus/src/modules/home/pages/nested_page.dart';
 import 'package:lotus/src/modules/home/widgets/sidebar.dart';
 import 'package:lotus_api_client/lotus_api_client.dart';
@@ -16,26 +17,42 @@ import 'package:sidebarx/sidebarx.dart';
 /// The Home module of the application.
 class NestedModule extends Module {
   @override
+  List<Module> imports = [
+    AuthModule(),
+  ];
+
+  @override
   void binds(Injector i) {
     i
       ..add<SidebarXController>(MySideBarController.new)
       ..addSingleton<MenuBarController>(MenuBarController.new)
       ..addLazySingleton<ComputadorRepository>(
         ComputadorRepository.new,
+      )
+      ..add<ImpressoraRepository>(ImpressoraRepository.new)
+      ..add<MonitorRepository>(MonitorRepository.new)
+      ..addLazySingleton<SearchBloc>(SearchBloc.new)
+      ..addLazySingleton<LotusApiClient>(
+        () => LotusApiClient(
+          authToken: Env.apiToken,
+          authTokenHeader: Env.apiTokenHeader,
+          authTokenPrefix: Env.apiTokenPrefix,
+          baseUrl: Env.baseUrl,
+        ),
       );
   }
 
-  @override
-  void exportedBinds(Injector i) {
-    i.addLazySingleton<LotusApiClient>(
-      () => LotusApiClient(
-        authToken: Env.apiToken,
-        authTokenHeader: Env.apiTokenHeader,
-        authTokenPrefix: Env.apiTokenPrefix,
-        baseUrl: Env.baseUrl,
-      ),
-    );
-  }
+  // @override
+  // void exportedBinds(Injector i) {
+  //   i.addLazySingleton<LotusApiClient>(
+  //     () => LotusApiClient(
+  //       authToken: Env.apiToken,
+  //       authTokenHeader: Env.apiTokenHeader,
+  //       authTokenPrefix: Env.apiTokenPrefix,
+  //       baseUrl: Env.baseUrl,
+  //     ),
+  //   );
+  // }
 
   @override
   void routes(RouteManager r) {
@@ -46,10 +63,9 @@ class NestedModule extends Module {
       children: [
         ParallelRoute.module('/settings', module: SettingsModule()),
         ParallelRoute.module('/dashboard', module: DashboardModule()),
-        ParallelRoute.module('/shop', module: ShopModule()),
         ParallelRoute.module('/computadores', module: ComputadorModule()),
-        ParallelRoute.module('/ice-cream', module: IceCreamModule()),
-        ParallelRoute.module('/search', module: SearchModule()),
+        ParallelRoute.module('/impressoras', module: ImpressoraModule()),
+        ParallelRoute.module('/monitores', module: MonitorModule()),
       ],
       transition: TransitionType.fadeIn,
     );

@@ -27,7 +27,7 @@ class ComputadorPage extends StatelessWidget {
       child: BlocProvider(
         create: (context) => computadorBloc
           ..add(
-            ComputadorFetch(id),
+            GetComputador(id),
           ),
         child: BlocBuilder<ComputadorBloc, ComputadorState>(
           builder: (context, state) {
@@ -35,8 +35,11 @@ class ComputadorPage extends StatelessWidget {
               return const Center(
                 child: CircularProgressIndicator(),
               );
-            } else if (state is ComputadorSuccess) {
-              return ComputadorWidget(computador: state.computador);
+            } else if (state is GetComputadorSuccess) {
+              return ComputadorWidget(
+                computador: state.computador,
+                computadorBloc: computadorBloc,
+              );
             } else {
               return const Center(
                 child: Text('Erro ao carregar computador.'),

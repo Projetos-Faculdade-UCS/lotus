@@ -1,18 +1,31 @@
+import 'package:ativos_ui/ativos_ui.dart';
 import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
 import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:hugeicons/hugeicons.dart';
-import 'package:lotus/src/modules/home/modules/computador/widgets/detalhe_computador/cabecalho_computador.dart';
-import 'package:lotus/src/modules/home/modules/computador/widgets/detalhe_computador/card_local.dart';
+import 'package:lotus/src/modules/home/modules/computador/bloc/computador/computador_bloc.dart';
+import 'package:lotus/src/modules/home/modules/computador/widgets/computador_badges.dart';
 import 'package:lotus/src/modules/home/modules/computador/widgets/detalhe_computador/ficha_tecnica_tabs.dart';
+import 'package:lotus/src/modules/home/modules/shared/bloc/ativos_relacionados_bloc.dart';
+import 'package:lotus/src/modules/home/modules/shared/bloc/movimentacao_bloc.dart';
+import 'package:lotus/src/modules/home/modules/shared/widgets/ativos_relacionados_dialog.dart';
+import 'package:lotus/src/modules/home/modules/shared/widgets/card_local.dart';
+import 'package:lotus/src/modules/home/modules/shared/widgets/lista_movimentacoes.dart';
 import 'package:repositories/repositories.dart';
 
 /// Componente que exibe detalhes de um [Computador].
 class ComputadorWidget extends StatelessWidget {
   /// Cria uma instância de [ComputadorWidget].
-  const ComputadorWidget({required this.computador, super.key});
+  const ComputadorWidget({
+    required this.computador,
+    required this.computadorBloc,
+    super.key,
+  });
 
   /// Computador a ser exibido.
   final Computador computador;
+
+  final ComputadorBloc computadorBloc;
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +41,12 @@ class ComputadorWidget extends StatelessWidget {
               horizontal: 24,
             ),
             decoration: BoxDecoration(
+              border: Border(
+                bottom: BorderSide(
+                  color: colorScheme.onSurfaceVariant,
+                  width: 0.5,
+                ),
+              ),
               color: theme.scaffoldBackgroundColor,
               boxShadow: [
                 BoxShadow(
@@ -41,12 +60,18 @@ class ComputadorWidget extends StatelessWidget {
                 ),
               ],
             ),
-            child: CabecalhoComputador(
-              computadorNome: computador.nome,
-              computadorAutomatico: computador.automatico,
-              computadorCriticidade: computador.criticidade,
-              computadorRelacionamentos: computador.relacionamentos,
-              computadorResponsavel: computador.responsavel,
+            child: CabecalhoAtivo(
+              ativo: computador,
+              subtitle: ComputadorBadges(
+                isAutomatico: computador.automatico,
+                criticidade: computador.criticidade,
+              ),
+              onPressed: (ativo) {
+                AtivosRelacionadosDialog.show(
+                  Modular.get<AtivosRelacionadosBloc>(),
+                  ativo,
+                );
+              },
             ),
           ),
           Expanded(
@@ -85,6 +110,14 @@ class ComputadorWidget extends StatelessWidget {
                         const SizedBox(height: 4),
                         CardLocal(
                           sala: computador.sala,
+                          onUpdateSala: (sala) {
+                            computadorBloc.add(
+                              UpdateSala(
+                                id: computador.id,
+                                sala: sala,
+                              ),
+                            );
+                          },
                         ),
                         const SizedBox(height: 16),
                         Row(
@@ -98,17 +131,25 @@ class ComputadorWidget extends StatelessWidget {
                               size: 20,
                             ),
                             const SizedBox(width: 4),
-                            Text(
-                              'Histórico de movimentações',
-                              style: TextStyle(
-                                fontSize: 18,
-                                color: colorScheme.onSurfaceVariant,
+                            Flexible(
+                              fit: FlexFit.tight,
+                              child: Text(
+                                'Histórico de movimentações',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  color: colorScheme.onSurfaceVariant,
+                                ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
                               ),
                             ),
                           ],
                         ),
-                        const Expanded(
-                          child: Placeholder(),
+                        Expanded(
+                          child: ListaMovimentacoes(
+                            idAtivo: computador.id,
+                            bloc: Modular.get<MovimentacaoBloc>(),
+                          ),
                         ),
                       ],
                     ),

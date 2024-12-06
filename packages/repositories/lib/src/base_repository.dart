@@ -1,5 +1,6 @@
 import 'package:lotus_api_client/lotus_api_client.dart';
 import 'package:repositories/repositories.dart';
+import 'package:repositories/src/repository_exception.dart';
 
 /// {@template base_repository}
 /// A base ativo repository class.
@@ -65,18 +66,105 @@ abstract class BaseAtivoRepository<T extends Ativo> {
       data: ativo.toJson(),
     );
   }
-}
 
-/// {@template base_ativo_repository_exception}
-/// Exception thrown by the [ComputadorRepository].
-/// {@endtemplate}
-class RepositoryException implements Exception {
-  /// {@macro base_ativo_repository_exception}
-  RepositoryException(this.message);
+  /// Atualiza a sala de um [T].
+  Future<T?> updateSala(int ativoId, int? salaId) async {
+    final ativoResponse = await lotusApiClient.patch<Map<String, dynamic>>(
+      '$baseUrl/$ativoId/',
+      data: {
+        'local': salaId,
+      },
+    );
+    if (ativoResponse.data == null || ativoResponse.statusCode != 200) {
+      return null;
+    }
 
-  /// Message describing the exception.
-  final String message;
+    final ativoMap = ativoResponse.data!;
 
-  @override
-  String toString() => 'RepositoryException: $message';
+    return fromJson(ativoMap);
+  }
+
+  /// Busca o histórico de movimentações de um [T].
+  Future<List<Movimentacao>> getHistoricoMovimentacoes(int ativoId) async {
+    final response = await lotusApiClient.get<List<dynamic>>(
+      '$baseUrl/$ativoId/movimentacoes/',
+    );
+
+    if (response.data == null || response.statusCode != 200) {
+      throw RepositoryException(
+        'Failed to fetch movimentacoes',
+      );
+    }
+
+    if (!response.data!.every((element) => element is Map)) {
+      throw RepositoryException('Not all movimentacoes are maps');
+    }
+
+    final movimentacoesMap = response.data!.cast<Map<String, dynamic>>();
+
+    final movimentacoes = movimentacoesMap.map((movimentacaoMap) {
+      return Movimentacao.fromJson(movimentacaoMap);
+    }).toList();
+
+    return movimentacoes;
+  }
+
+  /// Lista todos os tipos de ativos relacionados a um [T].
+  Future<List<Ativo>> getRelacionados(int ativoId) async {
+    final response = await lotusApiClient.get<List<dynamic>>(
+      '$baseUrl/$ativoId/relacionados/',
+    );
+
+    if (response.data == null || response.statusCode != 200) {
+      throw RepositoryException(
+        'Failed to fetch relacionados',
+      );
+    }
+
+    if (!response.data!.every((element) => element is Map)) {
+      throw RepositoryException('Not all relacionados are maps');
+    }
+
+    final relacionadosMap = response.data!.cast<Map<String, dynamic>>();
+
+    final relacionados = relacionadosMap.map((relacionadoMap) {
+      return Ativo.fromJson(relacionadoMap);
+    }).toList();
+
+    return relacionados;
+  }
+  
+  /// Search for [Ativo]s by [query] or [patrimonio].
+  Future<List<Ativo>> search({
+    required CancelToken cancelToken,
+    String? query,
+    String? patrimonio,
+  }) async {
+    final response = await lotusApiClient.get<List<dynamic>>(
+      '$baseUrl/',
+      queryParameters: {
+        if (patrimonio != null) 'patrimonio': patrimonio,
+        if (query != null) 'q': query,
+      },
+      cancelToken: CancelToken(),
+    );
+
+    if (response.data == null || response.statusCode != 200) {
+      throw RepositoryException(
+        'Failed to search ${tipo.pluralName}',
+      );
+    }
+
+    if (!response.data!.every((element) => element is Map)) {
+      throw RepositoryException('Not all ${tipo.pluralName} are maps');
+    }
+
+    final ativosMap = response.data!.cast<Map<String, dynamic>>();
+
+    final ativos = ativosMap.map((ativoMap) {
+      return Ativo.fromJson(ativoMap);
+    }).toList();
+
+    return ativos;
+  }
 }

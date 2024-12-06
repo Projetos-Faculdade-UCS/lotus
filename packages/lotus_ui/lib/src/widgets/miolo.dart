@@ -21,18 +21,20 @@ class Miolo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ColoredBox(
-      color: Theme.of(context).scaffoldBackgroundColor,
-      child: Column(
-        children: [
-          if (appBar != null) appBar!,
-          Expanded(
-            child: Padding(
-              padding: padding,
-              child: child,
+    return RepaintBoundary(
+      child: ColoredBox(
+        color: Theme.of(context).scaffoldBackgroundColor,
+        child: Column(
+          children: [
+            if (appBar != null) appBar!,
+            Expanded(
+              child: Padding(
+                padding: padding,
+                child: child,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
