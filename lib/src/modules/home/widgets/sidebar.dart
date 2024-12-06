@@ -43,11 +43,6 @@ class Sidebar extends StatelessWidget {
       label: 'Monitores',
       route: '/monitores/',
     ),
-    _SidebarItem(
-      icon: HugeIcons.strokeRoundedSearch02,
-      label: 'Search',
-      route: '/search/',
-    ),
   ];
   static final List<_SidebarItem> _footerItems = [
     _SidebarItem(
