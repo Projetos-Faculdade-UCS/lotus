@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:drop_shadow/drop_shadow.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
@@ -41,10 +43,10 @@ class _AdditionalDetailsChartState extends State<AdditionalDetailsChart> {
         padding: const EdgeInsets.all(16),
         child: LayoutBuilder(
           builder: (context, constraints) {
+            // maxRadius is the smallest of the two dimensions
+            final maxRadius = min(constraints.maxWidth, constraints.maxHeight);
             double getRadius(int index) {
-              return touchedIndex == index
-                  ? constraints.maxHeight * 0.33
-                  : constraints.maxHeight * 0.3;
+              return touchedIndex == index ? maxRadius * 0.33 : maxRadius * 0.3;
             }
 
             return Column(
