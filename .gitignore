@@ -49,3 +49,4 @@ app.*.map.json
 !**/.env.example
 
 **/env.g.dart
+/windows/wix/installer

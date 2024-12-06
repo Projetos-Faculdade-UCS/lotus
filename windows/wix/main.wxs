@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs"
+     xmlns:ui="http://wixtoolset.org/schemas/v4/wxs/ui">
+    <?define ProductName="Lotus" ?>
+    <?define ProductVersion="1.0.0.0" ?>
+    <?define ProductManufacturer="Lotus" ?>
+    <?define UpgradeCode="87d543f4-6a0a-4a0f-bbbe-9e96345d788b" ?>
+
+    <Package Name="$(var.ProductName)"
+             Language="1033"
+             Version="$(var.ProductVersion)"
+             Manufacturer="$(var.ProductManufacturer)"
+             UpgradeCode="$(var.UpgradeCode)"
+             InstallerVersion="500"
+             Compressed="yes"
+             Scope="perMachine">
+
+        <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+        <MediaTemplate EmbedCab="yes" />
+
+        <!-- Ensure 64-bit package -->
+        <Property Id="MSIFASTINSTALL" Value="7" />
+
+        <Icon Id="AppIcon.exe" SourceFile="..\runner\resources\app_icon.ico"/>
+        <Property Id="ARPPRODUCTICON" Value="AppIcon.exe" />
+
+        <!-- Add standard UI -->
+        <ui:WixUI Id="WixUI_InstallDir"
+                  InstallDirectory="INSTALLFOLDER" />
+
+        <!-- Directory Structure -->
+        <StandardDirectory Id="ProgramFiles64Folder">
+            <Directory Id="INSTALLFOLDER" Name="$(var.ProductName)">
+                <Component Id="MainExecutable">
+                    <File Id="LotusEXE" 
+                          Name="lotus.exe" 
+                          Source="$(var.BinaryDir)\lotus.exe" 
+                          KeyPath="yes"/>
+                </Component>
+            </Directory>
+        </StandardDirectory>
+
+        <StandardDirectory Id="ProgramMenuFolder">
+            <Directory Id="ApplicationProgramsFolder" Name="$(var.ProductName)">
+                <Component Id="ApplicationShortcut">
+                    <Shortcut Id="ApplicationStartMenuShortcut" 
+                             Target="[INSTALLFOLDER]lotus.exe"
+                             Name="$(var.ProductName)"
+                             WorkingDirectory="INSTALLFOLDER"
+                             Icon="AppIcon.exe"/>
+                    <RemoveFolder Id="ApplicationProgramsFolder" On="uninstall"/>
+                    <RegistryValue Root="HKCU" 
+                                 Key="Software\$(var.ProductManufacturer)\$(var.ProductName)" 
+                                 Name="installed" 
+                                 Type="integer" 
+                                 Value="1" 
+                                 KeyPath="yes"/>
+                </Component>
+            </Directory>
+        </StandardDirectory>
+
+        <!-- Features -->
+        <Feature Id="MainApplication" 
+                 Title="Main Application" 
+                 Level="1" 
+                 ConfigurableDirectory="INSTALLFOLDER">
+            <ComponentRef Id="MainExecutable" />
+            <ComponentRef Id="ApplicationShortcut" />
+        </Feature>
+
+    </Package>
+</Wix>
