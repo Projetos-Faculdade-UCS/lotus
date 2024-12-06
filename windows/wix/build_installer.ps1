@@ -24,14 +24,6 @@ if (!(Test-Path $outputDir)) {
     New-Item -ItemType Directory -Force -Path $outputDir
 }
 
-# Generate file list
-Write-Host "Generating file list..."
-& wix dir $buildDir -prefix INSTALLFOLDER -out files.wxs
-if ($LASTEXITCODE -ne 0) {
-    Write-Host "Error: Failed to generate file list"
-    exit 1
-}
-
 # Build the installer
 Write-Host "Building installer..."
 & wix build `
@@ -39,7 +31,7 @@ Write-Host "Building installer..."
     -d BinaryDir="$buildDir" `
     -d ProductVersion="$productVersion" `
     -ext WixToolset.UI.wixext `
-    main.wxs files.wxs `
+    main.wxs `
     -o "$outputDir\Lotus-$productVersion-$platform.msi"
 
 if ($LASTEXITCODE -eq 0) {
